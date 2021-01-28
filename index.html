@@ -176,7 +176,38 @@
             </div>
         </div>
     </main>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script data-brackets-id='38044' src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
 
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script data-brackets-id='38045' src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
+    <script data-brackets-id='38046' src="https://www.gstatic.com/firebasejs/8.2.4/firebase-auth.js"></script>
+<script data-brackets-id='38047' src="https://www.gstatic.com/firebasejs/8.2.4/firebase-database.js"></script>
+
+<script data-brackets-id='38048'>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyAhnI6Wuxy9-lCaaz8NeIah6GieElHfGgY",
+    authDomain: "pwassistant-f0c9f.firebaseapp.com",
+    databaseURL: "https://pwassistant-f0c9f-default-rtdb.firebaseio.com",
+    projectId: "pwassistant-f0c9f",
+    storageBucket: "pwassistant-f0c9f.appspot.com",
+    messagingSenderId: "129191690225",
+    appId: "1:129191690225:web:58020b5b07133ebfedce50",
+    measurementId: "G-YCJ886VJQ6"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+    
+var data = "test";
+  var dataRef = database.ref('/').push();//Generates a new child location with a randomly generated id.
+  dataRef.set({
+    value: data
+  });
+</script>
     <script>
         $(".nav-item").on("click", function() {
             $(".nav-item").find(".active").removeClass("active");
