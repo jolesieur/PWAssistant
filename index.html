@@ -1,6 +1,18 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
+    <link rel="manifest" href="manifest.json" />
+    <!-- ios support -->
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="PWAssistant">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#2196F3">
+    <link rel="apple-touch-icon" href="drop.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="drop-180x180.png">
+    <link href="apple_splash_750.png" sizes="750x1334" rel="apple-touch-startup-image" />
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -32,6 +44,10 @@
             }
         }
 
+       h1 {
+font-size: 4rem;
+}
+
         .noselect {
             -webkit-touch-callout: none;
             /* iOS Safari */
@@ -47,25 +63,31 @@
             /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
         }
-        
-        /* selected btn css */
-.btn-group-toggle .btn:not(:disabled):not(.disabled).active, .btn-group-toggle .btn:not(:disabled):not(.disabled):active, .show>.btn.dropdown-toggle {
-      color: #fff;
-      background-color: #2196F3;
-      border-color: #2196F3;
-}
 
-/* non selected btn css */
-.btn-group-toggle .btn {
-  color: #fff;
-  background-color: #b7b7b7;
-  border-color: #6c757d;
-}
+        /* selected btn css */
+        .btn-group-toggle .btn:not(:disabled):not(.disabled).active,
+        .btn-group-toggle .btn:not(:disabled):not(.disabled):active,
+        .show>.btn.dropdown-toggle {
+            color: #fff;
+            background-color: #2196F3;
+            border-color: #2196F3;
+        }
+
+        /* non selected btn css */
+        .btn-group-toggle .btn {
+            color: #fff;
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        .days {
+            font-size: 10px;
+            color: white;
+        }
     </style>
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-md  navbar-dark bg-dark fixed-top">
         <span class="navbar-brand noselect">PW<i class="fas fa-tint" style="font-size:25px;color:#2196F3"></i>Assistant<br></span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,6 +128,8 @@
             <div class="tab-pane fade show active" id="content-1" aria-labelledby="tab-1" role="tabpanel">
                 <h1>Accueil</h1>
                 <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll, it will remain fixed to the top of your browser’s viewport.</p>
+
+                <pre id='object'></pre>
             </div>
             <div class="tab-pane fade" id="content-2" aria-labelledby="tab-2" role="tabpanel">
                 <h1>Inspection</h1>
@@ -122,6 +146,8 @@
             <div class="tab-pane fade" id="content-6" aria-labelledby="tab-6" role="tabpanel">
                 <h1>Hémodialyse</h1>
                 <h2>Remplacement des filtres</h2>
+
+                <button onClick="pushData()">Add data to Firebase</button>
             </div>
             <div class="tab-pane fade" id="content-7" aria-labelledby="tab-7" role="tabpanel">
                 <h1>Laboratoires</h1>
@@ -129,85 +155,174 @@
             </div>
             <div class="tab-pane fade" id="content-8" aria-labelledby="tab-8" role="tabpanel">
                 <h1>Endoscopie</h1>
-                <h2>Remplacement des filtres</h2>
+                <div class="d-flex h-100">
+                    <div class="m-auto">
+                        <h3 class="d-flex flex-column text-center">Remplacement des filtres</h3>
 
-                <p><br>Medivator 1</p>
-                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                    <label class="btn btn-outline-primary">
-                        <input type="checkbox" name="options" autocomplete="off"> 0.1 µm
-                    </label>
-                    <label class="btn btn-outline-primary">
-                        <input type="checkbox" name="options" autocomplete="off"> 0.4 µm
-                    </label>
-                    <label class="btn btn-outline-primary">
-                        <input type="checkbox" name="options" autocomplete="off"> 1 µm
-                    </label>
+                        <ul class="nav nav-pills">
+                            <li>
+                                <a class="nav-link active" id="tab-medivator" data-toggle="tab" role="tab" href="#content-medivator">Medivator</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" id="tab-system1" data-toggle="tab" role="tab" href="#content-system1">System 1</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane show active fade" id="content-medivator" role="tabpanel">
+                                <form>
+                                    <div class="form-group d-flex flex-column text-center">
+                                        <label class="col-form-label">Medivator 1</label>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-outline-primary">
+                                                <input type="checkbox" name="options" autocomplete="off"> 0.1 µm <br> <span class="days">365</span>
+                                            </label>
+                                            <label class="btn btn-outline-primary">
+                                                <input type="checkbox" name="options" autocomplete="off"> 0.4 µm <br> <span class="days">365</span>
+                                            </label>
+                                            <label class="btn btn-outline-primary">
+                                                <input type="checkbox" name="options" autocomplete="off"> 1 µm <br> <span class="days">365</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group d-flex flex-column text-center">
+                                        <label class="col-form-label">Medivator 2</label>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-outline-primary">
+                                                <input type="checkbox" name="options" autocomplete="off"> 0.1 µm <br> <span class="days">365</span>
+                                            </label>
+                                            <label class="btn btn-outline-primary">
+                                                <input type="checkbox" name="options" autocomplete="off"> 0.4 µm <br> <span class="days">365</span>
+                                            </label>
+                                            <label class="btn btn-outline-primary">
+                                                <input type="checkbox" name="options" autocomplete="off"> 1 µm <br> <span class="days">365</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group d-flex flex-column text-center">
+                                        <label class="col-form-label">Medivator 3</label>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-outline-primary">
+                                                <input type="checkbox" name="options" autocomplete="off"> 0.1 µm <br> <span class="days">365</span>
+                                            </label>
+                                            <label class="btn btn-outline-primary">
+                                                <input type="checkbox" name="options" autocomplete="off"> 0.4 µm <br> <span class="days">365</span>
+                                            </label>
+                                            <label class="btn btn-outline-primary">
+                                                <input type="checkbox" name="options" autocomplete="off"> 1 µm <br> <span class="days">365</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <input type="date" class="datePicker">
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <button id="succes_btn" type="button" class="btn btn-success">Valider</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="content-system1" role="tabpanel">
+                                <form>
+                                    <div class="form-group d-flex flex-column text-center">
+                                        <label class="col-form-label">SYSTEM 1 #7</label>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-outline-primary">
+                                                <input type="checkbox" name="options" autocomplete="off"> Pré-filtre <br> <span class="days">365</span>
+                                            </label>
+                                            <label class="btn btn-outline-primary">
+                                                <input type="checkbox" name="options" autocomplete="off"> A <br> <span class="days">365</span>
+                                            </label>
+                                            <label class="btn btn-outline-primary">
+                                                <input type="checkbox" name="options" autocomplete="off"> B <br> <span class="days">365</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group d-flex flex-column text-center">
+                                        <label class="col-form-label">SYSTEM 1 #8</label>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-outline-primary">
+                                                <input type="checkbox" name="options" autocomplete="off"> Pré-filtre <br> <span class="days">365</span>
+                                            </label>
+                                            <label class="btn btn-outline-primary">
+                                                <input type="checkbox" name="options" autocomplete="off"> A <br> <span class="days">365</span>
+                                            </label>
+                                            <label class="btn btn-outline-primary">
+                                                <input type="checkbox" name="options" autocomplete="off"> B <br> <span class="days">365</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <input type="date" class="datePicker">
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <button id="succes_btn" type="button" class="btn btn-success">Valider</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <p><br>Medivator 2</p>
-                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                    <label class="btn btn-outline-primary">
-                        <input type="checkbox" name="options" autocomplete="off"> 0.1 µm
-                    </label>
-                    <label class="btn btn-outline-primary">
-                        <input type="checkbox" name="options" autocomplete="off"> 0.4 µm
-                    </label>
-                    <label class="btn btn-outline-primary">
-                        <input type="checkbox" name="options" autocomplete="off"> 1 µm
-                    </label>
-                </div>
-                <p><br>Medivator 3</p>
-                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                    <label class="btn btn-outline-primary">
-                        <input type="checkbox" name="options" autocomplete="off"> 0.1 µm
-                    </label>
-                    <label class="btn btn-outline-primary">
-                        <input type="checkbox" name="options" autocomplete="off"> 0.4 µm
-                    </label>
-                    <label class="btn btn-outline-primary">
-                        <input type="checkbox" name="options" autocomplete="off"> 1 µm
-                    </label>
-                </div>
-                <p>
-                <p>
-                    <input type="date" id="meeting-time" name="meeting-time" value="2018-06-12" min="2018-06-07" max="2018-06-14">
-                <p>
-                    <button type="button" class="btn btn-success">Valider</button>
-                </p>
+            </div>
+            <div id="success-alert" class="alert alert-success d-none" role="alert">
+                Donnés sauvegardées dans la base de données.
             </div>
         </div>
     </main>
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script data-brackets-id='38044' src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-firestore.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-<script data-brackets-id='38045' src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
-    <script data-brackets-id='38046' src="https://www.gstatic.com/firebasejs/8.2.4/firebase-auth.js"></script>
-<script data-brackets-id='38047' src="https://www.gstatic.com/firebasejs/8.2.4/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-auth.js"></script>
 
-<script data-brackets-id='38048'>
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  var firebaseConfig = {
-    apiKey: "AIzaSyAhnI6Wuxy9-lCaaz8NeIah6GieElHfGgY",
-    authDomain: "pwassistant-f0c9f.firebaseapp.com",
-    databaseURL: "https://pwassistant-f0c9f-default-rtdb.firebaseio.com",
-    projectId: "pwassistant-f0c9f",
-    storageBucket: "pwassistant-f0c9f.appspot.com",
-    messagingSenderId: "129191690225",
-    appId: "1:129191690225:web:58020b5b07133ebfedce50",
-    measurementId: "G-YCJ886VJQ6"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
-    
-var data = "test";
-  var dataRef = database.ref('/').push();//Generates a new child location with a randomly generated id.
-  dataRef.set({
-    value: data
-  });
-</script>
+
+    <!--<script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyAhnI6Wuxy9-lCaaz8NeIah6GieElHfGgY",
+            authDomain: "pwassistant-f0c9f.firebaseapp.com",
+            databaseURL: "https://pwassistant-f0c9f-default-rtdb.firebaseio.com",
+            projectId: "pwassistant-f0c9f",
+            storageBucket: "pwassistant-f0c9f.appspot.com",
+            messagingSenderId: "129191690225",
+            appId: "1:129191690225:web:58020b5b07133ebfedce50",
+            measurementId: "G-YCJ886VJQ6"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        const db = firebase.firestore()
+
+        var docRef = db.collection("endoscopie").doc("medivator x");
+
+        docRef.get().then(function(doc) {
+            if (doc.exists) {
+                console.log("Document data:", doc.data());
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }).catch(function(error) {
+            console.log("Error getting document:", error);
+        });
+
+
+        /*firebase
+                    .firestore()
+                    .collection("filtres")
+                    .doc("medivator_1")
+                    .set({
+                        date: Date.now(),
+                    })
+                    .then(() => {
+                        console.log("Document created");
+                    })*/
+    </script>-->
+
     <script>
         $(".nav-item").on("click", function() {
             $(".nav-item").find(".active").removeClass("active");
@@ -218,5 +333,25 @@ var data = "test";
                 $('.navbar-collapse').collapse('hide');
             }
         });
+
+        Date.prototype.toDateInputValue = (function() {
+            var local = new Date(this);
+            local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+            return local.toJSON().slice(0, 10);
+        });
+
+        $(document).ready(function() {
+            $('.datePicker').val(new Date().toDateInputValue());
+
+            $('#succes_btn').on('click', function() {
+                if (document.getElementById('success-alert').classList.contains('d-none')) {
+                    document.getElementById('success-alert').classList.remove('d-none');
+                }
+                window.setTimeout(function() {
+                    document.getElementById('success-alert').classList.add('d-none');
+                }, 5000);
+            });
+        });
     </script>
+    <script src="js/app.js"></script>
 </body></html>
