@@ -204,13 +204,13 @@
                                         <label class="col-form-label">Medivator 2</label>
                                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                             <label class="btn btn-outline-primary">
-                                                <input type="checkbox" name="options" autocomplete="off"> 0.1 µm <br> <span class="days">365</span>
+                                                <input id="medivavor2.f01" type="checkbox" name="options" autocomplete="off"> 0.1 µm <br> <span class="days">365</span>
                                             </label>
                                             <label class="btn btn-outline-primary">
-                                                <input type="checkbox" name="options" autocomplete="off"> 0.4 µm <br> <span class="days">365</span>
+                                                <input id="medivavor2.f04" type="checkbox" name="options" autocomplete="off"> 0.4 µm <br> <span class="days">365</span>
                                             </label>
                                             <label class="btn btn-outline-primary">
-                                                <input type="checkbox" name="options" autocomplete="off"> 1 µm <br> <span class="days">365</span>
+                                                <input id="medivavor2.f1" type="checkbox" name="options" autocomplete="off"> 1 µm <br> <span class="days">365</span>
                                             </label>
                                         </div>
                                     </div>
@@ -218,13 +218,13 @@
                                         <label class="col-form-label">Medivator 3</label>
                                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                             <label class="btn btn-outline-primary active">
-                                                <input type="checkbox" name="options" autocomplete="off"> 0.1 µm <br> <span class="days">365</span>
+                                                <input id="medivavor3.f01" type="checkbox" name="options" autocomplete="off"> 0.1 µm <br> <span class="days">365</span>
                                             </label>
                                             <label class="btn btn-outline-primary">
-                                                <input type="checkbox" name="options" autocomplete="off"> 0.4 µm <br> <span class="days">365</span>
+                                                <input id="medivavor3.f04" type="checkbox" name="options" autocomplete="off"> 0.4 µm <br> <span class="days">365</span>
                                             </label>
                                             <label class="btn btn-outline-primary">
-                                                <input type="checkbox" name="options" autocomplete="off"> 1 µm <br> <span class="days">365</span>
+                                                <input id="medivavor3.f1" type="checkbox" name="options" autocomplete="off"> 1 µm <br> <span class="days">365</span>
                                             </label>
                                         </div>
                                     </div>
@@ -312,8 +312,16 @@
 
         const db = firebase.firestore()
 
-        var docRef = db.collection("endoscopie").doc("medivator");
+        //        var docRef = db.collection("endoscopie").doc("medivator");
 
+        db.collection("endoscopie").get().then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+                var obj = JSON.parse(doc.data().filtres);
+                console.log(obj);
+            });
+        });
         /*docRef.get().then(function(doc) {
             if (doc.exists) {
                 console.log(doc.data().filtres);
@@ -337,27 +345,26 @@
                         console.log("Document created");
                     })*/
 
-/*
-{
-"medivator1" : {   
-                "f01": [1, 2, 3],
-                "f04": [1, 2, 3],
-                "f1": [1, 2, 3 ]
-                },
-"medivator2" : {   
-                "f01": [1, 2, 3],
-                "f04": [1, 2, 3],
-                "f1": [1, 2, 3 ]
-                },
-"medivator3" : {   
-                "f01": [1, 2, 3],
-                "f04": [1, 2, 3],
-                "f1": [1, 2, 3 ]
-                }
-}
-*/        
-        
-        
+        /*
+        {
+        "medivator1" : {   
+                        "f01": [1, 2, 3],
+                        "f04": [1, 2, 3],
+                        "f1": [1, 2, 3 ]
+                        },
+        "medivator2" : {   
+                        "f01": [1, 2, 3],
+                        "f04": [1, 2, 3],
+                        "f1": [1, 2, 3 ]
+                        },
+        "medivator3" : {   
+                        "f01": [1, 2, 3],
+                        "f04": [1, 2, 3],
+                        "f1": [1, 2, 3 ]
+                        }
+        }
+        */
+
     </script>
 
     <script>
@@ -384,14 +391,16 @@
             } else {
                 $('#succes_btn').attr('disabled', 'disabled');
             }
-        });       
-        
+        });
+
 
         $(document).ready(function() {
             $('.datePicker').val(new Date().toDateInputValue());
 
             $('.btn-success').on('click', function() {
-                console.log(this);
+
+                console.log($("#form-medivator :checkbox:checked"));
+
                 var selected = [];
                 $('#medivator1 input:checked').each(function() {
                     selected.push($(this).attr('id'));
