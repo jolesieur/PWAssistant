@@ -270,7 +270,7 @@
                                         <input type="date" class="datePicker">
                                     </div>
                                     <div class="form-group text-center">
-                                        <button id="succes_btn" type="button" class="btn btn-success">Valider</button>
+                                        <button id="succes_btn2" type="button" class="btn btn-success">Valider</button>
                                     </div>
                                 </form>
                             </div>
@@ -314,7 +314,7 @@
 
         var docRef = db.collection("endoscopie").doc("medivator");
 
-        docRef.get().then(function(doc) {
+        /*docRef.get().then(function(doc) {
             if (doc.exists) {
                 console.log(doc.data().filtres);
                 var obj = JSON.parse(doc.data().filtres);
@@ -325,7 +325,7 @@
             }
         }).catch(function(error) {
             console.log("Error getting document:", error);
-        });
+        });*/
         /*firebase
                     .firestore()
                     .collection("filtres")
@@ -337,6 +337,27 @@
                         console.log("Document created");
                     })*/
 
+/*
+{
+"medivator1" : {   
+                "f01": [1, 2, 3],
+                "f04": [1, 2, 3],
+                "f1": [1, 2, 3 ]
+                },
+"medivator2" : {   
+                "f01": [1, 2, 3],
+                "f04": [1, 2, 3],
+                "f1": [1, 2, 3 ]
+                },
+"medivator3" : {   
+                "f01": [1, 2, 3],
+                "f04": [1, 2, 3],
+                "f1": [1, 2, 3 ]
+                }
+}
+*/        
+        
+        
     </script>
 
     <script>
@@ -363,15 +384,14 @@
             } else {
                 $('#succes_btn').attr('disabled', 'disabled');
             }
-        });
-
-
-
+        });       
+        
 
         $(document).ready(function() {
             $('.datePicker').val(new Date().toDateInputValue());
 
-            $('#succes_btn').on('click', function() {
+            $('.btn-success').on('click', function() {
+                console.log(this);
                 var selected = [];
                 $('#medivator1 input:checked').each(function() {
                     selected.push($(this).attr('id'));
