@@ -99,7 +99,6 @@
             font-size: 10px;
             color: white;
         }
-
     </style>
 </head>
 
@@ -162,8 +161,6 @@
             <div class="tab-pane fade" id="content-6" aria-labelledby="tab-6" role="tabpanel">
                 <h1>Hémodialyse</h1>
                 <h2>Remplacement des filtres</h2>
-
-                <button onClick="pushData()">Add data to Firebase</button>
             </div>
             <div class="tab-pane fade" id="content-7" aria-labelledby="tab-7" role="tabpanel">
                 <h1>Laboratoires</h1>
@@ -311,17 +308,20 @@
         firebase.analytics();
 
         const db = firebase.firestore()
-
+        var jsons = new Object();
         //        var docRef = db.collection("endoscopie").doc("medivator");
 
         db.collection("endoscopie").get().then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc) {
-                // doc.data() is never undefined for query doc snapshots
-                console.log(doc.id, " => ", doc.data());
-                var obj = JSON.parse(doc.data().filtres);
-                console.log(obj);
-            });
+        querySnapshot.forEach(function(doc) {
+        // doc.data() is never undefined for query doc snapshots
+        //console.log(doc.data().filtres);
+        $.extend(jsons, JSON.parse(doc.data().filtres));
         });
+        console.log(jsons.system1_8.f5);
+        });
+
+
+
         /*docRef.get().then(function(doc) {
             if (doc.exists) {
                 console.log(doc.data().filtres);
@@ -364,7 +364,6 @@
                         }
         }
         */
-
     </script>
 
     <script>
@@ -397,6 +396,21 @@
         $(document).ready(function() {
             $('.datePicker').val(new Date().toDateInputValue());
 
+
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+                switch (e.target.id) {
+                    case "tab-8": {
+                        console.log("bingo")
+                        break;
+                    }
+                    case "configTab": {
+                        doConfigTabStuff();
+                        break;
+                    }
+                }
+            })
+
+
             $('.btn-success').on('click', function() {
 
                 console.log($("#form-medivator :checkbox:checked"));
@@ -427,9 +441,6 @@
                 }, 5000);
             });
         });
-
     </script>
     <script src="js/app.js"></script>
-</body>
-
-</html>
+</body></html>
