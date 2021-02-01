@@ -99,6 +99,7 @@
             font-size: 10px;
             color: white;
         }
+
     </style>
 </head>
 
@@ -143,8 +144,9 @@
             <div class="tab-pane fade show active" id="content-1" aria-labelledby="tab-1" role="tabpanel">
                 <h1>Accueil</h1>
                 <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll, it will remain fixed to the top of your browser’s viewport.</p>
+                <br>
+                <span id="test"></span>
 
-                <pre id='object'></pre>
             </div>
             <div class="tab-pane fade" id="content-2" aria-labelledby="tab-2" role="tabpanel">
                 <h1>Inspection</h1>
@@ -226,7 +228,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group text-center">
-                                        <input type="date" class="datePicker">
+                                        <input id="dt-medivator" type="date" class="datePicker">
                                     </div>
                                     <div class="form-group text-center">
                                         <button id="succes_btn" type="button" class="btn btn-success" disabled>Valider</button>
@@ -326,6 +328,12 @@
                     $.extend(jsons, JSON.parse(doc.data().filtres));
                 });
                 console.log(jsons);
+                //                                jsons.medivator1.f01.unshift(1612269919000);
+                //                                console.log(jsons.medivator1.f01);
+                //                                jsons.medivator1.f01.pop()
+                //                                console.log(jsons.medivator1.f01);
+                var value = "medivator1";
+                console.log(jsons[value]);
             });
 
         /*docRef.get().then(function(doc) {
@@ -354,22 +362,23 @@
         /*
         {
         "medivator1" : {   
-                        "f01": [1, 2, 3],
-                        "f04": [1, 2, 3],
-                        "f1": [1, 2, 3 ]
+                        "f01": [1609508538000, 1601478156000],
+                        "f04": [1609508538000, 1601478156000],
+                        "f1": [1609508538000, 1601478156000]
                         },
         "medivator2" : {   
-                        "f01": [1, 2, 3],
-                        "f04": [1, 2, 3],
-                        "f1": [1, 2, 3 ]
+                        "f01": [1609508538000, 1601478156000],
+                        "f04": [1609508538000, 1601478156000],
+                        "f1": [1609508538000, 1601478156000]
                         },
         "medivator3" : {   
-                        "f01": [1, 2, 3],
-                        "f04": [1, 2, 3],
-                        "f1": [1, 2, 3 ]
+                        "f01": [1609508538000, 1601478156000],
+                        "f04": [1609508538000, 1601478156000],
+                        "f1": [1609508538000, 1601478156000]
                         }
         }
         */
+
     </script>
 
     <script>
@@ -399,8 +408,24 @@
         });
 
 
+        function daysdifference(firstDate, secondDate) {
+            var startDay = new Date(firstDate);
+            var endDay = new Date(secondDate);
+
+            var millisBetween = startDay.getTime() - endDay.getTime();
+            var days = millisBetween / (1000 * 3600 * 24);
+
+            return Math.round(Math.abs(days));
+        }
+
         $(document).ready(function() {
             $('.datePicker').val(new Date().toDateInputValue());
+
+            var old = 1611952240000;
+            var days = daysdifference($.now(), old);
+            console.log(days);
+
+            document.getElementById("test").innerHTML = $.now();
 
 
             $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
@@ -416,7 +441,6 @@
                 }
             })
 
-
             $('.btn-success').on('click', function() {
 
                 console.log($("#form-medivator :checkbox:checked"));
@@ -425,16 +449,26 @@
                 $('#medivator1 input:checked').each(function() {
                     selected.push($(this).attr('id'));
                 });
-                console.log(selected);
+                console.log(selected[0].split("."));
+
+                jsons.medivator1.f01.unshift(1612269919000);
+                console.log(jsons.medivator1.f01);
+                jsons.medivator1.f01.pop()
+                console.log(jsons.medivator1.f01);
 
 
-                var docRef = db.collection("endoscopie").doc("medivator1");
 
-                // Atomically add a new region to the "regions" array field.
-                docRef.update({
-                    f01: firebase.firestore.FieldValue.arrayUnion(new Date())
-                });
+                var timestamp = (+new Date(document.getElementById('dt-medivator').value));
 
+                console.log(timestamp);
+
+
+                //                var docRef = db.collection("endoscopie").doc("medivator1");
+                //
+                //                // Atomically add a new region to the "regions" array field.
+                //                docRef.update({
+                //                    f01: firebase.firestore.FieldValue.arrayUnion(new Date())
+                //                });
 
                 if (document.getElementById('success-alert').classList.contains('d-none')) {
                     document.getElementById('success-alert').classList.remove('d-none');
@@ -447,6 +481,9 @@
                 }, 5000);
             });
         });
+
     </script>
     <script src="js/app.js"></script>
-</body></html>
+</body>
+
+</html>
