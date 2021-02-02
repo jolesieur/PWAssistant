@@ -446,10 +446,11 @@
                 console.log($("#form-medivator :checkbox:checked"));
 
                 var selected = [];
-                $('#medivator1 input:checked').each(function() {
-                    selected.push($(this).attr('id'));
+                $('#form-medivator input:checked').each(function() {
+                    var _checked = ($(this).attr('id'));
+                    selected.push(_checked.split("."));
                 });
-                console.log(selected[0].split("."));
+                console.log(selected[0][1]);
 
                 jsons.medivator1.f01.unshift(1612269919000);
                 console.log(jsons.medivator1.f01);
