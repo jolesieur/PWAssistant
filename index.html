@@ -144,8 +144,6 @@
                 <h1>Accueil</h1>
                 <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll, it will remain fixed to the top of your browser’s viewport.</p>
                 <br>
-                <span id="test"></span>
-
             </div>
             <div class="tab-pane fade" id="content-2" aria-labelledby="tab-2" role="tabpanel">
                 <h1>Inspection</h1>
@@ -239,12 +237,13 @@
                                         <input id="dt-medivator" type="date" class="datePicker">
                                     </div>
                                     <div class="form-group text-center">
-                                        <button id="endoscopie.medivator" type="button" class="btn btn-success" disabled>Valider</button>
+                                        <button id="endoscopie.medivator" type="button" class="btn btn-success" disabled>
+                                            Valider</button>
                                     </div>
                                 </form>
                             </div>
                             <div class="tab-pane fade" id="content-system1" role="tabpanel">
-                                <form>
+                                <form id="form-system1">
                                     <div class="form-group d-flex flex-column text-center">
                                         <label class="col-form-label">SYSTEM 1 #7</label>
                                         <div id="system1_7" class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -280,10 +279,11 @@
                                         </div>
                                     </div>
                                     <div class="form-group text-center">
-                                        <input type="date" class="datePicker">
+                                        <input id="dt-system1" type="date" class="datePicker">
                                     </div>
                                     <div class="form-group text-center">
-                                        <button id="succes_btn2" type="button" class="btn btn-success">Valider</button>
+                                        <button id="endoscopie.system1" type="button" class="btn btn-success" disabled>
+                                            Valider</button>
                                     </div>
                                 </form>
                             </div>
@@ -347,11 +347,7 @@
                 querySnapshot.forEach(function(doc) {
                     $.extend(jsons, JSON.parse(doc.data().filtres));
                 });
-                console.log(jsons);
-
-                var value = "medivator1";
-                console.log("allo automatique : ", jsons[value]);
-
+                console.log("db read: ", jsons);
                 updateFields("endoscopie");
             });
 
@@ -416,8 +412,8 @@
             $('.endoscopie .days').each(function() {
                 item = $(this).closest('label').attr('id');
                 location = $(this).closest('div').attr('id');
-                if (jsons[location][item].length > 1) {
-                    timeDiff = daysdifference(jsons[location][item][0], jsons[location][item][1]);
+                if (jsons[location][item].length > 0) {
+                    timeDiff = daysdifference($.now(), jsons[location][item][0]);
                 } else {
                     timeDiff = 0;
                 }
@@ -452,6 +448,17 @@
             }
         });
 
+        // TODO merge within one function
+
+        $('#form-system1 input[type=checkbox]').change(function() {
+            var checked = $("#form-system1 input:checked").length > 0;
+            if (checked) {
+                $('#form-system1 .btn-success').removeAttr('disabled');
+            } else {
+                $('#form-system1 .btn-success').attr('disabled', 'disabled');
+            }
+        });
+
 
         function daysdifference(firstDate, secondDate) {
             var startDay = new Date(firstDate);
@@ -460,8 +467,8 @@
             var millisBetween = startDay.getTime() - endDay.getTime();
             var days = millisBetween / (1000 * 3600 * 24);
 
-            return Math.round(Math.abs(days));
-        }
+            return Math.floor(Math.abs(days));
+        };
 
 
         $(function() {
@@ -476,9 +483,6 @@
             var old = 1611952240000;
             var days = daysdifference($.now(), old);
             console.log(days);
-
-            document.getElementById("test").innerHTML = $.now();
-
 
             $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
                 switch (e.target.id) {
@@ -496,13 +500,14 @@
 
 
             $('.btn-success').on('click', function() {
+                var senderFormID = $(this).closest('form').attr('id');
 
                 // Get datePicker value in milliseconds.
-                var timestamp = (+new Date(document.getElementById('dt-medivator').value));
+                var timestamp = (+new Date($("#" + senderFormID + " .datePicker").val()));
                 console.log(timestamp); // DEBUG ONLY
 
                 var checked = [];
-                $('#form-medivator input:checked').each(function() {
+                $("#" + senderFormID + " input:checked").each(function() {
                     var _checked = [($(this).closest('div').attr('id')), ($(this).closest('label').attr('id'))];
                     checked.push(_checked);
                 });
