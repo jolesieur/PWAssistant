@@ -99,6 +99,7 @@
             font-size: 10px;
             color: white;
         }
+
     </style>
 </head>
 
@@ -331,6 +332,7 @@
 
         const db = firebase.firestore()
         var jsons = new Object();
+        var raw = new Object();
         //        var docRef = db.collection("endoscopie").doc("medivator");
 
         //        db.collection("endoscopie").get().then(function(querySnapshot) {
@@ -346,8 +348,16 @@
             .onSnapshot(function(querySnapshot) {
                 querySnapshot.forEach(function(doc) {
                     $.extend(jsons, JSON.parse(doc.data().filtres));
+
+                    raw.push({
+                        doc.id: doc.data().filtres
+                    });
+
                 });
-                console.log("db read: ", jsons);
+                var json_text = JSON.stringify(raw);
+                var json_obj = JSON.parse(json_text);
+                console.log(json_obj["medivator"]["medivator1"])
+                console.log("db read: ", json_obj);
                 updateFields("endoscopie");
             });
 
@@ -420,6 +430,7 @@
                 $(this).text(timeDiff);
             });
         };
+
     </script>
 
     <script>
@@ -519,7 +530,7 @@
                         jsons[item[0]][item[1]].pop();
                     };
                 });
-                console.log(jsons); // DEBUG ONLY
+                console.log("jsons: ", jsons); // DEBUG ONLY
                 console.log($(this).attr('id'));
 
                 var newData = JSON.stringify(jsons);
@@ -553,6 +564,9 @@
                     });
             });
         });
+
     </script>
     <script src="js/app.js"></script>
-</body></html>
+</body>
+
+</html>
