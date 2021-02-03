@@ -99,7 +99,6 @@
             font-size: 10px;
             color: white;
         }
-
     </style>
 </head>
 
@@ -113,7 +112,7 @@
             <ul class="navbar-nav mr-auto" id="myTab">
 
                 <li class="nav-item">
-                    <a class="nav-link" id="tab-1" data-toggle="tab" role="tab" href="#content-1">Accueil</a>
+                    <a class="nav-link  active" id="tab-1" data-toggle="tab" role="tab" href="#content-1">Accueil</a>
                 </li>
 
                 <li class="nav-item">
@@ -125,7 +124,7 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" id="tab-6" data-toggle="tab" role="tab" href="#content-6">Hémodialyse</a>
                         <a class="dropdown-item" id="tab-7" data-toggle="tab" role="tab" href="#content-7">Laboratoire</a>
-                        <a class="dropdown-item active" id="tab-8" data-toggle="tab" role="tab" href="#content-8">Endoscopie</a>
+                        <a class="dropdown-item" id="tab-8" data-toggle="tab" role="tab" href="#content-8">Endoscopie</a>
                     </div>
                 </li>
 
@@ -141,7 +140,7 @@
 
     <main class="container">
         <div class="tab-content bg-light p-5 rounded">
-            <div class="tab-pane fade" id="content-1" aria-labelledby="tab-1" role="tabpanel">
+            <div class="tab-pane fade  show active " id="content-1" aria-labelledby="tab-1" role="tabpanel">
                 <h1>Accueil</h1>
                 <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll, it will remain fixed to the top of your browser’s viewport.</p>
                 <br>
@@ -166,7 +165,7 @@
                 <h1>Laboratoires</h1>
                 <h2>Remplacement des filtres</h2>
             </div>
-            <div class="tab-pane fade show active endoscopie" id="content-8" aria-labelledby="tab-8" role="tabpanel">
+            <div class="tab-pane fade endoscopie" id="content-8" aria-labelledby="tab-8" role="tabpanel">
                 <h1>Endoscopie</h1>
                 <div class="d-flex h-100">
                     <div class="m-auto">
@@ -220,7 +219,7 @@
                                     <div class="form-group d-flex flex-column text-center">
                                         <label class="col-form-label">Medivator 3</label>
                                         <div id="medivator3" class="btn-group btn-group-toggle" data-toggle="buttons">
-                                            <label id="f01" class="btn btn-outline-primary active">
+                                            <label id="f01" class="btn btn-outline-primary">
                                                 <input type="checkbox" name="options" autocomplete="off"> 0.1 µm <br>
                                                 <span class="days">365</span>
                                             </label>
@@ -328,61 +327,26 @@
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
-        //firebase.analytics();
+        firebase.analytics();
 
         const db = firebase.firestore()
         var jsons = new Object();
-        var raw = new Object();
-        //        var docRef = db.collection("endoscopie").doc("medivator");
-
-        //        db.collection("endoscopie").get().then(function(querySnapshot) {
-        //        querySnapshot.forEach(function(doc) {
-        //        // doc.data() is never undefined for query doc snapshots
-        //        //console.log(doc.data().filtres);
-        //        $.extend(jsons, JSON.parse(doc.data().filtres));
-        //        });
-        //        console.log(jsons.system1_8.f5);
-        //        });
+        var json_obj = new Object();
 
         db.collection("endoscopie")
             .onSnapshot(function(querySnapshot) {
                 querySnapshot.forEach(function(doc) {
-                    $.extend(jsons, JSON.parse(doc.data().filtres));
+                    //$.extend(jsons, JSON.parse(doc.data().filtres));
 
-                    raw.push({
-                        doc.id: doc.data().filtres
-                    });
-
+                    var raw = JSON.parse(doc.data().filtres);
+                    json_obj[doc.id] = raw;
                 });
-                var json_text = JSON.stringify(raw);
-                var json_obj = JSON.parse(json_text);
-                console.log(json_obj["medivator"]["medivator1"])
+                //var json_text = JSON.stringify(raw);
+                //var json_obj = JSON.parse(json_text);
+                //console.log(raw);
                 console.log("db read: ", json_obj);
                 updateFields("endoscopie");
             });
-
-        /*docRef.get().then(function(doc) {
-            if (doc.exists) {
-                console.log(doc.data().filtres);
-                var obj = JSON.parse(doc.data().filtres);
-                console.log(obj.medivator1.f01);
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-            }
-        }).catch(function(error) {
-            console.log("Error getting document:", error);
-        });*/
-        /*firebase
-                    .firestore()
-                    .collection("filtres")
-                    .doc("medivator_1")
-                    .set({
-                        date: Date.now(),
-                    })
-                    .then(() => {
-                        console.log("Document created");
-                    })*/
 
         /*
         {
@@ -419,18 +383,19 @@
         var element = [];
 
         function updateFields(location) {
-            $('.endoscopie .days').each(function() {
+            $('.' + location + ' .days').each(function() {
+                group = $(this).closest('form').attr('id').split("-").pop();
+                equipment = $(this).closest('div').attr('id');
                 item = $(this).closest('label').attr('id');
-                location = $(this).closest('div').attr('id');
-                if (jsons[location][item].length > 0) {
-                    timeDiff = daysdifference($.now(), jsons[location][item][0]);
+
+                if (json_obj[group][equipment][item].length > 0) {
+                    timeDiff = daysdifference($.now(), json_obj[group][equipment][item][0]);
                 } else {
                     timeDiff = 0;
                 }
                 $(this).text(timeDiff);
             });
         };
-
     </script>
 
     <script>
@@ -450,23 +415,15 @@
             return local.toJSON().slice(0, 10);
         });
 
-        $('#form-medivator input[type=checkbox]').change(function() {
-            var checked = $("#form-medivator input:checked").length > 0;
-            if (checked) {
-                $('#form-medivator .btn-success').removeAttr('disabled');
-            } else {
-                $('#form-medivator .btn-success').attr('disabled', 'disabled');
-            }
-        });
 
-        // TODO merge within one function
+        $('.endoscopie input[type=checkbox]').change(function() {
+            var senderFormID = $(this).closest('form').attr('id');
 
-        $('#form-system1 input[type=checkbox]').change(function() {
-            var checked = $("#form-system1 input:checked").length > 0;
+            var checked = $("#" + senderFormID + " input:checked").length > 0;
             if (checked) {
-                $('#form-system1 .btn-success').removeAttr('disabled');
+                $("#" + senderFormID + " .btn-success").removeAttr('disabled');
             } else {
-                $('#form-system1 .btn-success').attr('disabled', 'disabled');
+                $("#" + senderFormID + " .btn-success").attr('disabled', 'disabled');
             }
         });
 
@@ -491,22 +448,19 @@
         $(document).ready(function() {
             $('.datePicker').val(new Date().toDateInputValue());
 
-            var old = 1611952240000;
-            var days = daysdifference($.now(), old);
-            console.log(days);
-
-            $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
-                switch (e.target.id) {
-                    case "tab-8": {
-                        console.log("bingo")
-                        break;
-                    }
-                    case "configTab": {
-                        doConfigTabStuff();
-                        break;
-                    }
-                }
-            })
+            //  monitor tab change. code example / not implemented
+//            $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+// switch (e.target.id) {
+// case "tab-8": {
+// //console.log("bingo")
+// break;
+// }
+// case "configTab": {
+// doConfigTabStuff();
+// break;
+// }
+// }
+// })
 
 
 
@@ -515,26 +469,28 @@
 
                 // Get datePicker value in milliseconds.
                 var timestamp = (+new Date($("#" + senderFormID + " .datePicker").val()));
-                console.log(timestamp); // DEBUG ONLY
+                //console.log("Timestamp :", timestamp); // DEBUG ONLY
 
                 var checked = [];
                 $("#" + senderFormID + " input:checked").each(function() {
                     var _checked = [($(this).closest('div').attr('id')), ($(this).closest('label').attr('id'))];
                     checked.push(_checked);
                 });
-                console.log("test", checked); // DEBUG ONLY
+                //console.log("Checked items :", checked); // DEBUG ONLY
+
+                group = senderFormID.split("-").pop();
 
                 checked.forEach(function(item) {
-                    jsons[item[0]][item[1]].unshift(timestamp);
-                    if (jsons[item[0]][item[1]].length > 10) { // Remove oldest entry. Limit to 10 entry max.
-                        jsons[item[0]][item[1]].pop();
+                    json_obj[group][item[0]][item[1]].unshift(timestamp);
+                    if (json_obj[group][item[0]][item[1]].length > 10) { // Remove oldest entry. Limit to 10 entry max.
+                        json_obj[group][item[0]][item[1]].pop();
                     };
                 });
-                console.log("jsons: ", jsons); // DEBUG ONLY
-                console.log($(this).attr('id'));
 
-                var newData = JSON.stringify(jsons);
-                console.log(newData);
+                console.log("json_obj: ", json_obj); // DEBUG ONLY
+
+                var newData = JSON.stringify(json_obj[group]);
+                console.log("newData ", newData);
                 var location = $(this).attr('id').split(".");
                 var docRef = db.collection(location[0]).doc(location[1]).set({
                         filtres: newData
@@ -547,9 +503,9 @@
                             document.getElementById('success-alert').classList.remove('d-none');
                         }
 
-                        $("#form-medivator :checkbox:enabled").prop('checked', false);
-                        $("#form-medivator label").removeClass("active");
-                        $('#succes_btn').attr('disabled', 'disabled');
+                        $("#" + senderFormID + " :checkbox:enabled").prop('checked', false);
+                        $("#" + senderFormID + " label").removeClass("active");
+                        $("#" + senderFormID + " .btn-success").attr('disabled', 'disabled');
 
                         window.setTimeout(function() {
                             $('#success-alert').hide();
@@ -564,9 +520,6 @@
                     });
             });
         });
-
     </script>
     <script src="js/app.js"></script>
-</body>
-
-</html>
+</body></html>
