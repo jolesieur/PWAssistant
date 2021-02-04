@@ -517,7 +517,7 @@
         }
         
         {
-       "charbons" : {
+       "charbon" : {
        "c1": [1609480800000],
        "c2": [1609480800000]
        }
@@ -628,20 +628,20 @@
                 });
                 //console.log("Checked items :", checked); // DEBUG ONLY
 
-                group = senderFormID.split("-").pop();
+                var location = $(this).attr('id').split(".");
 
                 checked.forEach(function(item) {
-                    json_obj[group][item[0]][item[1]].unshift(timestamp);
-                    if (json_obj[group][item[0]][item[1]].length > 10) { // Remove oldest entry. Limit to 10 entry max.
-                        json_obj[group][item[0]][item[1]].pop();
+                    json_obj[location[0]][location[1]][item[0]][item[1]].unshift(timestamp);
+                    if (json_obj[location[0]][location[1]][item[0]][item[1]].length > 10) { // Remove oldest entry. Limit to 10 entry max.
+                        json_obj[location[0]][location[1]][item[0]][item[1]].pop();
                     };
                 });
 
                 console.log("json_obj: ", json_obj); // DEBUG ONLY
 
-                var newData = JSON.stringify(json_obj[group]);
+                var newData = JSON.stringify(json_obj[location[0]][location[1]]);
                 console.log("newData ", newData);
-                var location = $(this).attr('id').split(".");
+
                 var docRef = db.collection(location[0]).doc(location[1]).set({
                         data: newData
                     })
