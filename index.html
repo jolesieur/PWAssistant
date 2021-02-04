@@ -439,21 +439,36 @@
 
         const db = firebase.firestore()
         var jsons = new Object();
+        //var json_obj = new Object();
         var json_obj = new Object();
 
         db.collection("endoscopie")
             .onSnapshot(function(querySnapshot) {
+                var _json_obj = new Object();
                 querySnapshot.forEach(function(doc) {
                     //$.extend(jsons, JSON.parse(doc.data().filtres));
 
-                    var raw = JSON.parse(doc.data().filtres);
-                    json_obj[doc.id] = raw;
+                    var raw = JSON.parse(doc.data().data);
+                    _json_obj[doc.id] = raw;
                 });
-                //var json_text = JSON.stringify(raw);
-                //var json_obj = JSON.parse(json_text);
-                //console.log(raw);
-                console.log("db read: ", json_obj);
+                json_obj["endoscopie"] = _json_obj;
+                //console.log("db read: ", json_obj);
                 updateFields("endoscopie");
+            });
+
+        db.collection("laboratoires")
+            .onSnapshot(function(querySnapshot) {
+                var _json_obj = new Object();
+                querySnapshot.forEach(function(doc) {
+                    //$.extend(jsons, JSON.parse(doc.data().filtres));
+
+                    var raw = JSON.parse(doc.data().data);
+                    _json_obj[doc.id] = raw;
+                });
+                json_obj["laboratoires"] = _json_obj;
+                console.log(json_obj);
+                //console.log("db read: ", json_obj);
+                updateFields("laboratoires");
             });
 
         /*
@@ -487,6 +502,33 @@
        "fb": [1609480800000]
        }
        }
+       
+       {
+        "sediments" : {   
+                        "f5": [1609480800000],
+                        "f1": [1609480800000]
+                        },
+        "osmose" : {   
+                        "f1": [1609480800000]
+                        },
+        "filtres01" : {   
+                        "f01": [1609480800000]
+                        }                
+        }
+        
+        {
+       "charbons" : {
+       "c1": [1609480800000],
+       "c2": [1609480800000]
+       }
+       }
+       
+       {
+       "resines" : {
+       "r1": [1609480800000],
+       "r2": [1609480800000]
+       }
+       }
         */
         var element = [];
 
@@ -496,8 +538,8 @@
                 equipment = $(this).closest('div').attr('id');
                 item = $(this).closest('label').attr('id');
 
-                if (json_obj[group][equipment][item].length > 0) {
-                    timeDiff = daysdifference($.now(), json_obj[group][equipment][item][0]);
+                if (json_obj[location][group][equipment][item].length > 0) {
+                    timeDiff = daysdifference($.now(), json_obj[location][group][equipment][item][0]);
                 } else {
                     timeDiff = 0;
                 }
@@ -524,7 +566,7 @@
         });
 
 
-        $('.endoscopie input[type=checkbox]').change(function() {
+        $('input[type=checkbox]').change(function() {
             var senderFormID = $(this).closest('form').attr('id');
 
             var checked = $("#" + senderFormID + " input:checked").length > 0;
@@ -601,7 +643,7 @@
                 console.log("newData ", newData);
                 var location = $(this).attr('id').split(".");
                 var docRef = db.collection(location[0]).doc(location[1]).set({
-                        filtres: newData
+                        data: newData
                     })
                     .then(function() { // Write successful
                         $('#error-alert').hide();
