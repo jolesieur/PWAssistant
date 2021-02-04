@@ -1,0 +1,15 @@
+{
+  "name": "Pure Water Assistant",
+  "short_name": "PWAssistant",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#2196F3",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "drop-180x180.png",
+      "type": "image/png", "sizes": "180x180"
+    }
+  ]
+}
