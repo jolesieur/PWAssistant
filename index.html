@@ -159,7 +159,152 @@
             </div>
             <div class="tab-pane fade" id="content-6" aria-labelledby="tab-6" role="tabpanel">
                 <h1>Hémodialyse</h1>
-                <h2>Remplacement des filtres</h2>
+                <div class="d-flex h-100">
+                    <div class="m-auto">
+                        <h3 class="d-flex d-flex-column text-center">Remplacement des filtres</h3>
+
+                        <ul class="nav nav-pills nav-fill">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="tab-filtres" data-toggle="tab" role="tab" href="#content-filtres">Pré-traitement</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="tab-charbon" data-toggle="tab" role="tab" href="#content-charbon">Osmoses portatives</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="tab-charbon" data-toggle="tab" role="tab" href="#content-charbon">Osmoses portatives</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="tab-charbon" data-toggle="tab" role="tab" href="#content-charbon">Osmoses portatives</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane show active fade" id="content-filtres" role="tabpanel">
+                                <form id="form-filtres">
+                                    <div class="form-group d-flex flex-column text-center">
+                                        <label class="col-form-label">Pré-traitement</label>
+                                        <div id="sediments" class="btn-group btn-group-toggle col-12 col-md-6 align-self-center" data-toggle="buttons">
+                                            <label id="f5" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="f5" autocomplete="off"> 5 µm <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="f1" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="f1" autocomplete="off"> 1 µm <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group d-flex flex-column text-center">
+                                        <label class="col-form-label">Osmose portative FR1</label>
+                                        <div id="osmose" class="btn-group btn-group-toggle  col-12 col-md-6 align-self-center" data-toggle="buttons">
+                                            <label id="f5" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="f5" autocomplete="off"> 5 µm <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="f1" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="f1" autocomplete="off"> 1 µm <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group d-flex flex-column text-center">
+                                        <label class="col-form-label">Osmose portative FR2</label>
+                                        <div id="osmose" class="btn-group btn-group-toggle  col-12 col-md-6 align-self-center" data-toggle="buttons">
+                                            <label id="f5" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="f5" autocomplete="off"> 5 µm <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="f1" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="f1" autocomplete="off"> 1 µm <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group d-flex flex-column text-center">
+                                        <label class="col-form-label">Osmose portative FR3</label>
+                                        <div id="osmose" class="btn-group btn-group-toggle  col-12 col-md-6 align-self-center" data-toggle="buttons">
+                                            <label id="f5" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="f5" autocomplete="off"> 5 µm <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="f1" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="f1" autocomplete="off"> 1 µm <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group d-flex flex-column text-center">
+                                        <label class="col-form-label">Osmose portative FR4</label>
+                                        <div id="osmose" class="btn-group btn-group-toggle  col-12 col-md-6 align-self-center" data-toggle="buttons">
+                                            <label id="f5" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="f5" autocomplete="off"> 5 µm <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="f1" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="f1" autocomplete="off"> 1 µm <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <input id="dt-filtres" type="date" class="datePicker">
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <button id="laboratoires.filtres" type="button" class="btn btn-success" disabled>
+                                            Valider</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="content-charbon" role="tabpanel">
+                                <form id="form-charbon">
+                                    <div class="form-group d-flex flex-column text-center">
+                                        <label class="col-form-label">Filtres au charbon</label>
+                                        <div id="charbon" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label id="c1" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="c1" autocomplete="off"> 1 <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="c2" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="c2" autocomplete="off"> 2 <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <input id="dt-charbon" type="date" class="datePicker">
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <button id="laboratoires.charbon" type="button" class="btn btn-success" disabled>
+                                            Valider</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="content-resines" role="tabpanel">
+                                <form id="form-resines">
+                                    <div class="form-group d-flex flex-column text-center">
+                                        <label class="col-form-label">Résines de déionisation</label>
+                                        <div id="resines" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label id="r1" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="r1" autocomplete="off"> 1 <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="r2" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="r2" autocomplete="off"> 2 <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <input id="dt-resines" type="date" class="datePicker">
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <button id="laboratoires.resines" type="button" class="btn btn-success" disabled>
+                                            Valider</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="tab-pane fade laboratoires" id="content-7" aria-labelledby="tab-7" role="tabpanel">
                 <h1>Laboratoires</h1>
