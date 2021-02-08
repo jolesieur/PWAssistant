@@ -186,43 +186,17 @@
                             </div>
                         </nav>
 -->
-                        <div class="text-center">
-                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span id="show"></span>
-                            </button>
-                            <div class="dropdown-menu dropdown1" id="button-menu" aria-labelledby="dropdownMenuButton">
-
-                                <a class="dropdown-item" type="button" id="tab-filtres" data-toggle="tab" role="tab" href="#content-filtres">Pré-traitement</a>
-
-                                <a class="dropdown-item" type="button" id="tab-charbon" data-toggle="tab" role="tab" href="#content-charbon">Osmoses portatives</a>
-
-                                <a class="dropdown-item" type="button" id="tab-charbon2" data-toggle="tab" role="tab" href="#content-charbon">Osmoses portatives</a>
-
-                                <a class="dropdown-item" type="button" id="tab-charbon3" data-toggle="tab" role="tab" href="#content-charbon">Osmoses portatives</a>
-
-                            </div>
-                            
-                           <div class="dropdown dropup">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown button
-  </button>
-
-</div> 
-                            
-                            <ul class="nav flex-column">
-    <li class="nav-item dropdown mb-5">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">DropDown</a>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" id="tab-filtres" data-toggle="tab" role="tab" href="#content-filtres">Pré-traitement</a>
-            <a class="dropdown-item" id="tab-charbon2" data-toggle="tab" role="tab" href="#content-charbon">Osmoses portatives</a>
-            <a class="dropdown-item" id="tab-charbon3" data-toggle="tab" role="tab" href="#content-charbon">Osmoses portatives</a>
-        </div>
-    </li>
-
-</ul> <!-- End nav -->
-                            
-                        </div>
-                        
+                        <ul class="nav flex-column text-center">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <span id="show">Pré-traitement</span></a>
+                                <div class="dropdown-menu w-100 text-center dropdown1">
+                                    <a class="dropdown-item" id="tab-filtres" data-toggle="tab" role="tab" href="#content-filtres">Pré-traitement</a>
+                                    <a class="dropdown-item" id="tab-charbon2" data-toggle="tab" role="tab" href="#content-charbon">Charbon</a>
+                                    <a class="dropdown-item" id="tab-charbon3" data-toggle="tab" role="tab" href="#content-resines">Osmoses portatives</a>
+                                </div>
+                            </li>
+                        </ul>
 
                         <div class="tab-content">
                             <div class="tab-pane show active fade" id="content-filtres" role="tabpanel">
@@ -741,7 +715,7 @@
     </script>
 
     <script>
-        $('.dropdown1 button').on('click', function() {
+        $('.dropdown1 a').on('click', function() {
             $('#show').text($(this).text());
         });
 
@@ -808,11 +782,10 @@
             // }
             // }
             // })
-            $('#show').text($(".dropdown1 button[id='tab-filtres']").text());
-
 
 
             $('.btn-success').on('click', function() {
+
                 var senderFormID = $(this).closest('form').attr('id');
 
                 // Get datePicker value in milliseconds.
