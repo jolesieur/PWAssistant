@@ -12,7 +12,7 @@
     <link rel="apple-touch-icon" href="drop.png">
     <link rel="apple-touch-icon" sizes="180x180" href="drop-180x180.png">
     <link href="apple_splash_750.png" sizes="750x1334" rel="apple-touch-startup-image" />
-
+    <meta http-equiv="x-ua-compatible" content="IE=Edge" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -276,7 +276,7 @@
                                     </div>
                                     <div class="form-group d-flex flex-column text-center">
                                         <div class="col-8 align-self-center">
-                                            <input id="datepicker" style="text-align: center;">
+                                            <input id="datepicker" style="text-align: center;" readonly="true">
                                         </div>
                                     </div>
 
@@ -734,7 +734,9 @@
                 rightIcon: '<span class="fa fa-sort-down"></span>'
             },
             locale: 'fr-fr',
-            format: 'yyyy-mm-dd'
+            format: 'yyyy-mm-dd',
+            ignoreReadonly: true,
+            allowInputToggle: true
         });
 
 
