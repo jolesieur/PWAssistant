@@ -35,6 +35,8 @@
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <script src="https://unpkg.com/gijgo@1.9.13/js/messages/messages.fr-fr.js" type="text/javascript"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
     <!--
     <script src="js/gijgo.min.js" type="text/javascript"></script>
     <link href="css/gijgo.min.css" rel="stylesheet" type="text/css" />
@@ -743,7 +745,7 @@
                 rightIcon: '<i class="fas fa-chevron-down"></i>'
             },
             locale: 'fr-fr',
-            format: 'yyyy/mm/dd',
+            format: 'yyyy-mm-dd',
             ignoreReadonly: true,
             allowInputToggle: true
         });
@@ -802,10 +804,7 @@
 
         $(document).ready(function() {
             $('.datePicker').val(new Date().toDateInputValue());
-
-            var today = moment().format('YYYY-MM-DD');
-            document.getElementById("datepicker").value = today;
-            //$('#datepicker').val(new Date());
+            $('#datepicker').val(new Date().toDateInputValue());
 
             //  monitor tab change. code example / not implemented
             //            $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
@@ -823,15 +822,17 @@
 
 
             $('.btn-success').on('click', function() {
-                console.log("raw :", $("#datepicker").val())
-                var ts = (+new Date($("#datepicker").val()));
-                console.log(ts)
+                //                console.log("raw :", $("#datepicker").val())
+                //                var ts = (+new Date($("#datepicker").val()));
+                //                var _ts = ts + ((new Date($("#datepicker").val())).getTimezoneOffset() * 60000);
+                //                console.log("this :", _ts);
 
                 var senderFormID = $(this).closest('form').attr('id');
 
                 // Get datePicker value in milliseconds.
-                var timestamp = (+new Date($("#" + senderFormID + " .datePicker").val()));
-                //console.log("Timestamp :", timestamp); // DEBUG ONLY
+                var ts = (+new Date($("#" + senderFormID + " .datePicker").val()));
+                var timestamp = ts + ((new Date($("#" + senderFormID + " .datePicker").val())).getTimezoneOffset() * 60000);;
+                console.log("Timestamp :", timestamp); // DEBUG ONLY
 
                 var checked = [];
                 $("#" + senderFormID + " input:checked").each(function() {
