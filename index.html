@@ -111,7 +111,6 @@
             font-size: 10px;
             color: white;
         }
-
     </style>
 </head>
 
@@ -135,7 +134,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Remplacement</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" id="tab-6" data-toggle="tab" role="tab" href="#content-6">Hémodialyse</a>
+                        <a class="dropdown-item" id="tab-6" data-toggle="tab" role="tab" href="#content-hemodialyse">Hémodialyse</a>
                         <a class="dropdown-item" id="tab-7" data-toggle="tab" role="tab" href="#content-7">Laboratoire</a>
                         <a class="dropdown-item" id="tab-8" data-toggle="tab" role="tab" href="#content-8">Endoscopie</a>
                     </div>
@@ -169,54 +168,32 @@
                 <h1>Historique</h1>
                 <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll, it will remain fixed to the top of your browser’s viewport.</p>
             </div>
-            <div class="tab-pane fade" id="content-6" aria-labelledby="tab-6" role="tabpanel">
+
+
+            <!-- Début Hémodialyse -->
+            <div class="tab-pane root fade" id="content-hemodialyse" aria-labelledby="tab-6" role="tabpanel">
                 <h1>Hémodialyse</h1>
                 <div class="d-flex h-100">
                     <div class="m-auto">
                         <h3 class="d-flex d-flex-column text-center">Remplacement des filtres</h3>
 
-                        <!--
-                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                            <span>Selection</span>
-                            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse8">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarCollapse8">
-                                <ul class="navbar-nav mr-auto" id="myTab">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="tab-filtres" data-toggle="tab" role="tab" href="#content-filtres">Pré-traitement</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="tab-charbon" data-toggle="tab" role="tab" href="#content-charbon">Osmoses portatives</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="tab-charbon" data-toggle="tab" role="tab" href="#content-charbon">Osmoses portatives</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="tab-charbon" data-toggle="tab" role="tab" href="#content-charbon">Osmoses portatives</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </nav>
--->
                         <ul class="nav flex-column text-center">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
                                     <span id="show">Pré-traitement</span></a>
-                                <div class="dropdown-menu w-100 text-center dropdown1">
+                                <div class="dropdown-menu w-100 text-center sub-tab">
                                     <a class="dropdown-item" id="tab-filtres" data-toggle="tab" role="tab" href="#content-filtres">Pré-traitement</a>
-                                    <a class="dropdown-item" id="tab-charbon2" data-toggle="tab" role="tab" href="#content-charbon">Charbon</a>
-                                    <a class="dropdown-item" id="tab-charbon3" data-toggle="tab" role="tab" href="#content-resines">Osmoses portatives</a>
+                                    <a class="dropdown-item" id="tab-osmoses-portatives" data-toggle="tab" role="tab" href="#content-osmoses-portatives">Osmoses portatives</a>
                                 </div>
                             </li>
                         </ul>
 
                         <div class="tab-content">
                             <div class="tab-pane show active fade" id="content-filtres" role="tabpanel">
-                                <form id="hemodialyse-form-filtres">
+                                <form id="pre-traitement">
                                     <div class="form-group d-flex flex-column text-center">
-                                        <label class="col-form-label">Pré-traitement</label>
-                                        <div id="sediments" class="btn-group btn-group-toggle col-8 align-self-center" data-toggle="buttons">
+                                        <label class="col-form-label">Filttres à sédiments</label>
+                                        <div id="sediments" class="btn-group btn-group-toggle col-10 align-self-center" data-toggle="buttons">
                                             <label id="f5" class="btn btn-outline-primary">
                                                 <input type="checkbox" name="f5" autocomplete="off"> 5 µm <br>
                                                 <span class="days">365</span>
@@ -227,128 +204,136 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="form-group d-flex flex-column text-center">
-                                        <label class="col-form-label">Osmose portative FR1</label>
-                                        <div id="osmose" class="btn-group btn-group-toggle  col-8 align-self-center" data-toggle="buttons">
-                                            <label id="f5" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="f5" autocomplete="off"> 5 µm <br>
-                                                <span class="days">365</span>
-                                            </label>
-                                            <label id="f1" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="f1" autocomplete="off"> 1 µm <br>
-                                                <span class="days">365</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group d-flex flex-column text-center">
-                                        <label class="col-form-label">Osmose portative FR2</label>
-                                        <div id="osmose" class="btn-group btn-group-toggle col-8 align-self-center" data-toggle="buttons">
-                                            <label id="f5" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="f5" autocomplete="off"> 5 µm <br>
-                                                <span class="days">365</span>
-                                            </label>
-                                            <label id="f1" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="f1" autocomplete="off"> 1 µm <br>
-                                                <span class="days">365</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group d-flex flex-column text-center">
-                                        <label class="col-form-label">Osmose portative FR3</label>
-                                        <div id="osmose" class="btn-group btn-group-toggle  col-8 align-self-center" data-toggle="buttons">
-                                            <label id="f5" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="f5" autocomplete="off"> 5 µm <br>
-                                                <span class="days">365</span>
-                                            </label>
-                                            <label id="f1" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="f1" autocomplete="off"> 1 µm <br>
-                                                <span class="days">365</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group d-flex flex-column text-center">
-                                        <label class="col-form-label">Osmose portative FR4</label>
-                                        <div id="osmose" class="btn-group btn-group-toggle  col-8 align-self-center" data-toggle="buttons">
-                                            <label id="f5" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="f5" autocomplete="off"> 5 µm <br>
-                                                <span class="days">365</span>
-                                            </label>
-                                            <label id="f1" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="f1" autocomplete="off"> 1 µm <br>
-                                                <span class="days">365</span>
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group text-center">
-                                        <input id="dt-filtres" type="date" class="datePicker">
-                                    </div>
-                                    <div class="form-group d-flex flex-column text-center">
-                                        <div class="col-8 align-self-center">
-                                            <input id="datepicker" style="text-align: center;" readonly="true">
-                                        </div>
-                                    </div>
-                                    <div class="form-group text-center">
-                                        <button id="laboratoires.filtres" type="button" class="btn btn-success" disabled>
-                                            Valider</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="tab-pane fade" id="content-charbon" role="tabpanel">
-                                <form id="form-charbon">
                                     <div class="form-group d-flex flex-column text-center">
                                         <label class="col-form-label">Filtres au charbon</label>
-                                        <div id="charbon" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <div id="osmose" class="btn-group btn-group-toggle  col-10 align-self-center" data-toggle="buttons">
                                             <label id="c1" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="c1" autocomplete="off"> 1 <br>
+                                                <input class="c1" type="checkbox" name="f5" autocomplete="off"> 1 <br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="c2" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="c2" autocomplete="off"> 2 <br>
+                                                <input type="checkbox" name="f1" autocomplete="off"> 2 <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="c3" class="btn btn-outline-primary">
+                                                <input class="c1" type="checkbox" name="f5" autocomplete="off"> 3 <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="c4" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="f1" autocomplete="off"> 4 <br>
                                                 <span class="days">365</span>
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="form-group text-center">
-                                        <input id="dt-charbon" type="date" class="datePicker">
-                                    </div>
-                                    <div class="form-group text-center">
-                                        <button id="laboratoires.charbon" type="button" class="btn btn-success" disabled>
-                                            Valider</button>
-                                    </div>
                                 </form>
                             </div>
-                            <div class="tab-pane fade" id="content-resines" role="tabpanel">
-                                <form id="form-resines">
+                            <div class="tab-pane fade" id="content-osmoses-portatives" role="tabpanel">
+                                <form id="form-osmoses-portatives">
                                     <div class="form-group d-flex flex-column text-center">
-                                        <label class="col-form-label">Résines de déionisation</label>
-                                        <div id="resines" class="btn-group btn-group-toggle" data-toggle="buttons">
-                                            <label id="r1" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="r1" autocomplete="off"> 1 <br>
+                                        <label class="col-form-label">FR1</label>
+                                        <div id="fr1" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label id="f5" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="r1"> 5 µm <br>
                                                 <span class="days">365</span>
                                             </label>
-                                            <label id="r2" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="r2" autocomplete="off"> 2 <br>
+                                            <label id="c1" class="btn btn-outline-primary">
+                                                <input class="c1" type="checkbox" name="r2"> Charbon <br> 1 <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="c2" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="r2"> Charbon <br> 2 <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="f1" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="r2"> 1 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="form-group text-center">
-                                        <input id="dt-resines" type="date" class="datePicker">
+                                    <div class="form-group d-flex flex-column text-center">
+                                        <label class="col-form-label">FR2</label>
+                                        <div id="fr1" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label id="f5" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="r1"> 5 µm <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="c1" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="r2"> Charbon <br> 1 <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="c2" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="r2"> Charbon <br> 2 <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="f1" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="r2"> 1 µm <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                        </div>
                                     </div>
-                                    <div class="form-group text-center">
-                                        <button id="laboratoires.resines" type="button" class="btn btn-success" disabled>
-                                            Valider</button>
+                                    <div class="form-group d-flex flex-column text-center">
+                                        <label class="col-form-label">FR3</label>
+                                        <div id="fr1" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label id="f5" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="r1"> 5 µm <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="c1" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="r2"> Charbon <br> 1 <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="c2" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="r2"> Charbon <br> 2 <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="f1" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="r2"> 1 µm <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group d-flex flex-column text-center">
+                                        <label class="col-form-label">FR4</label>
+                                        <div id="fr1" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label id="f5" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="r1"> 5 µm <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="c1" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="r2"> Charbon <br> 1 <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="c2" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="r2"> Charbon <br> 2 <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="f1" class="btn btn-outline-primary">
+                                                <input type="checkbox" name="r2"> 1 µm <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
-
                         </div>
                     </div>
                 </div>
+                <div>
+                    <div class="form-group d-flex flex-column text-center">
+                        <div class="col-10 col-sm-8 col-md-4 align-self-center">
+                            <input id="datepicker" class="datePicker" style="text-align: center;" readonly="true">
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <button id="btn-valider" type="button" class="btn btn-success" disabled>
+                            Valider</button>
+                    </div>
+                </div>
             </div>
+            <!-- Fin Hémodialyse -->
 
 
+            <!-- Début Laboratoires -->
             <div class="tab-pane fade laboratoires" id="content-7" aria-labelledby="tab-7" role="tabpanel">
                 <h1>Laboratoires</h1>
                 <div class="d-flex h-100">
@@ -733,7 +718,6 @@
                 $(this).text(timeDiff);
             });
         };
-
     </script>
 
     <script>
@@ -751,13 +735,14 @@
         });
 
 
-        $('.dropdown1 a').on('click', function() {
-            $('#show').text($(this).text());
-        });
-
-
         $(".navbar-nav .nav-item").on("click", function() {
             $(".navbar-nav .nav-item").find(".active").removeClass("active");
+        });
+
+        $(".c1").on("click", function() {
+            if ($(this).prop('checked')) {
+                alert("permutation?");
+            }
         });
 
         $('.navbar-nav li a').on('click', function() {
@@ -774,15 +759,31 @@
 
 
         $('input[type=checkbox]').change(function() {
+            var senderRootID = $(this).parents('.root').attr('id');
             var senderFormID = $(this).closest('form').attr('id');
 
             var checked = $("#" + senderFormID + " input:checked").length > 0;
             if (checked) {
-                $("#" + senderFormID + " .btn-success").removeAttr('disabled');
+                $("#" + senderRootID + " .btn-success").removeAttr('disabled');
             } else {
-                $("#" + senderFormID + " .btn-success").attr('disabled', 'disabled');
+                $("#" + senderRootID + " .btn-success").attr('disabled', 'disabled');
             }
         });
+
+        // Set active sub-tab name to dropmenu text.
+        $('.sub-tab a').on('click', function() {
+            $('#show').text($(this).text());
+        });
+
+        //  Watch for sub-tab change and clear selection.
+        $('.sub-tab').on('shown.bs.tab', function(e) {
+            var senderRootID = $(this).parents('.root').attr('id');
+            var activeFormID = $(this).parents('.root').find(".tab-content .active").children('form').attr('id');
+
+            $("#" + activeFormID + " :checkbox:enabled").prop('checked', false);
+            $("#" + activeFormID + " label").removeClass("active");
+            $("#" + senderRootID + " .btn-success").attr('disabled', 'disabled');
+        })
 
 
         function daysdifference(firstDate, secondDate) {
@@ -804,88 +805,69 @@
 
         $(document).ready(function() {
             $('.datePicker').val(new Date().toDateInputValue());
-            $('#datepicker').val(new Date().toDateInputValue());
-
-            //  monitor tab change. code example / not implemented
-            //            $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
-            // switch (e.target.id) {
-            // case "tab-8": {
-            // //console.log("bingo")
-            // break;
-            // }
-            // case "configTab": {
-            // doConfigTabStuff();
-            // break;
-            // }
-            // }
-            // })
-
-
-            $('.btn-success').on('click', function() {
-                //                console.log("raw :", $("#datepicker").val())
-                //                var ts = (+new Date($("#datepicker").val()));
-                //                var _ts = ts + ((new Date($("#datepicker").val())).getTimezoneOffset() * 60000);
-                //                console.log("this :", _ts);
-
-                var senderFormID = $(this).closest('form').attr('id');
-
-                // Get datePicker value in milliseconds.
-                var ts = (+new Date($("#" + senderFormID + " .datePicker").val()));
-                var timestamp = ts + ((new Date($("#" + senderFormID + " .datePicker").val())).getTimezoneOffset() * 60000);;
-                console.log("Timestamp :", timestamp); // DEBUG ONLY
-
-                var checked = [];
-                $("#" + senderFormID + " input:checked").each(function() {
-                    var _checked = [($(this).closest('div').attr('id')), ($(this).closest('label').attr('id'))];
-                    checked.push(_checked);
-                });
-                //console.log("Checked items :", checked); // DEBUG ONLY
-
-                var location = $(this).attr('id').split(".");
-
-                checked.forEach(function(item) {
-                    json_obj[location[0]][location[1]][item[0]][item[1]].unshift(timestamp);
-                    if (json_obj[location[0]][location[1]][item[0]][item[1]].length > 10) { // Remove oldest entry. Limit to 10 entry max.
-                        json_obj[location[0]][location[1]][item[0]][item[1]].pop();
-                    };
-                });
-
-                console.log("json_obj: ", json_obj); // DEBUG ONLY
-
-                var newData = JSON.stringify(json_obj[location[0]][location[1]]);
-                console.log("newData ", newData);
-
-                var docRef = db.collection(location[0]).doc(location[1]).set({
-                        data: newData
-                    })
-                    .then(function() { // Write successful
-                        $('#error-alert').hide();
-                        $('#success-alert').show();
-
-                        if (document.getElementById('success-alert').classList.contains('d-none')) {
-                            document.getElementById('success-alert').classList.remove('d-none');
-                        }
-
-                        $("#" + senderFormID + " :checkbox:enabled").prop('checked', false);
-                        $("#" + senderFormID + " label").removeClass("active");
-                        $("#" + senderFormID + " .btn-success").attr('disabled', 'disabled');
-
-                        window.setTimeout(function() {
-                            $('#success-alert').hide();
-                            //document.getElementById('success-alert').classList.add('d-none');
-                        }, 5000);
-                    })
-                    .catch(function(error) {
-                        $('#error-alert').show();
-                        if (document.getElementById('error-alert').classList.contains('d-none')) {
-                            document.getElementById('error-alert').classList.remove('d-none');
-                        }
-                    });
-            });
         });
 
+        $('.btn-success').on('click', function() {
+            //                console.log("raw :", $("#datepicker").val())
+            //                var ts = (+new Date($("#datepicker").val()));
+            //                var _ts = ts + ((new Date($("#datepicker").val())).getTimezoneOffset() * 60000);
+            //                console.log("this :", _ts);
+            var senderRootID = $(this).parents('.root').attr('id');
+            var senderFormID = $(this).closest('form').attr('id');
+
+            // Get datePicker value in milliseconds.
+            var ts = (+new Date($("#" + senderRootID + " .datePicker").val()));
+            var timestamp = ts + ((new Date($("#" + senderRootID + " .datePicker").val())).getTimezoneOffset() * 60000);;
+            console.log("Timestamp :", timestamp); // DEBUG ONLY
+
+            var checked = [];
+            $("#" + senderFormID + " input:checked").each(function() {
+                var _checked = [($(this).closest('div').attr('id')), ($(this).closest('label').attr('id'))];
+                checked.push(_checked);
+            });
+            //console.log("Checked items :", checked); // DEBUG ONLY
+
+            var location = $(this).attr('id').split(".");
+
+            checked.forEach(function(item) {
+                json_obj[location[0]][location[1]][item[0]][item[1]].unshift(timestamp);
+                if (json_obj[location[0]][location[1]][item[0]][item[1]].length > 10) { // Remove oldest entry. Limit to 10 entry max.
+                    json_obj[location[0]][location[1]][item[0]][item[1]].pop();
+                };
+            });
+
+            console.log("json_obj: ", json_obj); // DEBUG ONLY
+
+            var newData = JSON.stringify(json_obj[location[0]][location[1]]);
+            console.log("newData ", newData);
+
+            var docRef = db.collection(location[0]).doc(location[1]).set({
+                    data: newData
+                })
+                .then(function() { // Write successful
+                    $('#error-alert').hide();
+                    $('#success-alert').show();
+
+                    if (document.getElementById('success-alert').classList.contains('d-none')) {
+                        document.getElementById('success-alert').classList.remove('d-none');
+                    }
+
+                    $("#" + senderFormID + " :checkbox:enabled").prop('checked', false);
+                    $("#" + senderFormID + " label").removeClass("active");
+                    $("#" + senderFormID + " .btn-success").attr('disabled', 'disabled');
+
+                    window.setTimeout(function() {
+                        $('#success-alert').hide();
+                        //document.getElementById('success-alert').classList.add('d-none');
+                    }, 5000);
+                })
+                .catch(function(error) {
+                    $('#error-alert').show();
+                    if (document.getElementById('error-alert').classList.contains('d-none')) {
+                        document.getElementById('error-alert').classList.remove('d-none');
+                    }
+                });
+        });
     </script>
     <!--<script src="js/app.js"></script>-->
-</body>
-
-</html>
+</body></html>
