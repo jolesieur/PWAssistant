@@ -21,6 +21,32 @@ $(".c1").on("click", function () {
     }
 });
 
+function swapCharbon() {
+    var selected = [];
+    $('input:checkbox[class=c1]:checked').each(function () {
+        selected.push($(this).closest("label").attr("id"));
+        dbCol = $(this).parents(".root").find("h1").attr("id");
+        dbDoc = $(this).parents(".root").find("h3").attr("id");
+        activeFormID = $(this).parents(".root").find(".tab-content .active").children("form").attr("id");
+    });
+    console.log(dbCol);
+    console.log(dbDoc);
+    console.log(activeFormID);
+
+    selected.forEach(function (item) {
+        if (item == "c1") {
+            console.log("c1 selectionné");
+            var c2 = json_obj[dbCol][dbDoc][activeFormID]["charbons"]["c2"][0];
+            console.log(c2);
+        };
+        if (item == "c3") {
+            console.log("c3 selectionné");
+            var c4 = 0;
+        };
+        //json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]].unshift(timestamp);
+    });
+};
+
 $(".navbar-nav li a").on("click", function () {
     if (!$(this).hasClass("dropdown-toggle")) {
         $(".navbar-collapse").collapse("hide");
@@ -54,10 +80,9 @@ $(".sub-tab a").on("click", function () {
 //  Watch for sub-tab change and clear selection.
 $(".sub-tab").on("shown.bs.tab", function (e) {
     var senderRootID = $(this).parents(".root").attr("id");
-    var activeFormID = $(this).parents(".root").find(".tab-content .active").children("form").attr("id");
 
-    $("#" + activeFormID + " :checkbox:enabled").prop("checked", false);
-    $("#" + activeFormID + " label").removeClass("active");
+    $("#" + senderRootID + " :checkbox:enabled").prop("checked", false);
+    $("#" + senderRootID + " label").removeClass("active");
     $("#" + senderRootID + " .btn-success").attr("disabled", "disabled");
 })
 
