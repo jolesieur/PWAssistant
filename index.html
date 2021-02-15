@@ -112,6 +112,12 @@
             font-size: 10px;
             color: white;
         }
+
+        .sub-tab {
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            top: 100% !important;
+        }
     </style>
 </head>
 
@@ -136,7 +142,7 @@
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Remplacement</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" id="tab-6" data-toggle="tab" role="tab" href="#content-hemodialyse">Hémodialyse</a>
-                        <a class="dropdown-item" id="tab-7" data-toggle="tab" role="tab" href="#content-7">Laboratoire</a>
+                        <a class="dropdown-item" id="tab-7" data-toggle="tab" role="tab" href="#content-laboratoires">Laboratoire</a>
                         <a class="dropdown-item" id="tab-8" data-toggle="tab" role="tab" href="#content-8">Endoscopie</a>
                     </div>
                 </li>
@@ -173,142 +179,141 @@
             <!-- Début Hémodialyse -->
             <div class="tab-pane root fade" id="content-hemodialyse" aria-labelledby="tab-6" role="tabpanel">
                 <h1 id="hemodialyse">Hémodialyse</h1>
+                <h3 id="remplacement" class="text-center">Remplacement des filtres</h3>
                 <div class="d-flex h-100">
                     <div class="m-auto">
-                        <h3 id="remplacement" class="d-flex d-flex-column text-center">Remplacement des filtres</h3>
-
                         <ul class="nav flex-column text-center">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <span id="show">Pré-traitement</span></a>
+                                    <span>Pré-traitement</span></a>
                                 <div class="dropdown-menu w-100 text-center sub-tab">
-                                    <a class="dropdown-item" id="tab-filtres" data-toggle="tab" role="tab" href="#content-filtres">Pré-traitement</a>
-                                    <a class="dropdown-item" id="tab-osmoses-portatives" data-toggle="tab" role="tab" href="#content-osmoses-portatives">Osmoses portatives</a>
+                                    <a class="dropdown-item" data-toggle="tab" role="tab" href="#content-a">Pré-traitement</a>
+                                    <a class="dropdown-item" data-toggle="tab" role="tab" href="#content-b">Osmoses portatives</a>
                                 </div>
                             </li>
                         </ul>
 
                         <div class="tab-content">
-                            <div class="tab-pane show active fade" id="content-filtres" role="tabpanel">
+                            <div class="tab-pane show active fade" id="content-a" role="tabpanel">
                                 <form id="pre-traitement">
                                     <div class="form-group d-flex flex-column text-center">
                                         <label class="col-form-label">Filttres à sédiments</label>
                                         <div id="filtres" class="btn-group btn-group-toggle col-10 align-self-center" data-toggle="buttons">
                                             <label id="f5" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="f5" autocomplete="off"> 5 µm <br>
+                                                <input type="checkbox" name="f5"> 5 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="f1" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="f1" autocomplete="off"> 1 µm <br>
+                                                <input type="checkbox" name="f1"> 1 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="form-group d-flex flex-column text-center">
                                         <label class="col-form-label">Filtres au charbon</label>
-                                        <div id="charbons" class="btn-group btn-group-toggle  col-12 align-self-center" data-toggle="buttons">
+                                        <div id="charbons" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
                                             <label id="c1" class="btn btn-outline-primary">
-                                                <input class="c1" type="checkbox" autocomplete="off"> 1 <br>
+                                                <input class="c1" type="checkbox">1<br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="c2" class="btn btn-outline-primary">
-                                                <input type="checkbox" autocomplete="off"> 2 <br>
+                                                <input class="c2" type="checkbox">2 <i class="fas fa-random swap2 d-none"></i><br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="c3" class="btn btn-outline-primary">
-                                                <input class="c1" type="checkbox" autocomplete="off"> 3 <br>
+                                                <input class="c3" type="checkbox">3<br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="c4" class="btn btn-outline-primary">
-                                                <input type="checkbox" autocomplete="off"> 4 <br>
+                                                <input class="c4" type="checkbox">4 <i class="fas fa-random swap4 d-none"></i><br>
                                                 <span class="days">365</span>
                                             </label>
                                         </div>
                                     </div>
                                 </form>
                             </div>
-                            <div class="tab-pane fade" id="content-osmoses-portatives" role="tabpanel">
+                            <div class="tab-pane fade" id="content-b" role="tabpanel">
                                 <form id="osmoses-portatives">
                                     <div class="form-group d-flex flex-column text-center">
                                         <label class="col-form-label">FR1</label>
-                                        <div id="fr1" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <div id="fr1" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
                                             <label id="f5" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="r1"> 5 µm <br>
+                                                <input type="checkbox"> 5 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="c1" class="btn btn-outline-primary">
-                                                <input class="c1" type="checkbox" name="r2"> Charbon <br> 1 <br>
+                                                <input class="c1" type="checkbox"> <small>Charbon <br> 1 </small><br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="c2" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="r2"> Charbon <br> 2 <br>
+                                                <input class="c2" type="checkbox"> <small>Charbon <br> 2 <i class="fas fa-random swap2 d-none"></i></small><br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="f1" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="r2"> 1 µm <br>
+                                                <input type="checkbox"> 1 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="form-group d-flex flex-column text-center">
                                         <label class="col-form-label">FR2</label>
-                                        <div id="fr2" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <div id="fr2" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
                                             <label id="f5" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="r1"> 5 µm <br>
+                                                <input type="checkbox"> 5 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="c1" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="r2"> Charbon <br> 1 <br>
+                                                <input class="c1" type="checkbox"> <small>Charbon <br> 1 </small><br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="c2" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="r2"> Charbon <br> 2 <br>
+                                                <input class="c2" type="checkbox"> <small>Charbon <br> 2 <i class="fas fa-random swap2 d-none"></i></small><br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="f1" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="r2"> 1 µm <br>
+                                                <input type="checkbox"> 1 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="form-group d-flex flex-column text-center">
                                         <label class="col-form-label">FR3</label>
-                                        <div id="fr3" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <div id="fr3" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
                                             <label id="f5" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="r1"> 5 µm <br>
+                                                <input type="checkbox"> 5 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="c1" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="r2"> Charbon <br> 1 <br>
+                                                <input class="c1" type="checkbox"> <small>Charbon <br> 1 </small><br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="c2" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="r2"> Charbon <br> 2 <br>
+                                                <input class="c2" type="checkbox"> <small>Charbon <br> 2 <i class="fas fa-random swap2 d-none"></i></small><br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="f1" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="r2"> 1 µm <br>
+                                                <input type="checkbox"> 1 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="form-group d-flex flex-column text-center">
                                         <label class="col-form-label">FR4</label>
-                                        <div id="fr4" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <div id="fr4" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
                                             <label id="f5" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="r1"> 5 µm <br>
+                                                <input type="checkbox"> 5 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="c1" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="r2"> Charbon <br> 1 <br>
+                                                <input class="c1" type="checkbox"> <small>Charbon <br> 1 </small> <br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="c2" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="r2"> Charbon <br> 2 <br>
+                                                <input class="c2" type="checkbox"> <small>Charbon <br> 2 <i class="fas fa-random swap2 d-none"></i></small><br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="f1" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="r2"> 1 µm <br>
+                                                <input type="checkbox"> 1 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                         </div>
@@ -320,8 +325,8 @@
                 </div>
                 <div>
                     <div class="form-group d-flex flex-column text-center">
-                        <div class="col-10 col-sm-8 col-md-4 align-self-center">
-                            <input id="datepicker" class="datePicker" style="text-align: center;" readonly="true">
+                        <div class="col-10 col-sm-8 col-md-4 col-lg-3 align-self-center">
+                            <input class="datePicker" style="text-align: center;" readonly="true">
                         </div>
                     </div>
                     <div class="form-group text-center">
@@ -334,118 +339,168 @@
 
 
             <!-- Début Laboratoires -->
-            <div class="tab-pane fade laboratoires" id="content-7" aria-labelledby="tab-7" role="tabpanel">
-                <h1>Laboratoires</h1>
+            <div class="tab-pane root fade" id="content-laboratoires" aria-labelledby="tab-6" role="tabpanel">
+                <h1 id="laboratoires">Laboratoires</h1>
+                <h3 id="remplacement" class="text-center">Remplacement des filtres</h3>
                 <div class="d-flex h-100">
                     <div class="m-auto">
-                        <h3 class="d-flex flex-column text-center">Remplacement des filtres</h3>
-
-                        <ul class="nav nav-pills nav-fill">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="tab-filtres" data-toggle="tab" role="tab" href="#content-filtres">Filtres</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="tab-charbon" data-toggle="tab" role="tab" href="#content-charbon">Charbon</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="tab-resines" data-toggle="tab" role="tab" href="#content-resines">Résines</a>
+                        <ul class="nav flex-column text-center">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <span>Pré-traitement</span></a>
+                                <div class="dropdown-menu text-center sub-tab">
+                                    <a class="dropdown-item" data-toggle="tab" role="tab" href="#content-c">Pré-traitement</a>
+                                    <a class="dropdown-item" data-toggle="tab" role="tab" href="#content-d">Boucle eau purifiée</a>
+                                </div>
                             </li>
                         </ul>
+
                         <div class="tab-content">
-                            <div class="tab-pane show active fade" id="content-filtres" role="tabpanel">
-                                <form id="form-filtres">
+                            <div class="tab-pane show active fade" id="content-c" role="tabpanel">
+                                <form id="pre-traitement2">
                                     <div class="form-group d-flex flex-column text-center">
-                                        <label class="col-form-label">Filtres à sédiments</label>
-                                        <div id="sediments" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="col-form-label">Filttres à sédiments</label>
+                                        <div id="filtres" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
                                             <label id="f5" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="f5" autocomplete="off"> 5 µm <br>
+                                                <input type="checkbox" name="f5"> 5 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="f1" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="f1" autocomplete="off"> 1 µm <br>
+                                                <input type="checkbox" name="f1"> 1 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="form-group d-flex flex-column text-center">
-                                        <label class="col-form-label">Filtre de l'osmose</label>
-                                        <div id="osmose" class="btn-group btn-group-toggle" data-toggle="buttons">
-                                            <label id="f1" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="f1" autocomplete="off"> 1 µm <br>
-                                                <span class="days">365</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group d-flex flex-column text-center">
-                                        <label class="col-form-label">Filtres à endotoxines</label>
-                                        <div id="filtres01" class="btn-group btn-group-toggle" data-toggle="buttons">
-                                            <label id="f01" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="f01" autocomplete="off"> 0.1 µm <br>
-                                                <span class="days">365</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group text-center">
-                                        <input id="dt-filtres" type="date" class="datePicker">
-                                    </div>
-                                    <div class="form-group text-center">
-                                        <button id="laboratoires.filtres" type="button" class="btn btn-success" disabled>
-                                            Valider</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="tab-pane fade" id="content-charbon" role="tabpanel">
-                                <form id="form-charbon">
                                     <div class="form-group d-flex flex-column text-center">
                                         <label class="col-form-label">Filtres au charbon</label>
-                                        <div id="charbon" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <div id="charbons" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
                                             <label id="c1" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="c1" autocomplete="off"> 1 <br>
+                                                <input class="c1" type="checkbox">1<br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="c2" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="c2" autocomplete="off"> 2 <br>
+                                                <input class="c2" type="checkbox">2 <i class="fas fa-random swap2 d-none"></i><br>
                                                 <span class="days">365</span>
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="form-group text-center">
-                                        <input id="dt-charbon" type="date" class="datePicker">
-                                    </div>
-                                    <div class="form-group text-center">
-                                        <button id="laboratoires.charbon" type="button" class="btn btn-success" disabled>
-                                            Valider</button>
+                                    <div class="form-group d-flex flex-column text-center">
+                                        <label class="col-form-label">Filtre osmose</label>
+                                        <div id="filtre-osmose" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
+                                            <label id="f1" class="btn btn-outline-primary">
+                                                <input type="checkbox">1 µm<br>
+                                                <span class="days">365</span>
+                                            </label>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
-                            <div class="tab-pane fade" id="content-resines" role="tabpanel">
-                                <form id="form-resines">
+                            <div class="tab-pane fade" id="content-d" role="tabpanel">
+                                <form id="boucle-eau-purifiee">
                                     <div class="form-group d-flex flex-column text-center">
-                                        <label class="col-form-label">Résines de déionisation</label>
-                                        <div id="resines" class="btn-group btn-group-toggle" data-toggle="buttons">
-                                            <label id="r1" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="r1" autocomplete="off"> 1 <br>
+                                        <label class="col-form-label">FR1</label>
+                                        <div id="fr1" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
+                                            <label id="f5" class="btn btn-outline-primary">
+                                                <input type="checkbox"> 5 µm <br>
                                                 <span class="days">365</span>
                                             </label>
-                                            <label id="r2" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="r2" autocomplete="off"> 2 <br>
+                                            <label id="c1" class="btn btn-outline-primary">
+                                                <input class="c1" type="checkbox"> <small>Charbon <br> 1 </small><br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="c2" class="btn btn-outline-primary">
+                                                <input class="c2" type="checkbox"> <small>Charbon <br> 2 <i class="fas fa-random swap2 d-none"></i></small><br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="f1" class="btn btn-outline-primary">
+                                                <input type="checkbox"> 1 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="form-group text-center">
-                                        <input id="dt-resines" type="date" class="datePicker">
+                                    <div class="form-group d-flex flex-column text-center">
+                                        <label class="col-form-label">FR2</label>
+                                        <div id="fr2" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
+                                            <label id="f5" class="btn btn-outline-primary">
+                                                <input type="checkbox"> 5 µm <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="c1" class="btn btn-outline-primary">
+                                                <input class="c1" type="checkbox"> <small>Charbon <br> 1 </small><br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="c2" class="btn btn-outline-primary">
+                                                <input class="c2" type="checkbox"> <small>Charbon <br> 2 <i class="fas fa-random swap2 d-none"></i></small><br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="f1" class="btn btn-outline-primary">
+                                                <input type="checkbox"> 1 µm <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                        </div>
                                     </div>
-                                    <div class="form-group text-center">
-                                        <button id="laboratoires.resines" type="button" class="btn btn-success" disabled>
-                                            Valider</button>
+                                    <div class="form-group d-flex flex-column text-center">
+                                        <label class="col-form-label">FR3</label>
+                                        <div id="fr3" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
+                                            <label id="f5" class="btn btn-outline-primary">
+                                                <input type="checkbox"> 5 µm <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="c1" class="btn btn-outline-primary">
+                                                <input class="c1" type="checkbox"> <small>Charbon <br> 1 </small><br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="c2" class="btn btn-outline-primary">
+                                                <input class="c2" type="checkbox"> <small>Charbon <br> 2 <i class="fas fa-random swap2 d-none"></i></small><br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="f1" class="btn btn-outline-primary">
+                                                <input type="checkbox"> 1 µm <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group d-flex flex-column text-center">
+                                        <label class="col-form-label">FR4</label>
+                                        <div id="fr4" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
+                                            <label id="f5" class="btn btn-outline-primary">
+                                                <input type="checkbox"> 5 µm <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="c1" class="btn btn-outline-primary">
+                                                <input class="c1" type="checkbox"> <small>Charbon <br> 1 </small> <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="c2" class="btn btn-outline-primary">
+                                                <input class="c2" type="checkbox"> <small>Charbon <br> 2 <i class="fas fa-random swap2 d-none"></i></small><br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="f1" class="btn btn-outline-primary">
+                                                <input type="checkbox"> 1 µm <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div>
+                    <div class="form-group d-flex flex-column text-center">
+                        <div class="col-10 col-sm-8 col-md-4 col-lg-3 align-self-center">
+                            <input class="datePicker" style="text-align: center;" readonly="true">
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <button id="btn-valider" type="button" class="btn btn-success btn-valider" disabled>
+                            Valider</button>
+                    </div>
+                </div>
             </div>
+            <!-- Fin Laboratoires -->
+
+
             <div class="tab-pane fade endoscopie" id="content-8" aria-labelledby="tab-8" role="tabpanel">
                 <h1>Endoscopie</h1>
                 <div class="d-flex h-100">
@@ -676,7 +731,7 @@
                 });
                 json_obj["hemodialyse"] = _json_obj;
                 console.log("db read: ", json_obj);
-                //updateFields("endoscopie");
+                updateFields("hemodialyse");
             });
     </script>
 
