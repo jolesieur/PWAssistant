@@ -1,4 +1,4 @@
-$("#datepicker").datepicker({
+$(".datePicker").datepicker({
     modal: true,
     footer: true,
     uiLibrary: "bootstrap4",
@@ -8,7 +8,8 @@ $("#datepicker").datepicker({
     locale: "fr-fr",
     format: "yyyy-mm-dd",
     ignoreReadonly: true,
-    allowInputToggle: true
+    allowInputToggle: true,
+    maxDate: new Date()
 });
 
 $(".navbar-nav .nav-item").on("click", function () {
@@ -126,14 +127,20 @@ $(".sub-tab").on("shown.bs.tab", function (e) {
 
 function updateFields(location) {
     $("#content-" + location + " .days").each(function () {
-        _location = location.split("-").pop();
+        //_location = location.split("-").pop();
         dbDoc = $(this).parents(".root").find("h3").attr("id");
         equipment = $(this).closest("form").attr("id");
         itemGroup = $(this).closest("div").attr("id");
         item = $(this).closest("label").attr("id");
 
-        if (json_obj[_location][dbDoc][equipment][itemGroup][item].length > 0) {
-            timeDiff = daysdifference($.now(), json_obj[_location][dbDoc][equipment][itemGroup][item][0]);
+        if (typeof (json_obj[location][dbDoc]) != 'undefined') {
+            console.log("not found in database");
+            $(this).text("n/a");
+            return;
+        }
+
+        if (json_obj[location][dbDoc][equipment][itemGroup][item].length > 0) {
+            timeDiff = daysdifference($.now(), json_obj[location][dbDoc][equipment][itemGroup][item][0]);
         } else {
             timeDiff = 0;
         }
@@ -247,7 +254,7 @@ $(".btn-valider").on("click", function () {
             console.log("item not defined");
             json_obj[dbCol][dbDoc][activeFormID] = {};
             json_obj[dbCol][dbDoc][activeFormID][item[0]] = {};
-            json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]] = [];
+            json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]] = [timestamp];
         }
         if (typeof (json_obj[dbCol][dbDoc][activeFormID][item[0]]) === 'undefined') {
             console.log("item not defined");

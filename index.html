@@ -398,85 +398,23 @@
                             <div class="tab-pane fade" id="content-d" role="tabpanel">
                                 <form id="boucle-eau-purifiee">
                                     <div class="form-group d-flex flex-column text-center">
-                                        <label class="col-form-label">FR1</label>
-                                        <div id="fr1" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
-                                            <label id="f5" class="btn btn-outline-primary">
-                                                <input type="checkbox"> 5 µm <br>
+                                        <label class="col-form-label">Cylindres de déionisation</label>
+                                        <div id="di" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
+                                            <label id="r1" class="btn btn-outline-primary">
+                                                <input class="r1" type="checkbox"> 1 <br>
                                                 <span class="days">365</span>
                                             </label>
-                                            <label id="c1" class="btn btn-outline-primary">
-                                                <input class="c1" type="checkbox"> <small>Charbon <br> 1 </small><br>
-                                                <span class="days">365</span>
-                                            </label>
-                                            <label id="c2" class="btn btn-outline-primary">
-                                                <input class="c2" type="checkbox"> <small>Charbon <br> 2 <i class="fas fa-random swap2 d-none"></i></small><br>
-                                                <span class="days">365</span>
-                                            </label>
-                                            <label id="f1" class="btn btn-outline-primary">
-                                                <input type="checkbox"> 1 µm <br>
+                                            <label id="r2" class="btn btn-outline-primary">
+                                                <input class="r2" type="checkbox"> 2 <br>
                                                 <span class="days">365</span>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="form-group d-flex flex-column text-center">
-                                        <label class="col-form-label">FR2</label>
-                                        <div id="fr2" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
-                                            <label id="f5" class="btn btn-outline-primary">
-                                                <input type="checkbox"> 5 µm <br>
-                                                <span class="days">365</span>
-                                            </label>
-                                            <label id="c1" class="btn btn-outline-primary">
-                                                <input class="c1" type="checkbox"> <small>Charbon <br> 1 </small><br>
-                                                <span class="days">365</span>
-                                            </label>
-                                            <label id="c2" class="btn btn-outline-primary">
-                                                <input class="c2" type="checkbox"> <small>Charbon <br> 2 <i class="fas fa-random swap2 d-none"></i></small><br>
-                                                <span class="days">365</span>
-                                            </label>
-                                            <label id="f1" class="btn btn-outline-primary">
-                                                <input type="checkbox"> 1 µm <br>
-                                                <span class="days">365</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group d-flex flex-column text-center">
-                                        <label class="col-form-label">FR3</label>
-                                        <div id="fr3" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
-                                            <label id="f5" class="btn btn-outline-primary">
-                                                <input type="checkbox"> 5 µm <br>
-                                                <span class="days">365</span>
-                                            </label>
-                                            <label id="c1" class="btn btn-outline-primary">
-                                                <input class="c1" type="checkbox"> <small>Charbon <br> 1 </small><br>
-                                                <span class="days">365</span>
-                                            </label>
-                                            <label id="c2" class="btn btn-outline-primary">
-                                                <input class="c2" type="checkbox"> <small>Charbon <br> 2 <i class="fas fa-random swap2 d-none"></i></small><br>
-                                                <span class="days">365</span>
-                                            </label>
-                                            <label id="f1" class="btn btn-outline-primary">
-                                                <input type="checkbox"> 1 µm <br>
-                                                <span class="days">365</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group d-flex flex-column text-center">
-                                        <label class="col-form-label">FR4</label>
-                                        <div id="fr4" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
-                                            <label id="f5" class="btn btn-outline-primary">
-                                                <input type="checkbox"> 5 µm <br>
-                                                <span class="days">365</span>
-                                            </label>
-                                            <label id="c1" class="btn btn-outline-primary">
-                                                <input class="c1" type="checkbox"> <small>Charbon <br> 1 </small> <br>
-                                                <span class="days">365</span>
-                                            </label>
-                                            <label id="c2" class="btn btn-outline-primary">
-                                                <input class="c2" type="checkbox"> <small>Charbon <br> 2 <i class="fas fa-random swap2 d-none"></i></small><br>
-                                                <span class="days">365</span>
-                                            </label>
-                                            <label id="f1" class="btn btn-outline-primary">
-                                                <input type="checkbox"> 1 µm <br>
+                                        <label class="col-form-label">Filtres endotoxines</label>
+                                        <div id="filtres-01" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
+                                            <label id="f01" class="btn btn-outline-primary">
+                                                <input type="checkbox"> 0.1 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                         </div>
@@ -732,6 +670,20 @@
                 json_obj["hemodialyse"] = _json_obj;
                 console.log("db read: ", json_obj);
                 updateFields("hemodialyse");
+            });
+
+        db.collection("laboratoires")
+            .onSnapshot(function(querySnapshot) {
+                var _json_obj = new Object();
+                querySnapshot.forEach(function(doc) {
+                    //$.extend(jsons, JSON.parse(doc.data().filtres));
+
+                    var raw = JSON.parse(doc.data().data);
+                    _json_obj[doc.id] = raw;
+                });
+                json_obj["laboratoires"] = _json_obj;
+                console.log("db read: ", json_obj);
+                updateFields("laboratoires");
             });
     </script>
 
