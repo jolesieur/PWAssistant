@@ -158,9 +158,11 @@
                     <a class="nav-link" id="tab-4" data-toggle="tab" role="tab" href="#content-4">Historique</a>
                 </li>
             </ul>
+            <!--
             <form class="form-inline my-2 my-md-0">
                 <input class="form-control" type="text" placeholder="Search">
             </form>
+-->
         </div>
     </nav>
 
@@ -170,20 +172,51 @@
                 <h1>Accueil</h1>
                 <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll, it will remain fixed to the top of your browser’s viewport.</p>
             </div>
+
+            <!-- Début Inspection -->
             <div class="tab-pane fade" id="content-2" aria-labelledby="tab-2" role="tabpanel">
                 <h1>Inspection</h1>
-                <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll, it will remain fixed to the top of your browser’s viewport.</p>
+                <p class="lead">Inspection des filtres au charbon.</p>
+
+                <div class="d-flex h-100">
+                    <div class="m-auto">
+                        <form id="pre-traitementx">
+                            <div class="form-group d-flex flex-column text-center">
+                                <label class="col-form-label">Filttres à sédiments</label>
+                                <div id="filtres" class="btn-group btn-group-toggle col-10 align-self-center" data-toggle="buttons">
+                                    <label id="f5" class="btn btn-outline-primary">
+                                        <input type="checkbox"> 5 µm <br>
+                                        <span class="days">365</span>
+                                    </label>
+                                    <label id="f1" class="btn btn-outline-primary">
+                                        <input type="checkbox"> 1 µm <br>
+                                        <span class="days">365</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-12">
+                                <label>Charbon #1</label>
+                                <input type="number" min="0" max="0.7" step="0.01">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group d-flex flex-column text-center">
+                        <div class="col-10 col-sm-8 col-md-4 col-lg-3 align-self-center">
+                            <input class="datePicker" style="text-align: center;" readonly="true">
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <button id="btn-valider" type="button" class="btn btn-success btn-valider" disabled>
+                            Valider</button>
+                    </div>
+                </div>
             </div>
-            <div class="tab-pane fade" id="content-3" aria-labelledby="tab-3" role="tabpanel">
-                <h1>Remplacement</h1>
-                <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll, it will remain fixed to the top of your browser’s viewport.</p>
-            </div>
-            <div class="tab-pane fade" id="content-4" aria-labelledby="tab-4" role="tabpanel">
-                <h1>Historique</h1>
-                <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll, it will remain fixed to the top of your browser’s viewport.</p>
-            </div>
+            <!-- Fin Inspection -->
 
 
+            <!-- Début Remplacement -->
             <!-- Début Hémodialyse -->
             <div class="tab-pane root fade" id="content-hemodialyse" aria-labelledby="tab-6" role="tabpanel">
                 <h1 id="hemodialyse">Hémodialyse</h1>
@@ -574,6 +607,14 @@
                 </div>
             </div>
             <!-- Fin Endoscopie -->
+            <!-- Fin Remplacement -->
+
+
+            <div class="tab-pane fade" id="content-4" aria-labelledby="tab-4" role="tabpanel">
+                <h1>Historique</h1>
+                <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll, it will remain fixed to the top of your browser’s viewport.</p>
+            </div>
+
 
             <!-- Success Alert -->
             <div id="success-alert" class="alert alert-success d-none" role="alert">
