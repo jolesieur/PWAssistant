@@ -176,27 +176,87 @@
             <!-- Début Inspection -->
             <div class="tab-pane fade" id="content-2" aria-labelledby="tab-2" role="tabpanel">
                 <h1>Inspection</h1>
-                <p class="lead">Inspection des filtres au charbon.</p>
-
                 <div class="d-flex h-100">
                     <div class="m-auto">
-                        <div class="form-group d-flex flex-column text-center">
-                            <label class="col-form-label">Filttres à sédiments</label>
-                            <div id="filtres" class="btn-group btn-group-toggle col-10 align-self-center" data-toggle="buttons">
-                                <label id="f5" class="btn btn-outline-primary">
-                                    <input type="checkbox"> 5 µm <br>
-                                    <span class="days">365</span>
-                                </label>
-                                <label id="f1" class="btn btn-outline-primary">
-                                    <input type="checkbox"> 1 µm <br>
-                                    <span class="days">365</span>
-                                </label>
+                        <form>
+                            <div id="pre-trait">
+                                <p class="lead text-center drop" style="cursor: pointer;">Pré-traitement hémodialyse <i class="fas fa-chevron-down" style="font-size:14px;color:#2196F3"></i></p>
+                                <div class="drop_content d-none">
+                                    <div class="form-group row">
+                                        <label class="col-form-label">Filtre au charbon #1&nbsp;</label>
+                                        <div class="col-4">
+                                            <input type="number" class="form-control text-center align-self-center" inputmode="decimal" pattern="\d*" min="0" max="0.7" step="0.01" autocomplete="off" style="width: 80px;">
+                                        </div>
+                                        <label class="col-form-label"><small>&nbsp;mg/L</small></label>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label">Filtre au charbon #2&nbsp;</label>
+                                        <div class="col-4">
+                                            <input type="number" class="form-control text-center align-self-center" inputmode="decimal" pattern="\d*" min="0" max="0.7" step="0.01" autocomplete="off" style="width: 80px;">
+                                        </div>
+                                        <label class="col-form-label"><small>&nbsp;mg/L</small></label>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label">Filtre au charbon #3&nbsp;</label>
+                                        <div class="col-4">
+                                            <input type="number" class="form-control text-center align-self-center" inputmode="decimal" pattern="\d*" min="0" max="0.7" step="0.01" autocomplete="off" style="width: 80px;">
+                                        </div>
+                                        <label class="col-form-label"><small>&nbsp;mg/L</small></label>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label">Filtre au charbon #4&nbsp;</label>
+                                        <div class="col-4">
+                                            <input type="number" class="form-control text-center align-self-center" inputmode="decimal" pattern="\d*" min="0" max="0.7" step="0.01" autocomplete="off" style="width: 80px;">
+                                        </div>
+                                        <label class="col-form-label"><small>&nbsp;mg/L</small></label>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group col-12">
-                            <label>Charbon #1</label>
-                            <input type="number" inputmode="decimal" pattern="\d*" min="0" max="0.7" step="0.01" autocomplete="off">
-                        </div>
+                            <p class="lead text-center">Osmoses portatives Fresenius</p>
+                            <div class="form-group row">
+                                <label class="col-form-label">Filtre au charbon FR1</label>
+                                <div class="col-4">
+                                    <input type="number" class="form-control text-center align-self-center" inputmode="decimal" pattern="\d*" min="0" max="0.7" step="0.01" autocomplete="off" style="width: 80px;">
+                                </div>
+                                <label class="col-form-label"><small>&nbsp;mg/L</small></label>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label">Filtre au charbon FR2</label>
+                                <div class="col-4">
+                                    <input type="number" class="form-control text-center align-self-center" inputmode="decimal" pattern="\d*" min="0" max="0.7" step="0.01" autocomplete="off" style="width: 80px;">
+                                </div>
+                                <label class="col-form-label"><small>&nbsp;mg/L</small></label>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label">Filtre au charbon FR3</label>
+                                <div class="col-4">
+                                    <input type="number" class="form-control text-center align-self-center" inputmode="decimal" pattern="\d*" min="0" max="0.7" step="0.01" autocomplete="off" style="width: 80px;">
+                                </div>
+                                <label class="col-form-label"><small>&nbsp;mg/L</small></label>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label">Filtre au charbon FR4</label>
+                                <div class="col-4">
+                                    <input type="number" class="form-control text-center align-self-center" inputmode="decimal" pattern="\d*" min="0" max="0.7" step="0.01" autocomplete="off" style="width: 80px;">
+                                </div>
+                                <label class="col-form-label"><small>&nbsp;mg/L</small></label>
+                            </div>
+                            <p class="lead text-center ">Pré-traitement laboratories</p>
+                            <div class="form-group row">
+                                <label class="col-form-label">Filtre au charbon #1&nbsp;</label>
+                                <div class="col-4">
+                                    <input type="number" class="form-control text-center align-self-center" inputmode="decimal" pattern="\d*" min="0" max="0.7" step="0.01" autocomplete="off" style="width: 80px;">
+                                </div>
+                                <label class="col-form-label"><small>&nbsp;mg/L</small></label>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label">Filtre au charbon #2&nbsp;</label>
+                                <div class="col-4">
+                                    <input type="number" class="form-control text-center align-self-center" inputmode="decimal" pattern="\d*" min="0" max="0.7" step="0.01" autocomplete="off" style="width: 80px;">
+                                </div>
+                                <label class="col-form-label"><small>&nbsp;mg/L</small></label>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div>

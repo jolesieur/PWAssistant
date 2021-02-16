@@ -16,6 +16,15 @@ $(".navbar-nav .nav-item").on("click", function () {
     $(".navbar-nav .nav-item").find(".active").removeClass("active");
 });
 
+$(".drop").click(function () {
+    console.log("hello");
+    if ($(this).closest("div").find(".drop_content").hasClass("d-none")) {
+        $(this).closest("div").find(".drop_content").removeClass("d-none");
+    } else {
+        $(this).closest("div").find(".drop_content").addClass("d-none");
+    }
+});
+
 $(".c1").on("click", function () {
     if ($(this).prop("checked")) {
         $("#myModal").modal('show');
