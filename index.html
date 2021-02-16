@@ -52,6 +52,10 @@
         }
 
         @media (min-width: 768px) {
+            body {
+                padding: 45px 0 0 0;
+            }
+
             .bd-placeholder-img-lg {
                 font-size: 3.5rem;
             }
@@ -66,6 +70,10 @@
         }
 
         @media all and (max-device-width: 760px) {
+            body {
+                padding: 30px 0 0 0;
+            }
+
             h1 {
                 font-size: 1.5rem;
             }
@@ -109,8 +117,8 @@
         }
 
         .days {
-            font-size: 10px;
-            color: white;
+            font-size: 0.8rem;
+            color: lightgray;
         }
 
         .sub-tab {
@@ -143,7 +151,7 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" id="tab-6" data-toggle="tab" role="tab" href="#content-hemodialyse">Hémodialyse</a>
                         <a class="dropdown-item" id="tab-7" data-toggle="tab" role="tab" href="#content-laboratoires">Laboratoire</a>
-                        <a class="dropdown-item" id="tab-8" data-toggle="tab" role="tab" href="#content-8">Endoscopie</a>
+                        <a class="dropdown-item" id="tab-8" data-toggle="tab" role="tab" href="#content-endoscopie">Endoscopie</a>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -200,11 +208,11 @@
                                         <label class="col-form-label">Filttres à sédiments</label>
                                         <div id="filtres" class="btn-group btn-group-toggle col-10 align-self-center" data-toggle="buttons">
                                             <label id="f5" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="f5"> 5 µm <br>
+                                                <input type="checkbox"> 5 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="f1" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="f1"> 1 µm <br>
+                                                <input type="checkbox"> 1 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                         </div>
@@ -362,11 +370,11 @@
                                         <label class="col-form-label">Filttres à sédiments</label>
                                         <div id="filtres" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
                                             <label id="f5" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="f5"> 5 µm <br>
+                                                <input type="checkbox"> 5 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="f1" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="f1"> 1 µm <br>
+                                                <input type="checkbox"> 1 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                         </div>
@@ -439,132 +447,134 @@
             <!-- Fin Laboratoires -->
 
 
-            <div class="tab-pane fade endoscopie" id="content-8" aria-labelledby="tab-8" role="tabpanel">
-                <h1>Endoscopie</h1>
+            <!-- Début Endoscopie -->
+            <div class="tab-pane root fade" id="content-endoscopie" aria-labelledby="tab-8" role="tabpanel">
+                <h1 id="endoscopie">Endoscopie </h1>
+                <h3 id="remplacement" class="text-center">Remplacement des filtres</h3>
                 <div class="d-flex h-100">
                     <div class="m-auto">
-                        <h3 class="d-flex flex-column text-center">Remplacement des filtres</h3>
-
-                        <ul class="nav nav-pills nav-fill">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="tab-medivator" data-toggle="tab" role="tab" href="#content-medivator">Medivator</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="tab-system1" data-toggle="tab" role="tab" href="#content-system1">System 1</a>
+                        <ul class="nav flex-column text-center">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <span>Medivators</span></a>
+                                <div class="dropdown-menu w-100 text-center sub-tab">
+                                    <a class="dropdown-item" data-toggle="tab" role="tab" href="#content-e">Medivators</a>
+                                    <a class="dropdown-item" data-toggle="tab" role="tab" href="#content-f">System 1</a>
+                                </div>
                             </li>
                         </ul>
+
                         <div class="tab-content">
-                            <div class="tab-pane show active fade" id="content-medivator" role="tabpanel">
-                                <form id="form-medivator">
+                            <div class="tab-pane show active fade" id="content-e" role="tabpanel">
+                                <form id="medivators">
                                     <div class="form-group d-flex flex-column text-center">
                                         <label class="col-form-label">Medivator 1</label>
-                                        <div id="medivator1" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <div id="medivator1" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
                                             <label id="f01" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="f01" autocomplete="off"> 0.1 µm <br>
+                                                <input type="checkbox"> 0.1 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="f04" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="f04" autocomplete="off"> 0.4 µm <br>
+                                                <input type="checkbox"> 0.4 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="f1" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="f1" autocomplete="off"> 1 µm <br>
+                                                <input type="checkbox"> 1 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="form-group d-flex flex-column text-center">
                                         <label class="col-form-label">Medivator 2</label>
-                                        <div id="medivator2" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <div id="medivator2" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
                                             <label id="f01" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="options" autocomplete="off"> 0.1 µm <br>
+                                                <input type="checkbox"> 0.1 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="f04" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="options" autocomplete="off"> 0.4 µm <br>
+                                                <input type="checkbox"> 0.4 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="f1" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="options" autocomplete="off"> 1 µm <br>
+                                                <input type="checkbox"> 1 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="form-group d-flex flex-column text-center">
                                         <label class="col-form-label">Medivator 3</label>
-                                        <div id="medivator3" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <div id="medivator3" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
                                             <label id="f01" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="options" autocomplete="off"> 0.1 µm <br>
+                                                <input type="checkbox"> 0.1 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="f04" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="options" autocomplete="off"> 0.4 µm <br>
+                                                <input type="checkbox"> 0.4 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="f1" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="options" autocomplete="off"> 1 µm <br>
+                                                <input type="checkbox"> 1 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                         </div>
-                                    </div>
-                                    <div class="form-group text-center">
-                                        <input id="dt-medivator" type="date" class="datePicker">
-                                    </div>
-                                    <div class="form-group text-center">
-                                        <button id="endoscopie.medivator" type="button" class="btn btn-success" disabled>
-                                            Valider</button>
                                     </div>
                                 </form>
                             </div>
-                            <div class="tab-pane fade" id="content-system1" role="tabpanel">
-                                <form id="form-system1">
+                            <div class="tab-pane fade" id="content-f" role="tabpanel">
+                                <form id="system1">
                                     <div class="form-group d-flex flex-column text-center">
-                                        <label class="col-form-label">SYSTEM 1 #7</label>
-                                        <div id="system1_7" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="col-form-label">Sytem 1 #7</label>
+                                        <div id="system1-7" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
                                             <label id="f5" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="options" autocomplete="off"> Pré-filtre <br>
+                                                <input type="checkbox"> 5 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="fa" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="options" autocomplete="off"> A <br>
+                                                <input type="checkbox"> Filtre A <br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="fb" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="options" autocomplete="off"> B <br>
+                                                <input type="checkbox"> Filtre B <br>
                                                 <span class="days">365</span>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="form-group d-flex flex-column text-center">
-                                        <label class="col-form-label">SYSTEM 1 #8</label>
-                                        <div id="system1_8" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="col-form-label">Sytem 1 #8</label>
+                                        <div id="system1-8" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
                                             <label id="f5" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="options" autocomplete="off"> Pré-filtre <br>
+                                                <input type="checkbox"> 5 µm <br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="fa" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="options" autocomplete="off"> A <br>
+                                                <input type="checkbox"> Filtre A <br>
                                                 <span class="days">365</span>
                                             </label>
                                             <label id="fb" class="btn btn-outline-primary">
-                                                <input type="checkbox" name="options" autocomplete="off"> B <br>
+                                                <input type="checkbox"> Filtre B <br>
                                                 <span class="days">365</span>
                                             </label>
                                         </div>
-                                    </div>
-                                    <div class="form-group text-center">
-                                        <input id="dt-system1" type="date" class="datePicker">
-                                    </div>
-                                    <div class="form-group text-center">
-                                        <button id="endoscopie.system1" type="button" class="btn btn-success" disabled>
-                                            Valider</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div>
+                    <div class="form-group d-flex flex-column text-center">
+                        <div class="col-10 col-sm-8 col-md-4 col-lg-3 align-self-center">
+                            <input class="datePicker" style="text-align: center;" readonly="true">
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <button id="btn-valider" type="button" class="btn btn-success btn-valider" disabled>
+                            Valider</button>
+                    </div>
+                </div>
             </div>
+            <!-- Fin Endoscopie -->
+
             <!-- Success Alert -->
             <div id="success-alert" class="alert alert-success d-none" role="alert">
                 Donnés sauvegardées dans la base de données.
@@ -603,7 +613,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-firestore.js"></script>
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
+    <!--    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>-->
     <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-auth.js"></script>
 
     <script src="js/pwassistant.js" type="text/javascript"></script>
@@ -622,7 +632,7 @@
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
-        firebase.analytics();
+        //firebase.analytics();
 
         const db = firebase.firestore()
         var jsons = new Object();
@@ -684,6 +694,20 @@
                 json_obj["laboratoires"] = _json_obj;
                 console.log("db read: ", json_obj);
                 updateFields("laboratoires");
+            });
+
+        db.collection("endoscopie")
+            .onSnapshot(function(querySnapshot) {
+                var _json_obj = new Object();
+                querySnapshot.forEach(function(doc) {
+                    //$.extend(jsons, JSON.parse(doc.data().filtres));
+
+                    var raw = JSON.parse(doc.data().data);
+                    _json_obj[doc.id] = raw;
+                });
+                json_obj["endoscopie"] = _json_obj;
+                console.log("db read: ", json_obj);
+                updateFields("endoscopie");
             });
     </script>
 

@@ -133,13 +133,10 @@ function updateFields(location) {
         itemGroup = $(this).closest("div").attr("id");
         item = $(this).closest("label").attr("id");
 
-        if (typeof (json_obj[location][dbDoc]) != 'undefined') {
+        if (typeof (json_obj[location][dbDoc][equipment]) === 'undefined' || typeof (json_obj[location][dbDoc][equipment][itemGroup]) === 'undefined' || typeof (json_obj[location][dbDoc][equipment][itemGroup][item]) === 'undefined') {
             console.log("not found in database");
-            $(this).text("n/a");
-            return;
-        }
-
-        if (json_obj[location][dbDoc][equipment][itemGroup][item].length > 0) {
+            timeDiff = "n/a";
+        } else if (json_obj[location][dbDoc][equipment][itemGroup][item].length > 0) {
             timeDiff = daysdifference($.now(), json_obj[location][dbDoc][equipment][itemGroup][item][0]);
         } else {
             timeDiff = 0;
@@ -250,18 +247,30 @@ $(".btn-valider").on("click", function () {
     //console.log("Checked items :", checked); // DEBUG ONLY
 
     checked.forEach(function (item) {
+        console.log("a ", typeof (json_obj[dbCol][dbDoc][activeFormID]));
         if (typeof (json_obj[dbCol][dbDoc][activeFormID]) === 'undefined') {
             console.log("item not defined");
             json_obj[dbCol][dbDoc][activeFormID] = {};
             json_obj[dbCol][dbDoc][activeFormID][item[0]] = {};
-            json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]] = [timestamp];
+            json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]] = [];
         }
+
+        console.log("b ", typeof (json_obj[dbCol][dbDoc][activeFormID][item[0]]));
         if (typeof (json_obj[dbCol][dbDoc][activeFormID][item[0]]) === 'undefined') {
             console.log("item not defined");
             json_obj[dbCol][dbDoc][activeFormID][item[0]] = {};
             json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]] = [];
         }
-        console.log($("#" + activeFormID + " #" + item[0] + " .swap2").hasClass("d-none"));
+
+        console.log("c ", typeof (json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]]));
+        if (typeof (json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]]) === 'undefined') {
+            console.log("item not defined");
+            json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]] = [];
+        }
+
+
+        //console.log($("#" + activeFormID + " #" + item[0] + " .swap2").hasClass("d-none"));
+
         if (item[1] === "c1" && !($("#" + activeFormID + " #" + item[0] + " .swap2").hasClass("d-none"))) {
             console.log("ceci cest c1 et swap c2");
             var c2 = json_obj[dbCol][dbDoc][activeFormID][item[0]]["c2"][0];
@@ -278,6 +287,8 @@ $(".btn-valider").on("click", function () {
             if (json_obj[dbCol][dbDoc][activeFormID][item[0]]["c4"].length > 10) { // Remove oldest entry. Limit to 10 entry max.
                 json_obj[dbCol][dbDoc][activeFormID][item[0]]["c4"].pop();
             }
+        } else if (json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]].length < 1) {
+            json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]].push(timestamp);
         } else {
             json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]].unshift(timestamp);
         }
