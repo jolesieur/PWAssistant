@@ -16,8 +16,41 @@ $(".navbar-nav .nav-item").on("click", function () {
     $(".navbar-nav .nav-item").find(".active").removeClass("active");
 });
 
+function checkLength(len, ele) {
+    var fieldLength = ele.value.length;
+    if (fieldLength <= len) {
+        return true;
+    } else {
+        var str = ele.value;
+        str = str.substring(0, str.length - 1);
+        ele.value = str;
+    }
+}
+
+function formatDecimal(input) {
+    var val = '' + (+input.value);
+    if (val.length > 1) {
+        val = val.split('\.');
+        var out = val[0];
+        while (out.length < 1) {
+            out = '0' + out;
+        }
+        if (val[1]) {
+            out = out + '.' + val[1]
+            if (out.length < 4) out = out + '0';
+        } else {
+            out = out + '.00';
+        }
+        input.value = out;
+    } else {
+        input.value = '';
+    }
+}
+
 $(".drop").click(function () {
     if ($(this).closest("div").find(".drop_content").hasClass("d-none")) {
+        $(this).closest("form").find(".drop_content").addClass("d-none");
+        $(this).closest("form").find("svg").removeClass('fa-chevron-up').addClass('fa-chevron-down');
         $(this).closest("div").find(".drop_content").removeClass("d-none");
         $(this).find("svg").removeClass('fa-chevron-down').addClass('fa-chevron-up');
     } else {
