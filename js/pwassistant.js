@@ -17,11 +17,12 @@ $(".navbar-nav .nav-item").on("click", function () {
 });
 
 $(".drop").click(function () {
-    console.log("hello");
     if ($(this).closest("div").find(".drop_content").hasClass("d-none")) {
         $(this).closest("div").find(".drop_content").removeClass("d-none");
+        $(this).find("svg").removeClass('fa-chevron-down').addClass('fa-chevron-up');
     } else {
         $(this).closest("div").find(".drop_content").addClass("d-none");
+        $(this).find("svg").removeClass('fa-chevron-up').addClass('fa-chevron-down');
     }
 });
 
