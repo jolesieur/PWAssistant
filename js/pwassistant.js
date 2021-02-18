@@ -28,8 +28,10 @@ function checkLength(len, ele) {
     }
 }
 
-function formatDecimal(input) {
-    var val = '' + (+input.value);
+$("#content-2 input").blur(function () {
+    var senderRootID = $(this).parents(".root").attr("id");
+    console.log($(this));
+    var val = "" + $(this).val();
     if (val.length > 1) {
         val = val.split('\.');
         var out = val[0];
@@ -42,11 +44,17 @@ function formatDecimal(input) {
         } else {
             out = out + '.00';
         }
-        input.value = out;
+        $(this).val(out);
     } else {
-        input.value = '';
+        $(this).val('');
     }
-}
+
+    $('#' + senderRootID + ' input[type="number"]').each(function () {
+        if ($(this).val() != "") {
+            console.log('yep');
+        }
+    });
+});
 
 $(".drop").click(function () {
     if ($(this).closest("form").find(".drop_content").hasClass("d-none")) {
