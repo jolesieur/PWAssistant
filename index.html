@@ -180,97 +180,79 @@
             </div>
 
             <!-- Début Inspection -->
-            <div class="tab-pane fade" id="content-2" aria-labelledby="tab-2" role="tabpanel">
-                <h1>Inspection</h1>
+            <div class="tab-pane fade root" id="content-2" aria-labelledby="tab-2" role="tabpanel">
+                <h1 id="inspection">Inspection</h1>
                 <div class="d-flex h-100">
-                    <div class="m-auto">
-                        <form>
-                            <div id="hemodialyse">
-                                <h6 class="text-center drop" style="cursor: pointer;">Pré-traitement hémodialyse <i class="fas fa-chevron-up" style="font-size:14px;color:#2196F3"></i></h6>
-                                <div class="drop_content">
-                                    <div class="form-group row">
-                                        <label class="col-form-label">Filtre au charbon #1&nbsp;&nbsp;</label>
-                                        <div class="col-3">
-                                            <input type="number" onInput="checkLength(4,this)" onblur="formatDecimal(this)" class="form-control text-center align-self-center" inputmode="decimal" pattern="\d*" min="1" max="0.01" step="0.01" autocomplete="off" style="width: 60px;">
-                                        </div>
-                                        <label class="col-form-label"><small>&nbsp;&nbsp;&nbsp;mg/L</small></label>
+                    <div class="m-auto text-center">
+                        <div id="hemodialyse" class="localisation">
+                            <form class="pre-traitement">
+                                <h6 class="drop" style="cursor: pointer;">Pré-traitement hémodialyse <i class="fas fa-chevron-up" style="font-size:14px;color:#2196F3"></i></h6>
+                                <div id="charbons" class="drop_content">
+                                    <div class="form-group row justify-content-center">
+                                        <label id="c1" class="col-form-label">Filtre au charbon #1&nbsp;</label>
+                                        <input type="number" onInput="checkLength(4,this)" onblur="formatDecimal(this)" class="form-control text-center" inputmode="decimal" pattern="\d*" step="0.01" autocomplete="off" style="width: 60px;">
+                                        <label class="col-form-label"><small>&nbsp;mg/L</small></label>
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="col-form-label">Filtre au charbon #2&nbsp;&nbsp;</label>
-                                        <div class="col-3">
-                                            <input type="number" onInput="checkLength(4,this)" onblur="formatDecimal(this)" class="form-control text-center align-self-center" inputmode="decimal" pattern="\d*" min="0" max="0.7" step="0.01" autocomplete="off" style="width: 60px;">
-                                        </div>
-                                        <label class="col-form-label"><small>&nbsp;&nbsp;&nbsp;mg/L</small></label>
+                                    <div class="form-group row justify-content-center justify-content-center">
+                                        <label class="col-form-label">Filtre au charbon #2&nbsp;</label>
+                                        <input type="number" onInput="checkLength(4,this)" onblur="formatDecimal(this)" class="form-control text-center" inputmode="decimal" pattern="\d*" step="0.01" autocomplete="off" style="width: 60px;">
+                                        <label class="col-form-label"><small>&nbsp;mg/L</small></label>
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="col-form-label">Filtre au charbon #3&nbsp;&nbsp;</label>
-                                        <div class="col-3">
-                                            <input type="number" onInput="checkLength(4,this)" onblur="formatDecimal(this)" class="form-control text-center align-self-center" inputmode="decimal" pattern="\d*" min="0" max="0.7" step="0.01" autocomplete="off" style="width: 60px;">
-                                        </div>
-                                        <label class="col-form-label"><small>&nbsp;&nbsp;&nbsp;mg/L</small></label>
+                                    <div class="form-group row justify-content-center">
+                                        <label id="c3" class="col-form-label">Filtre au charbon #3&nbsp;</label>
+                                        <input type="number" onInput="checkLength(4,this)" onblur="formatDecimal(this)" class="form-control text-center" inputmode="decimal" pattern="\d*" step="0.01" autocomplete="off" style="width: 60px;">
+                                        <label class="col-form-label"><small>&nbsp;mg/L</small></label>
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="col-form-label">Filtre au charbon #4&nbsp;&nbsp;</label>
-                                        <div class="col-3">
-                                            <input type="number" onInput="checkLength(4,this)" onblur="formatDecimal(this)" class="form-control text-center align-self-center" inputmode="decimal" pattern="\d*" min="0" max="0.7" step="0.01" autocomplete="off" style="width: 60px;">
-                                        </div>
-                                        <label class="col-form-label"><small>&nbsp;&nbsp;&nbsp;mg/L</small></label>
+                                    <div class="form-group row justify-content-center">
+                                        <label id="c4" class="col-form-label">Filtre au charbon #4&nbsp;</label>
+                                        <input type="number" onInput="checkLength(4,this)" onblur="formatDecimal(this)" class="form-control text-center" inputmode="decimal" pattern="\d*" step="0.01" autocomplete="off" style="width: 60px;">
+                                        <label class="col-form-label"><small>&nbsp;mg/L</small></label>
                                     </div>
                                 </div>
-                            </div>
-                            <div id="osmoses-portatives">
-                                <h6 class="text-center drop" style="cursor: pointer;">Osmoses portatives Fresenius <i class="fas fa-chevron-down" style="font-size:14px;color:#2196F3"></i></h6>
-                                <div class="drop_content d-none">
-                                    <div class="form-group row">
-                                        <label class="col-form-label">Filtre au charbon FR1</label>
-                                        <div class="col-3">
-                                            <input type="number" onInput="checkLength(4,this)" onblur="formatDecimal(this)" class="form-control text-center align-self-center" inputmode="decimal" pattern="\d*" min="0" max="0.7" step="0.01" autocomplete="off" style="width: 60px;">
-                                        </div>
-                                        <label class="col-form-label"><small>&nbsp;&nbsp;&nbsp;mg/L</small></label>
+                            </form>
+                            <form class="osmoses-portatives">
+                                <h6 class="drop" style="cursor: pointer;">Osmoses portatives Fresenius <i class="fas fa-chevron-down" style="font-size:14px;color:#2196F3"></i></h6>
+                                <div id="osmoses-portatives" class="drop_content  d-none">
+                                    <div id="fr1" class="form-group row justify-content-center ">
+                                        <label id="c1" class="col-form-label">Filtre au charbon FR1&nbsp;</label>
+                                        <input type="number" onInput="checkLength(4,this)" onblur="formatDecimal(this)" class="form-control text-center" inputmode="decimal" pattern="\d*" step="0.01" autocomplete="off" style="width: 60px;">
+                                        <label class="col-form-label"><small>&nbsp;mg/L</small></label>
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="col-form-label">Filtre au charbon FR2</label>
-                                        <div class="col-3">
-                                            <input type="number" onInput="checkLength(4,this)" onblur="formatDecimal(this)" class="form-control text-center align-self-center" inputmode="decimal" pattern="\d*" min="0" max="0.7" step="0.01" autocomplete="off" style="width: 60px;">
-                                        </div>
-                                        <label class="col-form-label"><small>&nbsp;&nbsp;&nbsp;mg/L</small></label>
+                                    <div id="fr2" class="form-group row justify-content-center">
+                                        <label id="c1" class="col-form-label">Filtre au charbon FR2&nbsp;</label>
+                                        <input type="number" onInput="checkLength(4,this)" onblur="formatDecimal(this)" class="form-control text-center" inputmode="decimal" pattern="\d*" step="0.01" autocomplete="off" style="width: 60px;">
+                                        <label class="col-form-label"><small>&nbsp;mg/L</small></label>
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="col-form-label">Filtre au charbon FR3</label>
-                                        <div class="col-3">
-                                            <input type="number" onInput="checkLength(4,this)" onblur="formatDecimal(this)" class="form-control text-center align-self-center" inputmode="decimal" pattern="\d*" min="0" max="0.7" step="0.01" autocomplete="off" style="width: 60px;">
-                                        </div>
-                                        <label class="col-form-label"><small>&nbsp;&nbsp;&nbsp;mg/L</small></label>
+                                    <div id="fr3" class="form-group row justify-content-center">
+                                        <label id="c1" class="col-form-label">Filtre au charbon FR3&nbsp;</label>
+                                        <input type="number" onInput="checkLength(4,this)" onblur="formatDecimal(this)" class="form-control text-center" inputmode="decimal" pattern="\d*" step="0.01" autocomplete="off" style="width: 60px;">
+                                        <label class="col-form-label"><small>&nbsp;mg/L</small></label>
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="col-form-label">Filtre au charbon FR4</label>
-                                        <div class="col-3">
-                                            <input type="number" onInput="checkLength(4,this)" onblur="formatDecimal(this)" class="form-control text-center align-self-center" inputmode="decimal" pattern="\d*" min="0" max="0.7" step="0.01" autocomplete="off" style="width: 60px;">
-                                        </div>
-                                        <label class="col-form-label"><small>&nbsp;&nbsp;&nbsp;mg/L</small></label>
+                                    <div id="fr4" class="form-group row justify-content-center">
+                                        <label id="c1" class="col-form-label">Filtre au charbon FR4&nbsp;</label>
+                                        <input type="number" onInput="checkLength(4,this)" onblur="formatDecimal(this)" class="form-control text-center" inputmode="decimal" pattern="\d*" step="0.01" autocomplete="off" style="width: 60px;">
+                                        <label class="col-form-label"><small>&nbsp;mg/L</small></label>
                                     </div>
                                 </div>
-                            </div>
-                            <div id="laboratoires">
-                                <h6 class="text-center drop" style="cursor: pointer;">Pré-traitement laboratories <i class="fas fa-chevron-down" style="font-size:14px;color:#2196F3"></i></h6>
-                                <div class="drop_content d-none">
-                                    <div class="form-group row">
-                                        <label class="col-form-label">Filtre au charbon #1&nbsp;&nbsp;</label>
-                                        <div class="col-3">
-                                            <input type="number" onInput="checkLength(4,this)" onblur="formatDecimal(this)" class="form-control text-center align-self-center" inputmode="decimal" pattern="\d*" min="0" max="0.7" step="0.01" autocomplete="off" style="width: 60px;">
-                                        </div>
-                                        <label class="col-form-label"><small>&nbsp;&nbsp;&nbsp;mg/L</small></label>
+                            </form>
+                        </div>
+                        <div id="laboratoires" class="localisation">
+                            <form class="pre-traitement">
+                                <h6 class="drop" style="cursor: pointer;">Pré-traitement laboratories <i class="fas fa-chevron-down" style="font-size:14px;color:#2196F3"></i></h6>
+                                <div id="charbon" class="drop_content d-none">
+                                    <div class="form-group row justify-content-center">
+                                        <label id="c1" class="col-form-label">Filtre au charbon #1&nbsp;</label>
+                                        <input type="number" onInput="checkLength(4,this)" onblur="formatDecimal(this)" class="form-control text-center" inputmode="decimal" pattern="\d*" step="0.01" autocomplete="off" style="width: 60px;">
+                                        <label class="col-form-label"><small>&nbsp;mg/L</small></label>
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="col-form-label">Filtre au charbon #2&nbsp;&nbsp;</label>
-                                        <div class="col-3">
-                                            <input type="number" onInput="checkLength(4,this)" onblur="formatDecimal(this)" class="form-control text-center align-self-center" inputmode="decimal" pattern="\d*" min="0" max="0.7" step="0.01" autocomplete="off" style="width: 60px;">
-                                        </div>
-                                        <label class="col-form-label"><small>&nbsp;&nbsp;&nbsp;mg/L</small></label>
+                                    <div class="form-group row justify-content-center">
+                                        <label id="c2" class="col-form-label">Filtre au charbon #2&nbsp;</label>
+                                        <input type="number" onInput="checkLength(4,this)" onblur="formatDecimal(this)" class="form-control text-center" inputmode="decimal" pattern="\d*" step="0.01" autocomplete="off" style="width: 60px;">
+                                        <label class="col-form-label"><small>&nbsp;mg/L</small></label>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -292,7 +274,7 @@
             <!-- Début Hémodialyse -->
             <div class="tab-pane root fade" id="content-hemodialyse" aria-labelledby="tab-6" role="tabpanel">
                 <h1 id="hemodialyse">Hémodialyse</h1>
-                <h3 id="remplacement" class="text-center">Remplacement des filtres</h3>
+                <h3 id="remplacement" class="text-center lead">Remplacement des filtres</h3>
                 <div class="d-flex h-100">
                     <div class="m-auto">
                         <ul class="nav flex-column text-center">
@@ -454,7 +436,7 @@
             <!-- Début Laboratoires -->
             <div class="tab-pane root fade" id="content-laboratoires" aria-labelledby="tab-6" role="tabpanel">
                 <h1 id="laboratoires">Laboratoires</h1>
-                <h3 id="remplacement" class="text-center">Remplacement des filtres</h3>
+                <h3 id="remplacement" class="text-center lead">Remplacement des filtres</h3>
                 <div class="d-flex h-100">
                     <div class="m-auto">
                         <ul class="nav flex-column text-center">
@@ -555,7 +537,7 @@
             <!-- Début Endoscopie -->
             <div class="tab-pane root fade" id="content-endoscopie" aria-labelledby="tab-8" role="tabpanel">
                 <h1 id="endoscopie">Endoscopie </h1>
-                <h3 id="remplacement" class="text-center">Remplacement des filtres</h3>
+                <h3 id="remplacement" class="text-center lead">Remplacement des filtres</h3>
                 <div class="d-flex h-100">
                     <div class="m-auto">
                         <ul class="nav flex-column text-center">

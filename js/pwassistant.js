@@ -18,6 +18,7 @@ $(".navbar-nav .nav-item").on("click", function () {
 
 function checkLength(len, ele) {
     var fieldLength = ele.value.length;
+
     if (fieldLength <= len) {
         return true;
     } else {
@@ -48,13 +49,13 @@ function formatDecimal(input) {
 }
 
 $(".drop").click(function () {
-    if ($(this).closest("div").find(".drop_content").hasClass("d-none")) {
-        $(this).closest("form").find(".drop_content").addClass("d-none");
-        $(this).closest("form").find("svg").removeClass('fa-chevron-up').addClass('fa-chevron-down');
-        $(this).closest("div").find(".drop_content").removeClass("d-none");
+    if ($(this).closest("form").find(".drop_content").hasClass("d-none")) {
+        $(this).parents(".root").find(".drop_content").addClass("d-none");
+        $(this).parents(".root").find("svg").removeClass('fa-chevron-up').addClass('fa-chevron-down');
+        $(this).closest("form").find(".drop_content").removeClass("d-none");
         $(this).find("svg").removeClass('fa-chevron-down').addClass('fa-chevron-up');
     } else {
-        $(this).closest("div").find(".drop_content").addClass("d-none");
+        $(this).closest("form").find(".drop_content").addClass("d-none");
         $(this).find("svg").removeClass('fa-chevron-up').addClass('fa-chevron-down');
     }
 });
