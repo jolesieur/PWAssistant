@@ -16,7 +16,7 @@ $(".navbar-nav .nav-item").on("click", function () {
     $(".navbar-nav .nav-item").find(".active").removeClass("active");
 });
 
-$("#content-2 input").on('input', function (ev) {
+$("#content-2 input[type=text]").on('input', function (ev) {
     var senderRootID = $(this).parents(".root").attr("id");
 
     var maxlength = 4;
@@ -25,8 +25,9 @@ $("#content-2 input").on('input', function (ev) {
         $(this).val(value.substr(0, maxlength));
     }
 
-    $('#' + senderRootID + ' input[type="number"]').each(function () {
-        if ($(this).val() != "") {
+    $('#' + senderRootID + ' input[type="text"]').each(function () {
+        if (value != "") {
+            console.log("yep");
             $(".btn-valider-inspection").removeAttr("disabled");
             return false;
         } else {
@@ -44,6 +45,11 @@ $("#content-2 input").on("keydown", function (e) {
         ($.inArray(e.keyCode, [65, 67, 88]) !== -1 && (e.ctrlKey === true || e.metaKey === true)) ||
         // home, end, left, right
         (e.keyCode >= 35 && e.keyCode <= 39)) {
+
+        if (e.keyCode === 188) {
+            e.preventDefault();
+            $(this).val($(this).val() + ".");
+        }
 
         return;
     }
