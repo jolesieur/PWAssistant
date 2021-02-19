@@ -16,20 +16,33 @@ $(".navbar-nav .nav-item").on("click", function () {
     $(".navbar-nav .nav-item").find(".active").removeClass("active");
 });
 
+//$("#content-2 input[type=text]").on('keyup', function () {
+//    var senderRootID = $(this).parents(".root").attr("id");
+//    console.log($(this).val());
+//    $('#' + senderRootID + ' input[type="text"]').each(function () {
+//        var value = $(this).val();
+//        if ($.isNumeric(value)) {
+//            console.log("yep");
+//            $(".btn-valider-inspection").removeAttr("disabled");
+//            return false;
+//        } else {
+//            $(".btn-valider-inspection").attr("disabled", "disabled");
+//        }
+//    });
+//});
+
 $("#content-2 input[type=text]").on('input', function (ev) {
     var senderRootID = $(this).parents(".root").attr("id");
-
+    
     var maxlength = 4;
     var value = "" + $(this).val();
     if (value.length >= maxlength) {
         $(this).val(value.substr(0, maxlength));
     }
-
+    
     $('#' + senderRootID + ' input[type="text"]').each(function () {
-
-var value = "" + $(this).val();
-
-        if (value != "" && (value != "." ||  value != ",")) {
+        var value = $(this).val();
+        if ($.isNumeric(value)) {
             console.log("yep");
             $(".btn-valider-inspection").removeAttr("disabled");
             return false;
