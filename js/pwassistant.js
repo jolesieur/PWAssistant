@@ -26,7 +26,7 @@ $("#content-2 input[type=text]").on('input', function (ev) {
     }
 
     $('#' + senderRootID + ' input[type="text"]').each(function () {
-        if (value != "") {
+        if (value != "" && value != ".") {
             console.log("yep");
             $(".btn-valider-inspection").removeAttr("disabled");
             return false;
