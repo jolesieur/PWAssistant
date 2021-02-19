@@ -16,18 +16,6 @@ $(".navbar-nav .nav-item").on("click", function () {
     $(".navbar-nav .nav-item").find(".active").removeClass("active");
 });
 
-function checkLength(len, ele) {
-    //    var fieldLength = ele.value.length;
-    //
-    //    if (fieldLength <= len) {
-    //        return true;
-    //    } else {
-    //        var str = ele.value;
-    //        str = str.substring(0, str.length - 1);
-    //        ele.value = str;
-    //    }
-}
-
 $("#content-2 input").on('input', function (ev) {
     var senderRootID = $(this).parents(".root").attr("id");
 
@@ -47,27 +35,25 @@ $("#content-2 input").on('input', function (ev) {
     });
 });
 
-//$("#content-2 input").on("keydown", function (e) {
-//    // allow function keys and decimal separators
-//    if (
-//        // backspace, delete, tab, escape, enter, comma and .
-//        $.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 188, 190]) !== -1 ||
-//        // Ctrl/cmd+A, Ctrl/cmd+C, Ctrl/cmd+X
-//        ($.inArray(e.keyCode, [65, 67, 88]) !== -1 && (e.ctrlKey === true || e.metaKey === true)) ||
-//        // home, end, left, right
-//        (e.keyCode >= 35 && e.keyCode <= 39)) {
-//
-//        return;
-//    }
-//    // block any non-number
-//    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-//        e.preventDefault();
-//    }
-//});
+$("#content-2 input").on("keydown", function (e) {
+    // allow function keys and decimal separators
+    if (
+        // backspace, delete, tab, escape, enter, comma and .
+        $.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 188, 190]) !== -1 ||
+        // Ctrl/cmd+A, Ctrl/cmd+C, Ctrl/cmd+X
+        ($.inArray(e.keyCode, [65, 67, 88]) !== -1 && (e.ctrlKey === true || e.metaKey === true)) ||
+        // home, end, left, right
+        (e.keyCode >= 35 && e.keyCode <= 39)) {
+
+        return;
+    }
+    // block any non-number
+    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+        e.preventDefault();
+    }
+});
 
 $("#content-2 input").blur(function () {
-    //    var senderRootID = $(this).parents(".root").attr("id");
-    //
     var val = "" + $(this).val();
     //
     if (val.length > 0) {
@@ -75,17 +61,6 @@ $("#content-2 input").blur(function () {
     } else {
         $(this).val('');
     }
-    //
-    //    $('#' + senderRootID + ' input[type="number"]').each(function () {
-    //        if ($(this).val() != "") {
-    //            console.log("yepp");
-    //            $(".btn-valider-inspection").removeAttr("disabled");
-    //            return false;
-    //        } else {
-    //            console.log("nope");
-    //            $(".btn-valider-inspection").attr("disabled", "disabled");
-    //        }
-    //    });
 });
 
 $(".drop").click(function () {
@@ -121,48 +96,18 @@ $(".c3").on("click", function () {
 });
 
 function swapCharbon() {
-    //var selected = [];
     $('input:checkbox[class=c1]:checked').each(function () {
         $(this).closest("div").find(".c2").attr('disabled', 'disabled');
         $(this).closest("div").find(".c2").prop("checked", false);
         $(this).closest("div").find("#c2").removeClass("active");
         $(this).closest("div").find(".swap2").removeClass("d-none");
-        //selected.push($(this).closest("label").attr("id"));
-        //dbCol = $(this).parents(".root").find("h1").attr("id");
-        //dbDoc = $(this).parents(".root").find("h3").attr("id");
-        //activeFormID = $(this).parents(".root").find(".tab-content .active").children("form").attr("id");
     });
     $('input:checkbox[class=c3]:checked').each(function () {
         $(this).closest("div").find(".c4").attr('disabled', 'disabled');
         $(this).closest("div").find(".c4").prop("checked", false);
         $(this).closest("div").find("#c4").removeClass("active");
         $(this).closest("div").find(".swap4").removeClass("d-none");
-        //selected.push($(this).closest("label").attr("id"));
-        //dbCol = $(this).parents(".root").find("h1").attr("id");
-        //dbDoc = $(this).parents(".root").find("h3").attr("id");
-        //activeFormID = $(this).parents(".root").find(".tab-content .active").children("form").attr("id");
     });
-    //    console.log(dbCol);
-    //    console.log(dbDoc);
-    //    console.log(activeFormID);
-    //
-    //    sel = [dbCol, dbDoc, activeFormID];
-    //
-    //    selected.forEach(function (item) {
-    //        if (item == "c1") {
-    //            console.log("c1 selectionné");
-    //            var c2 = json_obj[dbCol][dbDoc][activeFormID]["charbons"]["c2"][0];
-    //            console.log(c2);
-    //            json_obj[dbCol][dbDoc][activeFormID]["charbons"]["c1"].unshift(c2); // Current C2 timestamp in C1 value.
-    //        };
-    //        if (item == "c3") {
-    //            console.log("c3 selectionné");
-    //            var c4 = json_obj[dbCol][dbDoc][activeFormID]["charbons"]["c4"][0];
-    //            console.log(c4);
-    //            json_obj[dbCol][dbDoc][activeFormID]["charbons"]["c3"].unshift(c4); // Current C4 timestamp in C3 value.
-    //        };
-    //        console.log(json_obj);
-    //    });
 };
 
 $(".navbar-nav li a").on("click", function () {
@@ -208,7 +153,6 @@ $(".sub-tab").on("shown.bs.tab", function (e) {
     $("#" + senderRootID + " .c4").removeAttr('disabled');
 })
 
-
 function updateFields(location) {
     $("#content-" + location + " .days").each(function () {
         //_location = location.split("-").pop();
@@ -250,68 +194,6 @@ $(document).ready(function () {
     $(".datePicker").val(new Date().toDateInputValue());
 });
 
-//$(".btn-success").on("click", function () {
-//    //                console.log("raw :", $("#datepicker").val())
-//    //                var ts = (+new Date($("#datepicker").val()));
-//    //                var _ts = ts + ((new Date($("#datepicker").val())).getTimezoneOffset() * 60000);
-//    //                console.log("this :", _ts);
-//    var senderRootID = $(this).parents(".root").attr("id");
-//    var senderFormID = $(this).closest("form").attr("id");
-//
-//    // Get datePicker value in milliseconds.
-//    var ts = (+new Date($("#" + senderRootID + " .datePicker").val()));
-//    var timestamp = ts + ((new Date($("#" + senderRootID + " .datePicker").val())).getTimezoneOffset() * 60000);
-//    console.log("Timestamp :", timestamp); // DEBUG ONLY
-//
-//    var checked = [];
-//    $("#" + senderFormID + " input:checked").each(function () {
-//        var _checked = [($(this).closest("div").attr("id")), ($(this).closest("label").attr("id"))];
-//        checked.push(_checked);
-//    });
-//    //console.log("Checked items :", checked); // DEBUG ONLY
-//
-//    var location = $(this).attr("id").split(".");
-//
-//    checked.forEach(function (item) {
-//        json_obj[location[0]][location[1]][item[0]][item[1]].unshift(timestamp);
-//        if (json_obj[location[0]][location[1]][item[0]][item[1]].length > 10) { // Remove oldest entry. Limit to 10 entry max.
-//            json_obj[location[0]][location[1]][item[0]][item[1]].pop();
-//        }
-//    });
-//
-//    console.log("json_obj: ", json_obj); // DEBUG ONLY
-//
-//    var newData = JSON.stringify(json_obj[location[0]][location[1]]);
-//    console.log("newData ", newData);
-//
-//    var docRef = db.collection(location[0]).doc(location[1]).set({
-//            data: newData
-//        })
-//        .then(function () { // Write successful
-//            $("#error-alert").hide();
-//            $("#success-alert").show();
-//
-//            if (document.getElementById("success-alert").classList.contains("d-none")) {
-//                document.getElementById("success-alert").classList.remove("d-none");
-//            }
-//
-//            $("#" + senderFormID + " :checkbox:enabled").prop("checked", false);
-//            $("#" + senderFormID + " label").removeClass("active");
-//            $("#" + senderFormID + " .btn-success").attr("disabled", "disabled");
-//
-//            window.setTimeout(function () {
-//                $("#success-alert").hide();
-//                //document.getElementById('success-alert').classList.add('d-none');
-//            }, 5000);
-//        })
-//        .catch(function (error) {
-//            $("#error-alert").show();
-//            if (document.getElementById("error-alert").classList.contains("d-none")) {
-//                document.getElementById("error-alert").classList.remove("d-none");
-//            }
-//        });
-//});
-
 $(".btn-valider").on("click", function () {
     var senderRootID = $(this).parents(".root").attr("id");
     var dbCol = $(this).parents(".root").find("h1").attr("id");
@@ -322,6 +204,125 @@ $(".btn-valider").on("click", function () {
     var ts = (+new Date($("#" + senderRootID + " .datePicker").val()));
     var timestamp = ts + ((new Date($("#" + senderRootID + " .datePicker").val())).getTimezoneOffset() * 60000);
     //console.log("Timestamp :", timestamp); // DEBUG ONLY
+
+    var checked = [];
+    $("#" + activeFormID + " input:checked").each(function () {
+        var _checked = [($(this).closest("div").attr("id")), ($(this).closest("label").attr("id"))];
+        checked.push(_checked);
+    });
+    //console.log("Checked items :", checked); // DEBUG ONLY
+
+    checked.forEach(function (item) {
+        console.log("a ", typeof (json_obj[dbCol][dbDoc][activeFormID]));
+        if (typeof (json_obj[dbCol][dbDoc][activeFormID]) === 'undefined') {
+            console.log("item not defined");
+            json_obj[dbCol][dbDoc][activeFormID] = {};
+            json_obj[dbCol][dbDoc][activeFormID][item[0]] = {};
+            json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]] = [];
+        }
+
+        console.log("b ", typeof (json_obj[dbCol][dbDoc][activeFormID][item[0]]));
+        if (typeof (json_obj[dbCol][dbDoc][activeFormID][item[0]]) === 'undefined') {
+            console.log("item not defined");
+            json_obj[dbCol][dbDoc][activeFormID][item[0]] = {};
+            json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]] = [];
+        }
+
+        console.log("c ", typeof (json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]]));
+        if (typeof (json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]]) === 'undefined') {
+            console.log("item not defined");
+            json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]] = [];
+        }
+
+
+        //console.log($("#" + activeFormID + " #" + item[0] + " .swap2").hasClass("d-none"));
+
+        if (item[1] === "c1" && !($("#" + activeFormID + " #" + item[0] + " .swap2").hasClass("d-none"))) {
+            console.log("ceci cest c1 et swap c2");
+            var c2 = json_obj[dbCol][dbDoc][activeFormID][item[0]]["c2"][0];
+            json_obj[dbCol][dbDoc][activeFormID][item[0]]["c1"].unshift(c2);
+            json_obj[dbCol][dbDoc][activeFormID][item[0]]["c2"].unshift(timestamp);
+            if (json_obj[dbCol][dbDoc][activeFormID][item[0]]["c2"].length > 10) { // Remove oldest entry. Limit to 10 entry max.
+                json_obj[dbCol][dbDoc][activeFormID][item[0]]["c2"].pop();
+            }
+        } else if (item[1] === "c3" && !($("#" + activeFormID + " #" + [item[0]] + " .swap4").hasClass("d-none"))) {
+            console.log("ceci cest c3 et swap c4");
+            var c4 = json_obj[dbCol][dbDoc][activeFormID][item[0]]["c4"][0];
+            json_obj[dbCol][dbDoc][activeFormID][item[0]]["c3"].unshift(c4);
+            json_obj[dbCol][dbDoc][activeFormID][item[0]]["c4"].unshift(timestamp);
+            if (json_obj[dbCol][dbDoc][activeFormID][item[0]]["c4"].length > 10) { // Remove oldest entry. Limit to 10 entry max.
+                json_obj[dbCol][dbDoc][activeFormID][item[0]]["c4"].pop();
+            }
+        } else if (json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]].length < 1) {
+            json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]].push(timestamp);
+        } else {
+            json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]].unshift(timestamp);
+        }
+        if (json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]].length > 10) { // Remove oldest entry. Limit to 10 entry max.
+            json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]].pop();
+        }
+    });
+
+    console.log("json_obj: ", json_obj); // DEBUG ONLY
+
+    var newData = JSON.stringify(json_obj[dbCol][dbDoc]);
+
+    //console.log("json_string: ", newData); // DEBUG ONLY
+
+    var docRef = db.collection(String([dbCol])).doc(String([dbDoc])).set({
+            data: newData
+        })
+        .then(function () { // Write successful
+            $("#error-alert").hide();
+            $("#success-alert").show();
+
+            if (document.getElementById("success-alert").classList.contains("d-none")) {
+                document.getElementById("success-alert").classList.remove("d-none");
+            }
+
+            $("#" + activeFormID + " :checkbox:enabled").prop("checked", false);
+            $("#" + activeFormID + " label").removeClass("active");
+            $("#" + senderRootID + " .btn-valider").attr("disabled", "disabled");
+            $("#" + activeFormID + " .swap2").addClass("d-none");
+            $("#" + activeFormID + " .c2").removeAttr('disabled');
+            $("#" + activeFormID + " .swap4").addClass("d-none");
+            $("#" + activeFormID + " .c4").removeAttr('disabled');
+
+            window.setTimeout(function () {
+                $("#success-alert").hide();
+                //document.getElementById('success-alert').classList.add('d-none');
+            }, 5000);
+        })
+        .catch(function (error) {
+            $("#error-alert").show();
+            if (document.getElementById("error-alert").classList.contains("d-none")) {
+                document.getElementById("error-alert").classList.remove("d-none");
+            }
+        });
+});
+
+$(".btn-valider-inspection").on("click", function () {
+    var senderRootID = $(this).parents(".root").attr("id");
+    var dbCol = $(this).parents(".root").find("h1").attr("id");
+    var dbDoc = "remplacement"; //$(this).parents(".root").find("h3").attr("id");
+    var activeFormID = $(this).parents(".root").find(".tab-content .active").children("form").attr("id");
+
+    // Get datePicker value in milliseconds.
+    var ts = (+new Date($("#" + senderRootID + " .datePicker").val()));
+    var timestamp = ts + ((new Date($("#" + senderRootID + " .datePicker").val())).getTimezoneOffset() * 60000);
+    //console.log("Timestamp :", timestamp); // DEBUG ONLY
+
+    var senderInfo = [];
+    var data = [];
+    $('#' + senderRootID + ' input[type="number"]').each(function () {
+        if ($(this).val() != "") {
+            var dbCol = $(this).parents(".root").find("h1").attr("id");
+            var dbDoc = "remplacement"; //$(this).parents(".root").find("h3").attr("id");
+            var activeFormID = $(this).parents(".root").find(".tab-content .active").children("form").attr("id");
+            senderInfo[0] = []
+        }
+    });
+
 
     var checked = [];
     $("#" + activeFormID + " input:checked").each(function () {
