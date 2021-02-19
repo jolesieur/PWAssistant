@@ -17,59 +17,75 @@ $(".navbar-nav .nav-item").on("click", function () {
 });
 
 function checkLength(len, ele) {
-    var fieldLength = ele.value.length;
-
-    if (fieldLength <= len) {
-        return true;
-    } else {
-        var str = ele.value;
-        str = str.substring(0, str.length - 1);
-        ele.value = str;
-    }
+    //    var fieldLength = ele.value.length;
+    //
+    //    if (fieldLength <= len) {
+    //        return true;
+    //    } else {
+    //        var str = ele.value;
+    //        str = str.substring(0, str.length - 1);
+    //        ele.value = str;
+    //    }
 }
 
-$("#content-2").on("input", function (evt) {
-    var self = $(this);
-    self.val(self.val().replace(/[^0-9\.]/g, ''));
-    if ((evt.which != 46 || self.val().indexOf('.') != -1) && (evt.which < 48 || evt.which > 57)) {
-        evt.preventDefault();
-    }
-});
-
-$("#content-2 input").blur(function () {
+$("#content-2 input").on('input', function (ev) {
     var senderRootID = $(this).parents(".root").attr("id");
-    console.log("sender ID ", senderRootID);
 
-    var val = "" + $(this).val();
-    if (val.length > 0) {
-        val = val.split('\.');
-        var out = val[0];
-        while (out.length < 1) {
-            out = '0' + out;
-        }
-        if (val[1]) {
-            out = out + '.' + val[1]
-            if (out.length < 4) {
-                out = out + '0';
-            }
-        } else {
-            out = out + '.00';
-        }
-        $(this).val(out);
-    } else {
-        $(this).val('');
+    var maxlength = 4;
+    var value = "" + $(this).val();
+    if (value.length >= maxlength) {
+        $(this).val(value.substr(0, maxlength));
     }
 
     $('#' + senderRootID + ' input[type="number"]').each(function () {
         if ($(this).val() != "") {
-            console.log("yepp");
-            $("#" + senderRootID + " .btn-valider").removeAttr("disabled");
+            $(".btn-valider-inspection").removeAttr("disabled");
             return false;
         } else {
-            console.log("nope");
-            $("#" + senderRootID + " .btn-valider").attr("disabled", "disabled");
+            $(".btn-valider-inspection").attr("disabled", "disabled");
         }
     });
+});
+
+//$("#content-2 input").on("keydown", function (e) {
+//    // allow function keys and decimal separators
+//    if (
+//        // backspace, delete, tab, escape, enter, comma and .
+//        $.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 188, 190]) !== -1 ||
+//        // Ctrl/cmd+A, Ctrl/cmd+C, Ctrl/cmd+X
+//        ($.inArray(e.keyCode, [65, 67, 88]) !== -1 && (e.ctrlKey === true || e.metaKey === true)) ||
+//        // home, end, left, right
+//        (e.keyCode >= 35 && e.keyCode <= 39)) {
+//
+//        return;
+//    }
+//    // block any non-number
+//    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+//        e.preventDefault();
+//    }
+//});
+
+$("#content-2 input").blur(function () {
+    //    var senderRootID = $(this).parents(".root").attr("id");
+    //
+    var val = "" + $(this).val();
+    //
+    if (val.length > 0) {
+        $(this).val(parseFloat(val).toFixed(2));
+    } else {
+        $(this).val('');
+    }
+    //
+    //    $('#' + senderRootID + ' input[type="number"]').each(function () {
+    //        if ($(this).val() != "") {
+    //            console.log("yepp");
+    //            $(".btn-valider-inspection").removeAttr("disabled");
+    //            return false;
+    //        } else {
+    //            console.log("nope");
+    //            $(".btn-valider-inspection").attr("disabled", "disabled");
+    //        }
+    //    });
 });
 
 $(".drop").click(function () {
