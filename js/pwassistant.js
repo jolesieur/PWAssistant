@@ -33,13 +33,13 @@ $(".navbar-nav .nav-item").on("click", function () {
 
 $("#content-2 input[type=text]").on('input', function (ev) {
     var senderRootID = $(this).parents(".root").attr("id");
-    
+
     var maxlength = 4;
     var value = "" + $(this).val();
     if (value.length >= maxlength) {
         $(this).val(value.substr(0, maxlength));
     }
-    
+
     $('#' + senderRootID + ' input[type="text"]').each(function () {
         var value = $(this).val();
         if ($.isNumeric(value)) {
@@ -335,25 +335,20 @@ $(".btn-valider-inspection").on("click", function () {
     //console.log("Timestamp :", timestamp); // DEBUG ONLY
 
     var senderInfo = [];
-    var data = [];
-    $('#' + senderRootID + ' input[type="number"]').each(function () {
-        if ($(this).val() != "") {
-            var dbCol = $(this).parents(".root").find("h1").attr("id");
-            var dbDoc = "remplacement"; //$(this).parents(".root").find("h3").attr("id");
-            var activeFormID = $(this).parents(".root").find(".tab-content .active").children("form").attr("id");
-            senderInfo[0] = []
+    var i = 0;
+    $("#" + senderRootID + " input[type=text]").each(function (index) {
+        if ($(this).val()) {
+            var dbDoc = "inspection";
+            var activeFormID = $(this).closest('form').attr('class').split(/\s+/);
+            var items = $(this).closest("div").attr("id");
+            var subItem = $(this).closest("label").attr("id");
+            senderInfo[i++] = [activeFormID[0], dbDoc, activeFormID[1], items, subItem];
         }
     });
+    console.log(senderInfo);
 
+    $.each(senderInfo, function (index, value) {
 
-    var checked = [];
-    $("#" + activeFormID + " input:checked").each(function () {
-        var _checked = [($(this).closest("div").attr("id")), ($(this).closest("label").attr("id"))];
-        checked.push(_checked);
-    });
-    //console.log("Checked items :", checked); // DEBUG ONLY
-
-    checked.forEach(function (item) {
         console.log("a ", typeof (json_obj[dbCol][dbDoc][activeFormID]));
         if (typeof (json_obj[dbCol][dbDoc][activeFormID]) === 'undefined') {
             console.log("item not defined");
@@ -375,26 +370,7 @@ $(".btn-valider-inspection").on("click", function () {
             json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]] = [];
         }
 
-
-        //console.log($("#" + activeFormID + " #" + item[0] + " .swap2").hasClass("d-none"));
-
-        if (item[1] === "c1" && !($("#" + activeFormID + " #" + item[0] + " .swap2").hasClass("d-none"))) {
-            console.log("ceci cest c1 et swap c2");
-            var c2 = json_obj[dbCol][dbDoc][activeFormID][item[0]]["c2"][0];
-            json_obj[dbCol][dbDoc][activeFormID][item[0]]["c1"].unshift(c2);
-            json_obj[dbCol][dbDoc][activeFormID][item[0]]["c2"].unshift(timestamp);
-            if (json_obj[dbCol][dbDoc][activeFormID][item[0]]["c2"].length > 10) { // Remove oldest entry. Limit to 10 entry max.
-                json_obj[dbCol][dbDoc][activeFormID][item[0]]["c2"].pop();
-            }
-        } else if (item[1] === "c3" && !($("#" + activeFormID + " #" + [item[0]] + " .swap4").hasClass("d-none"))) {
-            console.log("ceci cest c3 et swap c4");
-            var c4 = json_obj[dbCol][dbDoc][activeFormID][item[0]]["c4"][0];
-            json_obj[dbCol][dbDoc][activeFormID][item[0]]["c3"].unshift(c4);
-            json_obj[dbCol][dbDoc][activeFormID][item[0]]["c4"].unshift(timestamp);
-            if (json_obj[dbCol][dbDoc][activeFormID][item[0]]["c4"].length > 10) { // Remove oldest entry. Limit to 10 entry max.
-                json_obj[dbCol][dbDoc][activeFormID][item[0]]["c4"].pop();
-            }
-        } else if (json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]].length < 1) {
+        if (json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]].length < 1) {
             json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]].push(timestamp);
         } else {
             json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]].unshift(timestamp);
@@ -410,34 +386,34 @@ $(".btn-valider-inspection").on("click", function () {
 
     //console.log("json_string: ", newData); // DEBUG ONLY
 
-    var docRef = db.collection(String([dbCol])).doc(String([dbDoc])).set({
-            data: newData
-        })
-        .then(function () { // Write successful
-            $("#error-alert").hide();
-            $("#success-alert").show();
-
-            if (document.getElementById("success-alert").classList.contains("d-none")) {
-                document.getElementById("success-alert").classList.remove("d-none");
-            }
-
-            $("#" + activeFormID + " :checkbox:enabled").prop("checked", false);
-            $("#" + activeFormID + " label").removeClass("active");
-            $("#" + senderRootID + " .btn-valider").attr("disabled", "disabled");
-            $("#" + activeFormID + " .swap2").addClass("d-none");
-            $("#" + activeFormID + " .c2").removeAttr('disabled');
-            $("#" + activeFormID + " .swap4").addClass("d-none");
-            $("#" + activeFormID + " .c4").removeAttr('disabled');
-
-            window.setTimeout(function () {
-                $("#success-alert").hide();
-                //document.getElementById('success-alert').classList.add('d-none');
-            }, 5000);
-        })
-        .catch(function (error) {
-            $("#error-alert").show();
-            if (document.getElementById("error-alert").classList.contains("d-none")) {
-                document.getElementById("error-alert").classList.remove("d-none");
-            }
-        });
+    //        var docRef = db.collection(String([dbCol])).doc(String([dbDoc])).set({
+    //                data: newData
+    //            })
+    //            .then(function () { // Write successful
+    //                $("#error-alert").hide();
+    //                $("#success-alert").show();
+    //    
+    //                if (document.getElementById("success-alert").classList.contains("d-none")) {
+    //                    document.getElementById("success-alert").classList.remove("d-none");
+    //                }
+    //    
+    //                $("#" + activeFormID + " :checkbox:enabled").prop("checked", false);
+    //                $("#" + activeFormID + " label").removeClass("active");
+    //                $("#" + senderRootID + " .btn-valider").attr("disabled", "disabled");
+    //                $("#" + activeFormID + " .swap2").addClass("d-none");
+    //                $("#" + activeFormID + " .c2").removeAttr('disabled');
+    //                $("#" + activeFormID + " .swap4").addClass("d-none");
+    //                $("#" + activeFormID + " .c4").removeAttr('disabled');
+    //    
+    //                window.setTimeout(function () {
+    //                    $("#success-alert").hide();
+    //                    //document.getElementById('success-alert').classList.add('d-none');
+    //                }, 5000);
+    //            })
+    //            .catch(function (error) {
+    //                $("#error-alert").show();
+    //                if (document.getElementById("error-alert").classList.contains("d-none")) {
+    //                    document.getElementById("error-alert").classList.remove("d-none");
+    //                }
+    //            });
 });
