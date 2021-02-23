@@ -77,9 +77,16 @@ $("#content-2 input").on("keydown", function (e) {
 
 $("#content-2 input").blur(function () {
     var val = "" + $(this).val();
-    //
+    var res = val.split(".");
+
     if (val.length > 0) {
-        $(this).val(parseFloat(val).toFixed(2));
+        if (res[0].length === 3) {
+            $(this).val(parseFloat(val).toFixed(0));
+        } else if (res[0].length === 2) {
+            $(this).val(parseFloat(val).toFixed(1));
+        } else if (res[0].length <= 1) {
+            $(this).val(parseFloat(val).toFixed(2));
+        }
     } else {
         $(this).val('');
     }
@@ -325,68 +332,77 @@ $(".btn-valider").on("click", function () {
 
 $(".btn-valider-inspection").on("click", function () {
     var senderRootID = $(this).parents(".root").attr("id");
-    var dbCol = $(this).parents(".root").find("h1").attr("id");
-    var dbDoc = "remplacement"; //$(this).parents(".root").find("h3").attr("id");
-    var activeFormID = $(this).parents(".root").find(".tab-content .active").children("form").attr("id");
+    var dbDoc = "inspection";
 
     // Get datePicker value in milliseconds.
     var ts = (+new Date($("#" + senderRootID + " .datePicker").val()));
     var timestamp = ts + ((new Date($("#" + senderRootID + " .datePicker").val())).getTimezoneOffset() * 60000);
     //console.log("Timestamp :", timestamp); // DEBUG ONLY
 
-    var senderInfo = [];
+    var dbEntry = [];
     var i = 0;
     $("#" + senderRootID + " input[type=text]").each(function (index) {
         if ($(this).val()) {
-            var dbDoc = "inspection";
             var activeFormID = $(this).closest('form').attr('class').split(/\s+/);
             var items = $(this).closest("div").attr("id");
             var subItem = $(this).closest("label").attr("id");
-            senderInfo[i++] = [activeFormID[0], dbDoc, activeFormID[1], items, subItem];
+            dbEntry[i++] = [activeFormID[0], activeFormID[1], items, subItem];
         }
     });
-    console.log(senderInfo);
+    console.log(dbEntry);
 
-    $.each(senderInfo, function (index, value) {
+//    var cnt = 0;
+//    dbEntry.foreach(function (val) {
+//        if (val !== undefined) {
+//            ++cnt;
+//        }
+//    })
+//    console.log("size :", cnt);
 
-        console.log("a ", typeof (json_obj[dbCol][dbDoc][activeFormID]));
-        if (typeof (json_obj[dbCol][dbDoc][activeFormID]) === 'undefined') {
+    $.each(dbEntry, function (index, value) {
+
+        console.log("a ", typeof (json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]]));
+        if (typeof (json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]]) === 'undefined') {
             console.log("item not defined");
-            json_obj[dbCol][dbDoc][activeFormID] = {};
-            json_obj[dbCol][dbDoc][activeFormID][item[0]] = {};
-            json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]] = [];
+            json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]] = {};
+            if (typeof (dbEntry[index][2]) === "undefined") {
+                json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][3]] = {};
+            } else {
+                json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][2]] = {};
+                json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][2]][dbEntry[index][3]] = [];
+            }
         }
 
-        console.log("b ", typeof (json_obj[dbCol][dbDoc][activeFormID][item[0]]));
-        if (typeof (json_obj[dbCol][dbDoc][activeFormID][item[0]]) === 'undefined') {
-            console.log("item not defined");
-            json_obj[dbCol][dbDoc][activeFormID][item[0]] = {};
-            json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]] = [];
-        }
+        //        console.log("b ", typeof (json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][2]));
+        //        if (typeof (json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][2]) === 'undefined') {
+        //            console.log("item not defined");
+        //            json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][item[0]] = {};
+        //            json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][item[0]][item[1]] = [];
+        //        }
 
-        console.log("c ", typeof (json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]]));
-        if (typeof (json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]]) === 'undefined') {
-            console.log("item not defined");
-            json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]] = [];
-        }
+        //        console.log("c ", typeof (json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][item[0]][item[1]]));
+        //        if (typeof (json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][item[0]][item[1]]) === 'undefined') {
+        //            console.log("item not defined");
+        //            json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][item[0]][item[1]] = [];
+        //        }
 
-        if (json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]].length < 1) {
-            json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]].push(timestamp);
+        if (json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][item[0]][item[1]].length < 1) {
+            json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][item[0]][item[1]].push(timestamp);
         } else {
-            json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]].unshift(timestamp);
+            json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][item[0]][item[1]].unshift(timestamp);
         }
-        if (json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]].length > 10) { // Remove oldest entry. Limit to 10 entry max.
-            json_obj[dbCol][dbDoc][activeFormID][item[0]][item[1]].pop();
+        if (json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][item[0]][item[1]].length > 10) { // Remove oldest entry. Limit to 10 entry max.
+            json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][item[0]][item[1]].pop();
         }
     });
 
     console.log("json_obj: ", json_obj); // DEBUG ONLY
 
-    var newData = JSON.stringify(json_obj[dbCol][dbDoc]);
+    var newData = JSON.stringify(json_obj[dbEntry[0]][dbDoc]);
 
     //console.log("json_string: ", newData); // DEBUG ONLY
 
-    //        var docRef = db.collection(String([dbCol])).doc(String([dbDoc])).set({
+    //        var docRef = db.collection(String([dbEntry[0]])).doc(String([dbDoc])).set({
     //                data: newData
     //            })
     //            .then(function () { // Write successful
