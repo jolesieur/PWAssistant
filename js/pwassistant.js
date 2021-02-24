@@ -345,19 +345,16 @@ $(".btn-valider-inspection").on("click", function () {
         if ($(this).val()) {
             var activeFormID = $(this).closest('form').attr('class').split(/\s+/);
             var items = $(this).closest("div").attr("id");
+            if (typeof (items) === "undefined") {
+                items = $(this).closest('form').find(".drop_content").attr("id");
+                console.log(items);
+            }
             var subItem = $(this).closest("label").attr("id");
-            dbEntry[i++] = [activeFormID[0], activeFormID[1], items, subItem];
+            var value = $(this).val();
+            dbEntry[i++] = [activeFormID[0], activeFormID[1], items, subItem, value];
         }
     });
     console.log(dbEntry);
-
-//    var cnt = 0;
-//    dbEntry.foreach(function (val) {
-//        if (val !== undefined) {
-//            ++cnt;
-//        }
-//    })
-//    console.log("size :", cnt);
 
     $.each(dbEntry, function (index, value) {
 
@@ -365,71 +362,106 @@ $(".btn-valider-inspection").on("click", function () {
         if (typeof (json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]]) === 'undefined') {
             console.log("item not defined");
             json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]] = {};
-            if (typeof (dbEntry[index][2]) === "undefined") {
-                json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][3]] = {};
-            } else {
-                json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][2]] = {};
-                json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][2]][dbEntry[index][3]] = [];
-            }
+            //            if (typeof (dbEntry[index][2]) === "undefined") {
+            //                json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][3]] = [];
+            //            } else {
+            json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][2]] = {};
+            json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][2]][dbEntry[index][3]] = [];
+            // }
         }
 
-        //        console.log("b ", typeof (json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][2]));
-        //        if (typeof (json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][2]) === 'undefined') {
-        //            console.log("item not defined");
-        //            json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][item[0]] = {};
-        //            json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][item[0]][item[1]] = [];
-        //        }
+        console.log("b ", typeof (json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][2]]));
+        if (typeof (json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][2]]) === 'undefined') {
+            console.log("item not defined");
+            //            if (typeof (dbEntry[index][2]) === "undefined") {
+            //                json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][3]] = [];
+            //            } else {
+            json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][2]] = {};
+            json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][2]][dbEntry[index][3]] = [];
+            //}
+        }
+        //if (typeof (dbEntry[index][2]) !== "undefined") {
+        console.log("c ", typeof (json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][2]][dbEntry[index][3]]));
+        if (typeof (json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][2]][dbEntry[index][3]]) === 'undefined') {
+            console.log("item not defined");
+            json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][2]][dbEntry[index][3]] = [];
+        }
+        // }
 
-        //        console.log("c ", typeof (json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][item[0]][item[1]]));
-        //        if (typeof (json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][item[0]][item[1]]) === 'undefined') {
-        //            console.log("item not defined");
-        //            json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][item[0]][item[1]] = [];
-        //        }
-
-        if (json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][item[0]][item[1]].length < 1) {
-            json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][item[0]][item[1]].push(timestamp);
+        //        if (typeof (dbEntry[index][2]) === "undefined") {
+        //            if (json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][3]].length < 1) {
+        //                json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][3]].push([timestamp, parseFloat([dbEntry[index][4]])]);
+        //            } else {
+        //                json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][3]].unshift([timestamp, parseFloat([dbEntry[index][4]])]);
+        //            }
+        //            if (json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][3]].length > 10) { // Remove oldest entry. Limit to 10 entry max.
+        //                json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][3]].pop();
+        //            }
+        //        } else {
+        if (json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][2]][dbEntry[index][3]].length < 1) {
+            json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][2]][dbEntry[index][3]].push([timestamp, parseFloat([dbEntry[index][4]])]);
         } else {
-            json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][item[0]][item[1]].unshift(timestamp);
+            json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][2]][dbEntry[index][3]].unshift([timestamp, parseFloat([dbEntry[index][4]])]);
         }
-        if (json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][item[0]][item[1]].length > 10) { // Remove oldest entry. Limit to 10 entry max.
-            json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][item[0]][item[1]].pop();
+        if (json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][2]][dbEntry[index][3]].length > 10) { // Remove oldest entry. Limit to 10 entry max.
+            json_obj[dbEntry[index][0]][dbDoc][dbEntry[index][1]][dbEntry[index][2]][dbEntry[index][3]].pop();
         }
+        //}
     });
 
     console.log("json_obj: ", json_obj); // DEBUG ONLY
 
-    var newData = JSON.stringify(json_obj[dbEntry[0]][dbDoc]);
+    //    var dbCol = [false, false];
+    //    $.each(dbEntry, function (index, value) {
+    //        if (value.indexOf('hemodialyse') >= 0) {
+    //            dbCol[0] = true;
+    //        }
+    //        if (value.indexOf('laboratoires') >= 0) {
+    //            dbCol[1] = true;
+    //        }
+    //    });
+    //    console.log("dbCol :", dbCol);
 
-    //console.log("json_string: ", newData); // DEBUG ONLY
+    newData = JSON.stringify(json_obj["hemodialyse"]["inspection"]);
+    console.log("json_string: ", newData); // DEBUG ONLY
 
     //        var docRef = db.collection(String([dbEntry[0]])).doc(String([dbDoc])).set({
     //                data: newData
     //            })
-    //            .then(function () { // Write successful
-    //                $("#error-alert").hide();
-    //                $("#success-alert").show();
-    //    
-    //                if (document.getElementById("success-alert").classList.contains("d-none")) {
-    //                    document.getElementById("success-alert").classList.remove("d-none");
-    //                }
-    //    
-    //                $("#" + activeFormID + " :checkbox:enabled").prop("checked", false);
-    //                $("#" + activeFormID + " label").removeClass("active");
-    //                $("#" + senderRootID + " .btn-valider").attr("disabled", "disabled");
-    //                $("#" + activeFormID + " .swap2").addClass("d-none");
-    //                $("#" + activeFormID + " .c2").removeAttr('disabled');
-    //                $("#" + activeFormID + " .swap4").addClass("d-none");
-    //                $("#" + activeFormID + " .c4").removeAttr('disabled');
-    //    
-    //                window.setTimeout(function () {
-    //                    $("#success-alert").hide();
-    //                    //document.getElementById('success-alert').classList.add('d-none');
-    //                }, 5000);
-    //            })
-    //            .catch(function (error) {
-    //                $("#error-alert").show();
-    //                if (document.getElementById("error-alert").classList.contains("d-none")) {
-    //                    document.getElementById("error-alert").classList.remove("d-none");
-    //                }
-    //            });
+    //           .then(function () { // Write successful
+
+    // Get a new write batch
+    var batch = db.batch();
+
+    // Set the value of 'hemodialyse -> inspection'
+    var hemoRef = db.collection("hemodialyse").doc("inspection");
+    batch.set(hemoRef, {
+        data: JSON.stringify(json_obj["hemodialyse"]["inspection"])
+    });
+
+    // Set the value of 'laboratoires -> inspection'
+    var laboRef = db.collection("laboratoires").doc("inspection");
+    batch.set(laboRef, {
+        data: JSON.stringify(json_obj["laboratoires"]["inspection"])
+    });
+
+    // Commit the batch
+    batch.commit().then(() => { // Write successful
+        $("#error-alert").hide();
+        $("#success-alert").show();
+
+        if (document.getElementById("success-alert").classList.contains("d-none")) {
+            document.getElementById("success-alert").classList.remove("d-none");
+        }
+
+        $("#" + senderRootID + " :input[type=text]").val("");
+        $("#" + senderRootID + " .btn-valider-inspection").attr("disabled", "disabled");
+        $("#" + senderRootID).find("svg").removeClass('fa-chevron-up').addClass('fa-chevron-down');
+        $("#" + senderRootID).find(".drop_content").addClass("d-none");
+
+        window.setTimeout(function () {
+            $("#success-alert").hide();
+            //document.getElementById('success-alert').classList.add('d-none');
+        }, 5000);
+    })
 });
