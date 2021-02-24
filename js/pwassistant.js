@@ -317,6 +317,10 @@ $(".btn-valider").on("click", function () {
             $("#" + activeFormID + " .swap4").addClass("d-none");
             $("#" + activeFormID + " .c4").removeAttr('disabled');
 
+            $('body,html').animate({
+                scrollTop: 0
+            }, 0);
+
             window.setTimeout(function () {
                 $("#success-alert").hide();
                 //document.getElementById('success-alert').classList.add('d-none');
@@ -458,6 +462,10 @@ $(".btn-valider-inspection").on("click", function () {
         $("#" + senderRootID + " .btn-valider-inspection").attr("disabled", "disabled");
         $("#" + senderRootID).find("svg").removeClass('fa-chevron-up').addClass('fa-chevron-down');
         $("#" + senderRootID).find(".drop_content").addClass("d-none");
+
+        $('body,html').animate({
+            scrollTop: 0
+        }, 0);
 
         window.setTimeout(function () {
             $("#success-alert").hide();
