@@ -30,6 +30,9 @@ $(".navbar-nav .nav-item").on("click", function () {
 //        }
 //    });
 //});
+$("#content-2 input[type=text]").focus(function () {
+    $(this).parents(".sub-label").find(".charbon-dt").removeClass("d-none");
+});
 
 $("#content-2 input[type=text]").on('input', function (ev) {
     var senderRootID = $(this).parents(".root").attr("id");
@@ -90,6 +93,7 @@ $("#content-2 input").blur(function () {
     } else {
         $(this).val('');
     }
+    $(this).parents(".sub-label").find(".charbon-dt").addClass("d-none");
 });
 
 $(".drop").click(function () {
