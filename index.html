@@ -182,15 +182,28 @@
             <div class="tab-pane fade show active" id="content-1" aria-labelledby="tab-1" role="tabpanel">
                 <h1>Accueil</h1>
                 <p class="lead">Bienvenue dans l'application de suivi des systèmes de traitement d'eau.</p>
-                <p>Pour débuté, sélectionnez l'intervention à réaliser.</p>
-                Pour les tests mensuel de validation du chlore résiduel total dans l'eau sélectionnez l'onglet «Inspection».<br>
-                Pour consigner le remplacement d'un filtres à sédiments au un filtre au charbon, sélectionnez l'onglet «Remplacement».<br>
-                Pour visualiser un sommaire détaillé des différents systèmes sélectionnez l'onglet «Historique».
+
+                <dl class="row" style="padding-left:1em">
+                    <dt class="col-sm-3 col-lg-2">Inspection</dt>
+                    <dd class="col-sm-10 col-lg-11" style="padding-left:2em"><i class="fas fa-chevron-right" style="font-size:14px;color:#2196F3"></i> Consigner le résultats des tests mensuels de validation du chlore résiduel total dans l'eau.</dd>
+                    <dt class="col-sm-4 col-col-lg-2">Remplacement</dt>
+                    <dd class="col-sm-10 col-lg-11" style="padding-left:2em"><i class="fas fa-chevron-right" style="font-size:14px;color:#2196F3"></i> Consigner le remplacement d'un filtre à sédiments ou d'un filtre au charbon</dd>
+                    <dt class="col-sm-3 col-lg-2">Historique</dt>
+                    <dd class="col-sm-10 col-lg-11" style="padding-left:2em"><i class="fas fa-chevron-right" style="font-size:14px;color:#2196F3"></i> Visualiser un sommaire détaillé des différents systèmes.</dd>
+                </dl>
             </div>
 
             <!-- Début Inspection -->
             <div class="tab-pane fade root" id="content-2" aria-labelledby="tab-2" role="tabpanel">
                 <h1>Inspection</h1>
+                <h3 id="remplacement" class="text-center lead">Test de chlore résiduel total dans l'eau d'hémodilasyse.</h3>
+                <!-- Info Alert -->
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="alert alert-primary alert-dismissible col-xl-7 fade show">
+                        <i class="fas fa-info-circle" style="color:#2196F3"></i><small class="text-muted"> Afin de satisfaire la norme ISO13959:2009, le résultat du test doit être inférieur à 0.1 mg/L à la sortie des filtres au charbon.</small>
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    </div>
+                </div>
                 <div class="d-flex">
                     <div class="m-auto text-center">
                         <form class="hemodialyse pre-traitement">
@@ -263,7 +276,7 @@
                 </div>
                 <div>
                     <div class="form-group d-flex flex-column text-center">
-                        <div class="col-10 col-sm-8 col-md-4 col-lg-3 align-self-center">
+                        <div class="col-9 col-sm-5 col-md-4 col-lg-3 col-xl-2 align-self-center">
                             <input class="datePicker" style="text-align: center;" readonly="true">
                         </div>
                     </div>
@@ -272,9 +285,9 @@
                             Valider</button>
                     </div>
                 </div>
+
             </div>
             <!-- Fin Inspection -->
-
 
             <!-- Début Remplacement -->
             <!-- Début Hémodialyse -->
@@ -674,7 +687,6 @@
                 <h1>Historique</h1>
                 <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll, it will remain fixed to the top of your browser’s viewport.</p>
             </div>
-
 
             <!-- Success Alert -->
             <div id="success-alert" class="alert alert-success d-none" role="alert">
