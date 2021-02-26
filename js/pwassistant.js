@@ -31,7 +31,25 @@ $(".navbar-nav .nav-item").on("click", function () {
 //    });
 //});
 $("#content-2 input[type=text]").focus(function () {
+    $(this).parents(".root").find(".charbon-dt").addClass("d-none");
     $(this).parents(".sub-label").find(".charbon-dt").removeClass("d-none");
+
+    var activeFormID = $(this).closest('form').attr('class').split(/\s+/);
+    var items = $(this).closest("div").attr("id");
+    if (typeof (items) === "undefined") {
+        items = $(this).closest('form').find(".drop_content").attr("id");
+    }
+    var subItem = $(this).closest("label").attr("id");
+
+    var lastValue = "n/a";
+
+    if (typeof (json_obj[activeFormID[0]]["inspection"][activeFormID[1]]) !== 'undefined' &&
+        typeof (json_obj[activeFormID[0]]["inspection"][activeFormID[1]][items]) !== 'undefined' &&
+        typeof (json_obj[activeFormID[0]]["inspection"][activeFormID[1]][items][subItem]) !== 'undefined') {
+        lastValue = json_obj[activeFormID[0]]["inspection"][activeFormID[1]][items][subItem][0][1] + " mg/L";
+    }
+
+    $(this).parents(".sub-label").find(".charbon-dt").text("Dernière valeur : " + lastValue);
 });
 
 $("#content-2 input[type=text]").on('input', function (ev) {
@@ -55,7 +73,7 @@ $("#content-2 input[type=text]").on('input', function (ev) {
     });
 });
 
-$("#content-2 input").on("keydown", function (e) {
+$("#content-2 input[type=text]").on("keydown", function (e) {
     // allow function keys and decimal separators
     if (
         // backspace, delete, tab, escape, enter, comma and .
@@ -78,7 +96,7 @@ $("#content-2 input").on("keydown", function (e) {
     }
 });
 
-$("#content-2 input").blur(function () {
+$("#content-2 input[type=text]").blur(function () {
     var val = "" + $(this).val();
     var res = val.split(".");
 
@@ -93,19 +111,20 @@ $("#content-2 input").blur(function () {
     } else {
         $(this).val('');
     }
-    $(this).parents(".sub-label").find(".charbon-dt").addClass("d-none");
+    //$(this).parents(".sub-label").find(".charbon-dt").addClass("d-none");
 });
 
 $(".drop").click(function () {
     if ($(this).closest("form").find(".drop_content").hasClass("d-none")) {
         $(this).parents(".root").find(".drop_content").addClass("d-none");
-        $(this).parents(".root").find("svg").removeClass('fa-chevron-up').addClass('fa-chevron-down');
+        $(this).parents(".root").find(".drop svg").removeClass('fa-chevron-up').addClass('fa-chevron-down');
         $(this).closest("form").find(".drop_content").removeClass("d-none");
         $(this).find("svg").removeClass('fa-chevron-down').addClass('fa-chevron-up');
     } else {
         $(this).closest("form").find(".drop_content").addClass("d-none");
         $(this).find("svg").removeClass('fa-chevron-up').addClass('fa-chevron-down');
     }
+    $(this).parents(".root").find(".charbon-dt").addClass("d-none");
 });
 
 $(".c1").on("click", function () {
