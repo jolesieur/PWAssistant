@@ -125,6 +125,10 @@ $(".drop").click(function () {
         $(this).find("svg").removeClass('fa-chevron-up').addClass('fa-chevron-down');
     }
     $(this).parents(".root").find(".charbon-dt").addClass("d-none");
+
+    $('body,html').animate({
+        scrollTop: 0
+    }, 0);
 });
 
 $(".c1").on("click", function () {
