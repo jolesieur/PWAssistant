@@ -1,3 +1,43 @@
+function notifyMe() {
+    // Vérifions si le navigateur prend en charge les notifications
+    if (!('Notification' in window)) {
+        alert('Ce navigateur ne prend pas en charge la notification de bureau')
+    }
+
+    // Vérifions si les autorisations de notification ont déjà été accordées
+    else if (Notification.permission === 'granted') {
+        // Si tout va bien, créons une notification
+        var img = 'drop-180x180.png';
+        var text = 'HEY! Your task blabla is now overdue.';
+        var notification = new Notification('To do list', {
+            body: text,
+            icon: img,
+            requireInteraction: true
+        });
+    }
+
+    // Sinon, nous devons demander la permission à l'utilisateur
+    else if (Notification.permission !== 'denied') {
+        Notification.requestPermission().then((permission) => {
+            // Si l'utilisateur accepte, créons une notification
+            if (permission === 'granted') {
+                var img = 'drop-180x180.png';
+                var text = 'HEY! Your task blabla is now overdue.';
+                var notification = new Notification('To do list', {
+                    body: text,
+                    icon: img,
+                    requireInteraction: true
+                });
+
+            }
+        })
+    }
+
+    // Enfin, si l'utilisateur a refusé les notifications, et que vous
+    // voulez être respectueux, il n'est plus nécessaire de les déranger.
+}
+
+
 $(".datePicker").datepicker({
     modal: true,
     footer: true,
