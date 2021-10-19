@@ -1,7 +1,8 @@
 function notifyMe() {
     // Vérifions si le navigateur prend en charge les notifications
     if (!('Notification' in window)) {
-        alert('Ce navigateur ne prend pas en charge la notification de bureau')
+        //alert('Ce navigateur ne prend pas en charge la notification de bureau')
+        return;
     }
 
     // Vérifions si les autorisations de notification ont déjà été accordées
