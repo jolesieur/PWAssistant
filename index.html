@@ -541,8 +541,19 @@
                             <div class="tab-pane fade" id="content-d" role="tabpanel">
                                 <form id="boucle-eau-purifiee">
                                     <div class="form-group d-flex flex-column text-center">
-                                        <label class="col-form-label">Cylindres de déionisation</label>
-                                        <div id="di" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
+                                        <label class="col-form-label">DI Banque #1</label>
+                                        <div id="di_bq1" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
+                                            <label id="r1" class="btn btn-outline-primary">
+                                                <input class="r1" type="checkbox"> 1 <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                            <label id="r2" class="btn btn-outline-primary">
+                                                <input class="r2" type="checkbox"> 2 <br>
+                                                <span class="days">365</span>
+                                            </label>
+                                        </div>
+                                        <label class="col-form-label">DI banque #2</label>
+                                        <div id="di_bq2" class="btn-group btn-group-toggle col-12 align-self-center" data-toggle="buttons">
                                             <label id="r1" class="btn btn-outline-primary">
                                                 <input class="r1" type="checkbox"> 1 <br>
                                                 <span class="days">365</span>
@@ -714,10 +725,8 @@
 
             <div class="tab-pane fade" id="content-4" aria-labelledby="tab-4" role="tabpanel">
                 <h1>Historique</h1>
-                <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll, it will remain fixed to the top of your browser’s viewport.</p>
+                <p class="lead">En cours de développement...</p>
                 <button onclick="setTimeout(notifyMe, 5000)">Notifie moi !</button>
-                <table id="excelDataTable" border="1">
-                </table>
             </div>
 
             <!-- Success Alert -->
@@ -822,45 +831,4 @@
                 updateFields("endoscopie");
             });
     </script>
-    <script>
-        var myList = ["yep"];
-        newData = JSON.stringify(json_obj["hemodialyse"]);
-        console.log("json_string: ", newData);
-        // Builds the HTML Table out of myList.
-        function buildHtmlTable(selector) {
-            var columns = addAllColumnHeaders(myList, selector);
-
-            for (var i = 0; i < myList.length; i++) {
-                var row$ = $('<tr/>');
-                for (var colIndex = 0; colIndex < columns.length; colIndex++) {
-                    var cellValue = myList[i][columns[colIndex]];
-                    if (cellValue == null) cellValue = "";
-                    row$.append($('<td/>').html(cellValue));
-                }
-                $(selector).append(row$);
-            }
-        }
-
-        // Adds a header row to the table and returns the set of columns.
-        // Need to do union of keys from all records as some records may not contain
-        // all records.
-        function addAllColumnHeaders(myList, selector) {
-            var columnSet = [];
-            var headerTr$ = $('<tr/>');
-
-            for (var i = 0; i < myList.length; i++) {
-                var rowHash = myList[i];
-                for (var key in rowHash) {
-                    if ($.inArray(key, columnSet) == -1) {
-                        columnSet.push(key);
-                        headerTr$.append($('<th/>').html(key));
-                    }
-                }
-            }
-            $(selector).append(headerTr$);
-
-            return columnSet;
-        }
-    </script>
-
 </body></html>
