@@ -53,6 +53,33 @@ $(".datePicker").datepicker({
     maxDate: new Date()
 });
 
+
+var dataSet = [];
+var arr = null;
+var table;
+var currentRow = null;
+
+$(document).ready(function () {
+    $(".datePicker").val(new Date().toDateInputValue());
+
+    table = $('#example').DataTable({
+        order: [0, 'desc'],
+        stateSave: true,
+        data: dataSet
+    });
+
+    $('#example tbody').on('click', 'tr', function () {
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+            currentRow = null;
+        } else {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+            currentRow = $(this).closest("tr");
+        }
+    });
+});
+
 $(".navbar-nav .nav-item").on("click", function () {
     $(".navbar-nav .nav-item").find(".active").removeClass("active");
 });
@@ -273,9 +300,67 @@ $(function () {
     })
 });
 
-$(document).ready(function () {
-    $(".datePicker").val(new Date().toDateInputValue());
+
+////////////////////////////////////////
+// Début Script Page Historique
+//
+// Référence https://datatables.net/
+////////////////////////////////////////
+var hist = [];
+var labo = [];
+
+$(".navbar-nav li .historique a").on("click", function () {
+    localisation = $(this).attr("id");
+    //console.log("localisation :", localisation);
+
+    var log = json_obj[$(this).attr("id")]["remplacement"];
+    //console.log("log :", log);
+
+    var group = Object.keys(log);
+
+    $.each(group, function (x, value) {
+        //console.log(value);
+        var category = Object.keys(log[group[x]]);
+        $.each(category, function (y, value) {
+            //console.log(value);
+            var elements = Object.keys(log[group[x]][category[y]]);
+            $.each(elements, function (z, value) {
+                //console.log(value);
+                var values = Object.keys(log[group[x]][category[y]][elements[z]]);
+                $.each(values, function (i, value) {
+                    //console.log(log[group[x]][category[y]][elements[z]][values[i]]);
+
+                    var d = new Date(log[group[x]][category[y]][elements[z]][values[i]]);
+                    var day = d.getDate();
+                    var month = d.getMonth() + 1;
+                    var year = d.getFullYear();
+                    if (day < 10) {
+                        day = "0" + day;
+                    }
+                    if (month < 10) {
+                        month = "0" + month;
+                    }
+                    var date = day + "-" + month + "-" + year;
+
+                    var temp = [date, localisation, group[x], category[y], elements[z]];
+                    hist.push(temp);
+                });
+            });
+        });
+    });
+    loadTable();
 });
+
+
+function loadTable() {
+    // Create form, order by ID and hide the first column.
+    table.clear().rows.add(hist).search('').draw();
+    hist = [];
+};
+////////////////////////////////////////
+// Fin Script Page Historique
+////////////////////////////////////////
+
 
 $(".btn-valider").on("click", function () {
     var senderRootID = $(this).parents(".root").attr("id");

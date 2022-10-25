@@ -62,6 +62,11 @@
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <script src="https://unpkg.com/gijgo@1.9.13/js/messages/messages.fr-fr.js" type="text/javascript"></script>
 
+    <!-- Tableau pour historique -->
+    <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/dataTables.bootstrap4.min.js"></script>
+
     <!-- Javscript -->
     <script>
         if ("serviceWorker" in navigator) {
@@ -69,9 +74,7 @@
                 navigator.serviceWorker && navigator.serviceWorker.register("./sw.js");
             });
         }
-
     </script>
-    <script defer src="./main.js"></script>
 
     <style>
         .bd-placeholder-img {
@@ -172,11 +175,10 @@
             font-size: 0.9rem;
             color: gray;
         }
-
     </style>
 </head>
 
-<body onLoad="buildHtmlTable('#excelDataTable')">
+<body>
     <nav class="navbar navbar-expand-md  navbar-dark bg-dark fixed-top">
         <span class="navbar-brand noselect">PW<i class="fas fa-tint" style="font-size:25px;color:#2196F3"></i>Assistant<br></span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -201,15 +203,15 @@
                         <a class="dropdown-item" id="tab-8" data-toggle="tab" role="tab" href="#content-endoscopie">Endoscopie</a>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="tab-4" data-toggle="tab" role="tab" href="#content-4">Historique</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Historique</a>
+                    <div class="dropdown-menu  historique">
+                        <a class="dropdown-item" id="hemodialyse" data-toggle="tab" role="tab" href="#content-4">Hémodialyse</a>
+                        <a class="dropdown-item" id="laboratoires" data-toggle="tab" role="tab" href="#content-4">Laboratoire</a>
+                        <a class="dropdown-item" id="endoscopie" data-toggle="tab" role="tab" href="#content-4">Endoscopie</a>
+                    </div>
                 </li>
             </ul>
-            <!--
-            <form class="form-inline my-2 my-md-0">
-                <input class="form-control" type="text" placeholder="Search">
-            </form>
--->
         </div>
     </nav>
 
@@ -764,7 +766,21 @@
 
             <div class="tab-pane fade" id="content-4" aria-labelledby="tab-4" role="tabpanel">
                 <h1>Historique</h1>
-                <p class="lead">En cours de développement...</p>
+                <div>
+                    <div>
+                        <table id="example" class="table nowrap table-striped table- table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Date de remplacement</th>
+                                    <th>Localisation</th>
+                                    <th>Groupe</th>
+                                    <th>Catégorie</th>
+                                    <th>Élément</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
                 <button onclick="setTimeout(notifyMe, 5000)">Notifie moi !</button>
             </div>
 
@@ -869,8 +885,5 @@
                 console.log("db read: ", json_obj);
                 updateFields("endoscopie");
             });
-
     </script>
-</body>
-
-</html>
+</body></html>
