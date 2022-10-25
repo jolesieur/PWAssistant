@@ -54,19 +54,19 @@ $(".datePicker").datepicker({
 });
 
 
-var dataSet = [];
+//var dataSet = [];
 var arr = null;
-var table;
+//var table;
 var currentRow = null;
 
 $(document).ready(function () {
     $(".datePicker").val(new Date().toDateInputValue());
 
-    table = $('#example').DataTable({
-        order: [0, 'desc'],
-        stateSave: true,
-        data: dataSet
-    });
+    //table = $('#example').DataTable({
+    //    order: [0, 'desc'],
+    //    stateSave: true,
+    //    data: dataSet
+    //});
 
     $('#example tbody').on('click', 'tr', function () {
         if ($(this).hasClass('selected')) {
@@ -306,6 +306,52 @@ $(function () {
 //
 // Référence https://datatables.net/
 ////////////////////////////////////////
+var dict = {
+    "endoscopie": "Endoscopie",
+    "laboratoires": "Laboratoires",
+    "hemodialyse": "Hémodialyse",
+
+    "f01": "Filtre 0.1µm",
+    "f04": "Filtre 0.4µm",
+    "f1": "Filtre 1µm",
+    "f5": "Filtre 5µm",
+    "fa": "Filtre A",
+    "fb": "Filtre B",
+
+    "system1": "System 1",
+    "system1-7": "System 1 #7",
+    "system1-8": "System 1 #8",
+
+    "medivators": "Medivators",
+    "medivator1": "Medivator #1",
+    "medivator2": "Nedivator #2",
+    "medivator3": "Medivator #3",
+
+    "osmoses-portatives": "Osmoses portatives",
+    "fr1": "FR1",
+    "fr2": "FR2",
+    "fr3": "FR3",
+    "fr4": "FR4",
+
+    "pre-traitement": "Pré-traitement",
+    "charbons": "Filtre au charbon",
+    "filtres": "Filtre",
+    "c1": "Réservoir #1",
+    "c2": "Réservoir #2",
+    "c3": "Réservoir #3",
+    "c4": "Réservoir #4",
+
+    "pre-traitement2": "Pré-traitement",
+    "filtre-osmose": "Filtre de l'osmose",
+
+    "boucle-eau-purifiee": "Boucle eau purifiée",
+    "di_bq1": "Déionisation banque #1",
+    "di_bq2": "Déionisation banque #2",
+    "r1": "Réservoir #1",
+    "r2": "Réservoir #2",
+    "filtres-01": "Filtres à endotoxines",
+};
+
 var hist = [];
 var labo = [];
 
@@ -316,21 +362,21 @@ $(".navbar-nav li .historique a").on("click", function () {
     var log = json_obj[$(this).attr("id")]["remplacement"];
     //console.log("log :", log);
 
-    var group = Object.keys(log);
+    var categorie = Object.keys(log);
 
-    $.each(group, function (x, value) {
+    $.each(categorie, function (x, value) {
         //console.log(value);
-        var category = Object.keys(log[group[x]]);
-        $.each(category, function (y, value) {
+        var equipement = Object.keys(log[categorie[x]]);
+        $.each(equipement, function (y, value) {
             //console.log(value);
-            var elements = Object.keys(log[group[x]][category[y]]);
-            $.each(elements, function (z, value) {
+            var element = Object.keys(log[categorie[x]][equipement[y]]);
+            $.each(element, function (z, value) {
                 //console.log(value);
-                var values = Object.keys(log[group[x]][category[y]][elements[z]]);
+                var values = Object.keys(log[categorie[x]][equipement[y]][element[z]]);
                 $.each(values, function (i, value) {
-                    //console.log(log[group[x]][category[y]][elements[z]][values[i]]);
+                    //console.log(log[categorie[x]][equipement[y]][element[z]][values[i]]);
 
-                    var d = new Date(log[group[x]][category[y]][elements[z]][values[i]]);
+                    var d = new Date(log[categorie[x]][equipement[y]][element[z]][values[i]]);
                     var day = d.getDate();
                     var month = d.getMonth() + 1;
                     var year = d.getFullYear();
@@ -342,19 +388,54 @@ $(".navbar-nav li .historique a").on("click", function () {
                     }
                     var date = day + "-" + month + "-" + year;
 
-                    var temp = [date, localisation, group[x], category[y], elements[z]];
+                    var temp = [date, dict[localisation], dict[categorie[x]],
+                                        dict[equipement[y]], dict[element[z]]];
                     hist.push(temp);
                 });
             });
         });
     });
+    console.log(hist);
     loadTable();
 });
 
-
 function loadTable() {
     // Create form, order by ID and hide the first column.
-    table.clear().rows.add(hist).search('').draw();
+    //table.clear().rows.add(hist).draw();
+
+    if (typeof table !== 'undefined') {
+        table.destroy();
+    }
+
+    table = $('#example').DataTable({
+        order: [0, 'desc'],
+        stateSave: false,
+        data: hist,
+        initComplete: function () {
+            this.api()
+                .columns(3)
+                .every(function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
+
+                            column.search(val ? '^' + val + '$' : '', true, false).draw();
+                        });
+
+                    column
+                        .data()
+                        .unique()
+                        .sort()
+                        .each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>');
+                        });
+                });
+        },
+    });
+
+
     hist = [];
 };
 ////////////////////////////////////////
