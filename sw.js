@@ -8,10 +8,23 @@ self.addEventListener("install", event => {
         caches.open(cacheName).then(cache => {
             return cache.addAll([
 				"/",
-				"icon.png", // Favicon, IE and fallback for other browsers
+				"./icon/android-chrome-192x192.png", // Favicon, Android Chrome M39+ with 4.0 screen density
+				"./icon/android-chrome-384x384.png", // Favicon, Android Chrome M47+ Splash screen with 3.0 screen density
+				"./icon/apple-touch-icon.png", // Favicon, Apple default
+				"./icon/apple-touch-icon-60x60.png", // Apple iPhone, Non-retina with iOS7
+				"./icon/apple-touch-icon-120x120.png", // Apple iPhone, Retina with iOS7
+				"./icon/apple-touch-icon-152x152.png", // Apple iPad, Retina with iOS7
+				"./icon/apple-touch-icon-180x180.png", // Apple iPhone 6 Plus with iOS8
+				"browserconfig.xml", // IE11 icon configuration file
+				"favicon.ico", // Favicon, IE and fallback for other browsers
+				"./icon/favicon-16x16.png", // Favicon, default
+				"./icon/favicon-32x32.png", // Favicon, Safari on Mac OS
 				"index.html", // Main HTML file
+				"logo.png", // Logo
 				"main.js", // Main Javascript file
 				"manifest.json", // Manifest file
+				"./icon/mstile-150x150.png", // Favicon, Windows 8 / IE11
+				"./icon/safari-pinned-tab.svg", // Favicon, Safari pinned tab
 				"share.png", // Social media sharing
 				"style.css", // Main CSS file
 			]);
