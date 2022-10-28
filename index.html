@@ -85,6 +85,7 @@
                 navigator.serviceWorker && navigator.serviceWorker.register("./sw.js");
             });
         }
+
     </script>
 
     <style>
@@ -186,6 +187,7 @@
             font-size: 0.9rem;
             color: gray;
         }
+
     </style>
 </head>
 
@@ -632,7 +634,7 @@
                 </div>
                 <div>
                     <div class="form-group d-flex flex-column text-center">
-                        <div class="col-10 col-sm-8 col-md-4 col-lg-3 align-self-center">
+                        <div class="col-10 col-sm-8 col-md-4 col-lg-2 align-self-center">
                             <input class="datePicker" style="text-align: center;" readonly="true">
                         </div>
                     </div>
@@ -906,5 +908,8 @@
                 console.log("db read: ", json_obj);
                 updateFields("endoscopie");
             });
+
     </script>
-</body></html>
+</body>
+
+</html>

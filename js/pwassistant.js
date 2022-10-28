@@ -60,6 +60,7 @@ var arr = null;
 var currentRow = null;
 
 $(document).ready(function () {
+    //Update datePicker with current date
     $(".datePicker").val(new Date().toDateInputValue());
 
     //table = $('#example').DataTable({
@@ -221,6 +222,9 @@ function swapCharbon() {
 };
 
 $(".navbar-nav li a").on("click", function () {
+    //Update datePicker with current date
+    $(".datePicker").val(new Date().toDateInputValue());
+
     if (!$(this).hasClass("dropdown-toggle")) {
         $(".navbar-collapse").collapse("hide");
     }
