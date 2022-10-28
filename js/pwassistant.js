@@ -386,7 +386,9 @@ $(".navbar-nav li .historique a").on("click", function () {
                     if (month < 10) {
                         month = "0" + month;
                     }
-                    var date = day + "-" + month + "-" + year;
+                    //var date = day + "-" + month + "-" + year;
+                    var date = year + "-" + month + "-" + day; // Convert Timestamp to ISO8601 readable date format
+                    //var date = log[categorie[x]][equipement[y]][element[z]][values[i]];
 
                     var temp = [date, dict[localisation], dict[categorie[x]],
                                         dict[equipement[y]], dict[element[z]]];
@@ -411,6 +413,10 @@ function loadTable() {
         order: [0, 'desc'],
         stateSave: false,
         data: hist,
+        columnDefs: [{
+            targets: 0,
+            render: $.fn.dataTable.render.moment('DD-MM-YYYY') // To enable table sorting by date
+                    }],
         initComplete: function () {
             this.api()
                 .columns(3)
